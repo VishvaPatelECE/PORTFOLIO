@@ -1,26 +1,224 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0d1b2a;
+  --surface: #1b263b;
+  --card: #415a77;
+  --text-primary: #e0e1dd;
+  --text-secondary: #778da9;
+  --accent: #ffc300;
+  --accent-highlight: #ffd60a;
+  --accent-warm: #ff6b35;
+  --accent-cool: #4cc9f0;
+  --foreground: #e0e1dd;
+  --scroll-darken: 0;
 }
 
-@theme inline {
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0d1b2a;
+    --foreground: #e0e1dd;
   }
 }
 
 body {
-  background: var(--background);
+  background: #0d1b2a;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Helvetica, sans-serif;
+  overflow-x: hidden;
+  position: relative;
 }
+
+/* Keep scrolling enabled but hide scrollbar chrome across the site. */
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.font-display {
+  font-family: var(--font-space-grotesk), var(--font-inter), Helvetica, sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(13, 27, 42, var(--scroll-darken));
+  z-index: -1;
+}
+
+.scan-log {
+  height: 40px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.parent-container {
+  overflow: hidden;
+}
+
+.scan-log div {
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 25;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 214, 10, 0.95),
+    transparent
+  );
+  box-shadow: 0 0 16px rgba(255, 214, 10, 0.85), 0 0 24px rgba(255, 214, 10, 0.45);
+  animation: scanMove 2.5s linear infinite alternate both;
+}
+
+@keyframes scanMove {
+  0% {
+    top: 0;
+    opacity: 1;
+  }
+  100% {
+    top: calc(100% - 2px);
+    opacity: 1;
+  }
+}
+
+.btn-spectrum {
+  position: relative;
+  overflow: hidden;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28), inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  transform: translateY(0) scale(1);
+  transition: transform 220ms ease-in-out, box-shadow 260ms ease-in-out, border-color 240ms ease-in-out, filter 240ms ease-in-out;
+}
+
+.btn-spectrum::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0.75;
+  transform: translateX(-140%);
+  background: linear-gradient(
+    100deg,
+    transparent 15%,
+    rgba(255, 214, 10, 0.12) 40%,
+    rgba(0, 212, 255, 0.2) 52%,
+    rgba(255, 214, 10, 0.1) 62%,
+    transparent 85%
+  );
+  animation: btn-spectrum-sweep 2.2s ease-out infinite;
+}
+
+.btn-spectrum:disabled::after {
+  animation: none;
+  opacity: 0;
+}
+
+@keyframes btn-spectrum-sweep {
+  0% {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  60% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(210%);
+    opacity: 0;
+  }
+}
+
+.btn-spectrum:hover {
+  border-color: transparent;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 195, 0, 0.15), inset 0 -1px 0 rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px) scale(1.03);
+  filter: brightness(1.04);
+}
+
+.btn-spectrum:active {
+  transform: translateY(2px) scale(0.985);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 2px 7px rgba(0, 0, 0, 0.24);
+  filter: brightness(0.97);
+}
+
+.btn-spectrum:active .btn-spectrum-layer {
+  opacity: 1;
+}
+
+.btn-spectrum:focus-visible {
+  outline: 2px solid rgba(76, 201, 240, 0.9);
+  outline-offset: 2px;
+}
+
+.btn-spectrum-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: all 500ms;
+  background: linear-gradient(90deg, #ffc300, #ffd60a, #00d4ff);
+}
+
+.btn-spectrum:hover .btn-spectrum-layer {
+  opacity: 1;
+}
+
+.btn-spectrum-text {
+  position: relative;
+  z-index: 10;
+  color: #e0e1dd;
+  transition: color 300ms;
+}
+
+.btn-spectrum:hover .btn-spectrum-text {
+  color: #000000;
+}
+
+.panel-card {
+  background: linear-gradient(145deg, #1b263b, #0d1b2a);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.panel-card:hover {
+  border-color: rgba(0, 212, 255, 0.4);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
+}
+
+.panel-card-solid {
+  background: #0d1b2a !important;
+}
+

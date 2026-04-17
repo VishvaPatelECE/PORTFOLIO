@@ -1,5 +1,25 @@
-<!-- BEGIN:nextjs-agent-rules -->
-# This is NOT the Next.js you know
+You are a senior software engineer building a futuristic portfolio website.
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
-<!-- END:nextjs-agent-rules -->
+Tech Stack:
+- Next.js
+- Tailwind CSS
+- Framer Motion
+
+Rules:
+- Always write modular code
+- Use reusable components
+- Maintain clean architecture
+- Use best UI practices
+
+Project Focus:
+1. DARVS (AI-based authentication system)
+2. USMHACS (hardware logic simulator)
+
+UI Style:
+- Glassmorphism
+- Cybersecurity dashboard look
+- Smooth animations
+
+Performance:
+- Optimize rendering
+
