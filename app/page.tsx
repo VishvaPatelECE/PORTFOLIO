@@ -5,13 +5,12 @@ import { useRouter } from 'next/navigation';
 import { Hero, Projects, SecureCommunication } from '@/components';
 import { useAuth } from '@/context/AuthContext';
 
-const DARVSPreview = Projects;
-
 export default function Home() {
   const router = useRouter();
   const { isVerified, setIsVerified } = useAuth();
   const [lockAttemptSignal, setLockAttemptSignal] = useState(0);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [showLockNotice, setShowLockNotice] = useState(!isVerified);
   const lastLockNudgeRef = useRef(0);
 
   const handleViewProjects = () => {
@@ -37,15 +36,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const isDesktopViewport = window.matchMedia('(min-width: 768px)').matches;
-
     if (!isVerified) {
-      if (!isDesktopViewport) {
-        document.documentElement.style.overflow = '';
-        document.body.style.overflow = '';
-        return;
-      }
-
       // Keep the hero in view before applying lock so refresh does not trap users mid-page.
       window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       document.documentElement.style.overflow = 'hidden';
@@ -103,6 +94,20 @@ export default function Home() {
   }, [isVerified]);
 
   useEffect(() => {
+    if (isVerified) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setShowLockNotice(false);
+    }, 5200);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [isVerified]);
+
+  useEffect(() => {
     const handlePopState = () => {
       setIsTerminalOpen(false);
     };
@@ -116,20 +121,15 @@ export default function Home() {
 
   return (
     <main className="w-full bg-transparent">
-      <div className="block md:hidden">
-        <DARVSPreview />
-        <Hero
-          compact
-          onViewProjects={handleViewProjects}
-          onContact={handleContact}
-          onConnect={handleConnect}
-          isVerified={isVerified}
-          onScanComplete={handleVerified}
-          lockAttemptSignal={lockAttemptSignal}
-        />
-      </div>
+      {!isVerified && showLockNotice ? (
+        <div className="pointer-events-none fixed inset-x-0 top-4 z-40 flex justify-center px-4">
+          <p className="rounded-lg border border-[#4cc9f0]/35 bg-[#0d1b2a]/88 px-4 py-2 text-center text-xs font-mono uppercase tracking-[0.08em] text-[#c6d4e7] shadow-[0_8px_20px_rgba(0,0,0,0.35)] sm:text-sm">
+            Best viewing experience is Laptop/PC. If using mobile, use desktop site and landscape mode.
+          </p>
+        </div>
+      ) : null}
 
-      <div className="hidden md:block">
+      <section>
         <Hero
           onViewProjects={handleViewProjects}
           onContact={handleContact}
@@ -138,8 +138,12 @@ export default function Home() {
           onScanComplete={handleVerified}
           lockAttemptSignal={lockAttemptSignal}
         />
+      </section>
 
-        <div className={`${!isVerified ? 'md:blur-md md:opacity-30 md:pointer-events-none' : ''} transition-all duration-700`}>
+      <div>
+        <div
+        className={`${!isVerified ? 'blur-md opacity-30 pointer-events-none' : ''} transition-all duration-700`}
+        >
           <Projects />
         </div>
       </div>

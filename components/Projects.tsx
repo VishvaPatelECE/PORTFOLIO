@@ -32,7 +32,7 @@ const AdditionalImplementedCard: React.FC<{
 
 export const Projects: React.FC = () => {
   return (
-    <section id="projects" className="min-h-[60vh] w-full px-6 py-24 sm:px-8 md:min-h-0 lg:px-12">
+    <section id="projects" className="w-full px-6 py-24 sm:px-8 lg:px-12">
       <div className="mx-auto w-full max-w-370 space-y-14 px-2 sm:px-4">
         <header className="space-y-3 border-b border-white/10 pb-6">
           <p className="text-xs font-mono uppercase tracking-[0.14em] text-[#778da9]">Engineering Work</p>

@@ -4,10 +4,6 @@ import { useEffect } from 'react';
 
 const ScrollDepthLayer = () => {
   useEffect(() => {
-    document.body.style.overflow = 'auto';
-  }, []);
-
-  useEffect(() => {
     const updateDepth = () => {
       const doc = document.documentElement;
       const maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);

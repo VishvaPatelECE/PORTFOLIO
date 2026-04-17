@@ -34,7 +34,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col overflow-x-hidden bg-[#0d1b2a] text-[#e0e1dd]">
+      <body className="min-h-full flex flex-col bg-[#0d1b2a] text-[#e0e1dd]">
         <AuthProvider>
           <ScrollDepthLayer />
           {children}
