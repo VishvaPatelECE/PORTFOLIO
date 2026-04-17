@@ -122,22 +122,21 @@ export default function SecureCommunication({ open, onClose }: SecureCommunicati
   }, [activeIntent.intentMessage]);
 
   useEffect(() => {
-    if (!open) {
-      return;
-    }
-
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose();
       }
     };
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', onKeyDown);
+    if (open) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', onKeyDown);
+    } else {
+      document.body.style.overflow = 'auto';
+    }
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = 'auto';
       window.removeEventListener('keydown', onKeyDown);
     };
   }, [open, onClose]);

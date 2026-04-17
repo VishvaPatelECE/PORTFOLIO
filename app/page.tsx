@@ -22,7 +22,12 @@ export default function Home() {
   };
 
   const handleConnect = () => {
+    window.history.pushState({ secureCommunicationOpen: true }, '');
     setIsTerminalOpen(true);
+  };
+
+  const handleCloseTerminal = () => {
+    setIsTerminalOpen(false);
   };
 
   const handleVerified = () => {
@@ -87,6 +92,18 @@ export default function Home() {
     };
   }, [isVerified]);
 
+  useEffect(() => {
+    const handlePopState = () => {
+      setIsTerminalOpen(false);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
   return (
     <main className="w-full bg-transparent">
       <section>
@@ -108,7 +125,7 @@ export default function Home() {
         </div>
       </div>
 
-      <SecureCommunication open={isTerminalOpen} onClose={() => setIsTerminalOpen(false)} />
+      {isTerminalOpen && <SecureCommunication open={isTerminalOpen} onClose={handleCloseTerminal} />}
     </main>
   );
 }
