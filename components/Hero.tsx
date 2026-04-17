@@ -175,7 +175,7 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   return (
-    <section className="relative flex min-h-screen w-full items-stretch justify-center overflow-hidden bg-transparent lg:h-screen">
+    <section className="relative flex min-h-[72vh] w-full items-stretch justify-center overflow-hidden bg-transparent md:min-h-screen lg:h-screen">
       <motion.div
         className="absolute inset-0 -z-10"
         initial={{ opacity: 0 }}
@@ -197,7 +197,7 @@ export const Hero: React.FC<HeroProps> = ({
               !isAccessVerified ? 'pointer-events-none select-none blur-sm opacity-30' : ''
             } transition-all duration-700`}
           >
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <motion.div variants={itemVariants}>
                 <div className="text-xs font-mono font-semibold uppercase tracking-[0.16em] text-[#778da9]">
                   EMBEDDED & INTELLIGENT SYSTEMS ENGINEER
@@ -253,7 +253,7 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
 
             <motion.div
-              className="flex flex-col gap-3 pt-6 sm:flex-row"
+              className="flex flex-col gap-3 pt-4 sm:flex-row sm:pt-6"
               variants={containerVariants}
             >
               <motion.button

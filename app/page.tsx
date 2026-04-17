@@ -35,7 +35,15 @@ export default function Home() {
   };
 
   useEffect(() => {
+    const isDesktopViewport = window.matchMedia('(min-width: 768px)').matches;
+
     if (!isVerified) {
+      if (!isDesktopViewport) {
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        return;
+      }
+
       // Keep the hero in view before applying lock so refresh does not trap users mid-page.
       window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       document.documentElement.style.overflow = 'hidden';
@@ -105,8 +113,8 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="w-full bg-transparent">
-      <section>
+    <main className="flex w-full flex-col bg-transparent">
+      <section className="order-2 md:order-1">
         <Hero
           onViewProjects={handleViewProjects}
           onContact={handleContact}
@@ -117,9 +125,9 @@ export default function Home() {
         />
       </section>
 
-      <div>
+      <div className="order-1 md:order-2">
         <div
-        className={`${!isVerified ? 'blur-md opacity-30 pointer-events-none' : ''} transition-all duration-700`}
+        className={`${!isVerified ? 'md:blur-md md:opacity-30 md:pointer-events-none' : ''} transition-all duration-700`}
         >
           <Projects />
         </div>
