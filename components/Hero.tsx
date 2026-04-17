@@ -6,6 +6,7 @@ import { motion, Variants } from 'framer-motion';
 interface HeroProps {
   name?: string;
   tagline?: string;
+  compact?: boolean;
   onViewProjects?: () => void;
   onContact?: () => void;
   onConnect?: () => void;
@@ -27,6 +28,7 @@ const SCAN_STEPS = [
 export const Hero: React.FC<HeroProps> = ({
   name = 'Vishva Patel',
   tagline = 'Engineering Secure Systems at the Intersection of Hardware and Intelligence',
+  compact = false,
   onViewProjects,
   onContact,
   onConnect,
@@ -175,7 +177,7 @@ export const Hero: React.FC<HeroProps> = ({
   };
 
   return (
-    <section className="relative flex min-h-[72vh] w-full items-stretch justify-center overflow-hidden bg-transparent md:min-h-screen lg:h-screen">
+    <section className={`relative flex w-full items-stretch justify-center overflow-hidden bg-transparent ${compact ? 'min-h-[60vh]' : 'min-h-[72vh] md:min-h-screen lg:h-screen'}`}>
       <motion.div
         className="absolute inset-0 -z-10"
         initial={{ opacity: 0 }}
@@ -193,7 +195,7 @@ export const Hero: React.FC<HeroProps> = ({
       >
         <div className="flex w-full flex-col lg:h-full lg:flex-row">
           <motion.div
-            className={`w-full flex flex-col justify-between overflow-hidden border-b border-white/10 bg-[#0d1b2a]/78 px-4 py-6 sm:px-6 md:px-8 lg:w-1/2 lg:border-b-0 lg:border-r lg:py-8 lg:pr-10 ${
+            className={`w-full flex flex-col justify-between overflow-hidden border-b border-white/10 bg-[#0d1b2a]/78 px-4 sm:px-6 md:px-8 lg:w-1/2 lg:border-b-0 lg:border-r lg:pr-10 ${compact ? 'py-6' : 'py-6 lg:py-8'} ${
               !isAccessVerified ? 'pointer-events-none select-none blur-sm opacity-30' : ''
             } transition-all duration-700`}
           >
@@ -205,7 +207,7 @@ export const Hero: React.FC<HeroProps> = ({
               </motion.div>
 
               <motion.div variants={itemVariants}>
-                <h1 className="text-3xl font-bold leading-tight tracking-[0.02em] text-[#e0e1dd] sm:text-4xl md:text-5xl">
+                <h1 className={`font-bold leading-tight tracking-[0.02em] text-[#e0e1dd] ${compact ? 'text-3xl' : 'text-3xl sm:text-4xl md:text-5xl'}`}>
                   {name}
                 </h1>
               </motion.div>

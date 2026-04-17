@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { Hero, Projects, SecureCommunication } from '@/components';
 import { useAuth } from '@/context/AuthContext';
 
+const DARVSPreview = Projects;
+
 export default function Home() {
   const router = useRouter();
   const { isVerified, setIsVerified } = useAuth();
@@ -113,8 +115,21 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex w-full flex-col bg-transparent">
-      <section className="order-2 md:order-1">
+    <main className="w-full bg-transparent">
+      <div className="block md:hidden">
+        <DARVSPreview />
+        <Hero
+          compact
+          onViewProjects={handleViewProjects}
+          onContact={handleContact}
+          onConnect={handleConnect}
+          isVerified={isVerified}
+          onScanComplete={handleVerified}
+          lockAttemptSignal={lockAttemptSignal}
+        />
+      </div>
+
+      <div className="hidden md:block">
         <Hero
           onViewProjects={handleViewProjects}
           onContact={handleContact}
@@ -123,12 +138,8 @@ export default function Home() {
           onScanComplete={handleVerified}
           lockAttemptSignal={lockAttemptSignal}
         />
-      </section>
 
-      <div className="order-1 md:order-2">
-        <div
-        className={`${!isVerified ? 'md:blur-md md:opacity-30 md:pointer-events-none' : ''} transition-all duration-700`}
-        >
+        <div className={`${!isVerified ? 'md:blur-md md:opacity-30 md:pointer-events-none' : ''} transition-all duration-700`}>
           <Projects />
         </div>
       </div>
