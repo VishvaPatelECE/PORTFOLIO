@@ -536,6 +536,17 @@ export default function DARVSPage() {
         </motion.section>
 
         <motion.section className="panel-card p-4" {...sectionMotion}>
+          <h2 className="font-display text-2xl font-semibold text-[#e5e5e5]">Execution Environment</h2>
+          <div className="mt-3 rounded-xl border border-white/10 bg-[#0d1b2a]/72 p-4">
+            <ul className="space-y-2 text-sm leading-relaxed text-[#778da9]">
+              <li>• Laptop-based real-time processing (OpenCV + TensorFlow)</li>
+              <li>• Multi-stage pipeline tuned for accuracy versus performance</li>
+              <li>• Designed under real-time response and system latency constraints</li>
+            </ul>
+          </div>
+        </motion.section>
+
+        <motion.section className="panel-card p-4" {...sectionMotion}>
           <h2 className="font-display text-2xl font-semibold text-[#e5e5e5]">Pipeline</h2>
           <div className="mt-3 space-y-3">
             <LivePipeline nodes={NODES} systemState={systemState} />
@@ -579,7 +590,6 @@ export default function DARVSPage() {
         </motion.section>
 
         <motion.section className="panel-card relative overflow-hidden border-[#4cc9f0]/20 p-4" {...sectionMotion}>
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-linear-to-r from-[#ffc300]/8 via-transparent to-[#00d4ff]/10" />
           <h2 className="relative z-10 font-display text-2xl font-semibold text-[#e5e5e5]">Security Logging</h2>
           <div className="relative z-10 mt-2 flex flex-wrap items-center gap-2 text-sm font-mono">
             <span className="rounded-md border border-[#4cc9f0]/25 bg-[#0d1b2a]/75 px-2.5 py-1 text-[#4cc9f0]">

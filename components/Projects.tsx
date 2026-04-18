@@ -37,8 +37,8 @@ export const Projects: React.FC = () => {
         <header className="space-y-3 border-b border-white/10 pb-6">
           <p className="text-xs font-mono uppercase tracking-[0.14em] text-[#778da9]">Engineering Work</p>
           <h2 className="text-3xl font-semibold text-[#e0e1dd] sm:text-4xl">Selected Systems &amp; Architectures</h2>
-          <p className="max-w-4xl whitespace-nowrap text-base leading-relaxed text-[#ffc300]">
-            Engineered systems emphasizing layered security, real-time decision pipelines, and hardware-aware intelligent processing.
+          <p className="max-w-4xl text-base leading-relaxed text-[#ffc300]">
+            Built and validated secure execution pipelines spanning intelligent authentication and deterministic hardware access control.
           </p>
         </header>
 
@@ -164,6 +164,31 @@ export const Projects: React.FC = () => {
               </div>
             </div>
           </div>
+        </article>
+
+        <article className="panel-card space-y-4 p-6 sm:p-8">
+          <div className="space-y-2 border-b border-white/10 pb-4">
+            <h3 className="text-2xl font-semibold text-[#e0e1dd]">System Validation</h3>
+            <p className="text-sm font-medium text-[#ffd60a]">Hardware demonstration and verification context</p>
+          </div>
+          <ul className="space-y-3 text-sm leading-relaxed text-[#778da9]">
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#4cc9f0]" />
+              <span>Demonstrated hardware systems at Eureka technical exhibition.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#4cc9f0]" />
+              <span>Built and tested real hardware implementations, not simulation-only prototypes.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#4cc9f0]" />
+              <span>Verified system behavior under real-world conditions and fault scenarios.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-[#4cc9f0]" />
+              <span>Designed complete engineering pipelines from hardware sensing to logic gating and output actuation.</span>
+            </li>
+          </ul>
         </article>
 
         <section className="space-y-4">

@@ -201,6 +201,9 @@ export default function AboutDossier() {
 
         <motion.section className={panelClass} {...enterMotion}>
           <p className="font-mono text-[14px] font-semibold uppercase tracking-[0.16em] text-[#22c55e]">ENGINEERING CAPABILITIES</p>
+          <p className="mt-2 text-sm font-medium text-[#ffd60a]">
+            Applied across simulation, verification, and real-time system implementation
+          </p>
           <p className="mt-2 font-mono text-[13px] uppercase tracking-[0.12em] text-[#9db2c8]">
             Tools and frameworks applied in system design, verification, and intelligent processing
           </p>
@@ -228,7 +231,7 @@ export default function AboutDossier() {
           </div>
           <Link href="/Vishva_Patel_CV.pdf" target="_blank" download className="btn-spectrum group text-sm font-semibold">
             <span className="btn-spectrum-layer" />
-            <span className="btn-spectrum-text">View CV</span>
+            <span className="btn-spectrum-text">View Research CV</span>
           </Link>
         </motion.section>
       </div>

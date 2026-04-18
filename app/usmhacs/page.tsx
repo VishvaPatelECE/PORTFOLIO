@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import USMHACSPanel from '@/components/USMHACSPanel';
 
 export default function USMHACSPage() {
@@ -20,7 +21,38 @@ export default function USMHACSPage() {
         </Link>
       </div>
 
-      <section className="w-full">
+      <section className="w-full lg:hidden">
+        <article className="panel-card space-y-4 p-4 sm:p-5">
+          <h2 className="text-lg font-semibold text-[#e0e1dd]">USMHACS Full System View</h2>
+          <p className="text-sm leading-relaxed text-[#778da9]">
+            The full USMHACS interface includes an interactive hardware logic diagram, signal-flow simulation, and event console for scenario validation.
+          </p>
+          <div className="overflow-hidden rounded-lg border border-white/10 bg-[#0d1b2a]/70">
+            <Image
+              src="/usmhacs-preview.svg"
+              alt="USMHACS system preview"
+              width={1200}
+              height={720}
+              className="h-auto w-full"
+              priority
+            />
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/usmhacs/full"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-spectrum group inline-flex items-center text-sm font-semibold"
+            >
+              <span className="btn-spectrum-layer" />
+              <span className="btn-spectrum-text">Open Full System View</span>
+            </Link>
+            <p className="text-xs text-[#ffd60a]">Best viewed on larger screens.</p>
+          </div>
+        </article>
+      </section>
+
+      <section className="hidden w-full lg:block">
         <USMHACSPanel />
       </section>
     </main>

@@ -1,0 +1,42 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D1B2A"/>
+      <stop offset="1" stop-color="#1B263B"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#10243A"/>
+      <stop offset="1" stop-color="#0D1B2A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <rect x="48" y="48" width="1104" height="624" rx="24" fill="url(#card)" stroke="#415A77" stroke-width="2"/>
+  <rect x="86" y="96" width="1028" height="56" rx="12" fill="#1B263B" stroke="#415A77"/>
+  <text x="114" y="132" fill="#E0E1DD" font-family="monospace" font-size="22" font-weight="700">USMHACS HARDWARE SECURITY DIAGRAM (PREVIEW)</text>
+
+  <g stroke="#778DA9" stroke-width="2" stroke-dasharray="10 8" opacity="0.75">
+    <line x1="210" y1="310" x2="420" y2="310"/>
+    <line x1="500" y1="310" x2="710" y2="310"/>
+    <line x1="790" y1="310" x2="990" y2="310"/>
+  </g>
+
+  <g>
+    <rect x="120" y="248" width="180" height="124" rx="14" fill="#1B263B" stroke="#4CC9F0"/>
+    <text x="154" y="292" fill="#4CC9F0" font-family="monospace" font-size="18">SENSORS</text>
+
+    <rect x="410" y="248" width="180" height="124" rx="14" fill="#1B263B" stroke="#FFD60A"/>
+    <text x="453" y="292" fill="#FFD60A" font-family="monospace" font-size="18">LOGIC</text>
+
+    <rect x="700" y="248" width="180" height="124" rx="14" fill="#1B263B" stroke="#22C55E"/>
+    <text x="735" y="292" fill="#22C55E" font-family="monospace" font-size="18">GATING</text>
+
+    <rect x="980" y="248" width="120" height="124" rx="14" fill="#1B263B" stroke="#FF6B35"/>
+    <text x="1004" y="292" fill="#FF6B35" font-family="monospace" font-size="18">DOOR</text>
+  </g>
+
+  <rect x="86" y="436" width="1028" height="178" rx="14" fill="#0B1D31" stroke="#415A77"/>
+  <text x="116" y="476" fill="#778DA9" font-family="monospace" font-size="18" font-weight="700">SYSTEM CONSOLE LOG PREVIEW</text>
+  <text x="116" y="512" fill="#C6D4E7" font-family="monospace" font-size="16">[12:02:41] Correct code entered. Initializing delay block.</text>
+  <text x="116" y="542" fill="#C6D4E7" font-family="monospace" font-size="16">[12:02:46] Delay cleared. AND gate conditions satisfied.</text>
+  <text x="116" y="572" fill="#C6D4E7" font-family="monospace" font-size="16">[12:02:47] Door unlock signal propagated.</text>
+</svg>
