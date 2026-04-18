@@ -124,7 +124,7 @@ export default function Home() {
       {!isVerified && showLockNotice ? (
         <div className="pointer-events-none fixed inset-x-0 top-4 z-40 flex justify-center px-4">
           <p className="rounded-lg border border-[#4cc9f0]/35 bg-[#0d1b2a]/88 px-4 py-2 text-center text-xs font-mono uppercase tracking-[0.08em] text-[#c6d4e7] shadow-[0_8px_20px_rgba(0,0,0,0.35)] sm:text-sm">
-            Best viewing experience is Laptop/PC. If using mobile, use desktop site and landscape mode.
+            Best viewing experience is Laptop/PC. If using mobile, use desktop site.
           </p>
         </div>
       ) : null}

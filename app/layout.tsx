@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "@/context/AuthContext";
 import ScrollDepthLayer from "@/components/ScrollDepthLayer";
 import "./globals.css";
@@ -39,6 +40,7 @@ export default function RootLayout({
         <AuthProvider>
           <ScrollDepthLayer />
           {children}
+          <Analytics />
         </AuthProvider>
       </body>
     </html>
