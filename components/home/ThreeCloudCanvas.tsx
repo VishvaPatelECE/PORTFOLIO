@@ -17,6 +17,10 @@ const cloudShader = {
     uniform vec3 fogColor;
     uniform float fogNear;
     uniform float fogFar;
+    uniform vec3 goldColor;
+    uniform vec3 ivoryColor;
+    uniform vec3 shadowColor;
+    uniform float time;
     varying vec2 vUv;
 
     void main() {
@@ -25,10 +29,22 @@ const cloudShader = {
 
       vec4 tex = texture2D( map, vUv );
       float nearFade = pow( gl_FragCoord.z, 20.0 );
-      float alpha = tex.a * nearFade * ( 1.0 - fogFactor );
+      float alpha = tex.a * nearFade * ( 1.0 - fogFactor * 0.96 );
 
-      vec3 col = mix( tex.rgb, fogColor, fogFactor );
-      gl_FragColor = vec4( col, alpha );
+      // Warm amber-gold pulse matching the hero flow field energy
+      vec3 activeGold = goldColor * ( 1.0 + 0.06 * sin( time * 0.7 + vUv.x * 2.0 ) );
+
+      // Multi-tonal cloud shading:
+      // Wisps/shadows -> warm bronze umber
+      // Midtones -> rich hero gold & amber (#d4a574, #b99d73)
+      // Bright crests -> luminous ivory (#e8e0d2)
+      float brightness = tex.r;
+      vec3 cloudTone = mix( shadowColor, activeGold, smoothstep( 0.04, 0.52, brightness ) );
+      cloudTone = mix( cloudTone, ivoryColor, smoothstep( 0.50, 0.94, brightness ) );
+
+      // Dissolve smoothly into void background fog (#08070b)
+      vec3 col = mix( cloudTone, fogColor, fogFactor );
+      gl_FragColor = vec4( col, alpha * 0.92 );
     }
   `,
 };
@@ -36,7 +52,7 @@ const cloudShader = {
 /**
  * Live Clouds with Three.js
  * Merged plane geometries with custom fog / depth shader.
- * Zero hard edges with full alpha transparency and smooth horizon evaporation.
+ * Shaded in warm gold, amber, and ivory to seamlessly harmonize with the hero flow-field and dark void palette.
  */
 export default function ThreeCloudCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -70,6 +86,11 @@ export default function ThreeCloudCanvas() {
     const fog = new THREE.Fog(0x08070b, -100, 3000);
     scene.fog = fog;
 
+    // Palette tokens matching the website and hero flow field
+    const goldColor = new THREE.Color(0xd4a574);    // Hero amber-gold
+    const ivoryColor = new THREE.Color(0xe8e0d2);   // Website ivory
+    const shadowColor = new THREE.Color(0x1a1512);  // Deep warm bronze umber
+
     let mouseX = 0;
     let mouseY = 0;
     const start_time = Date.now();
@@ -100,6 +121,10 @@ export default function ThreeCloudCanvas() {
             fogColor: { value: fog.color },
             fogNear: { value: fog.near },
             fogFar: { value: fog.far },
+            goldColor: { value: goldColor },
+            ivoryColor: { value: ivoryColor },
+            shadowColor: { value: shadowColor },
+            time: { value: 0 },
           },
           vertexShader: cloudShader.vertexShader,
           fragmentShader: cloudShader.fragmentShader,
@@ -172,8 +197,13 @@ export default function ThreeCloudCanvas() {
       if (disposed) return;
       animId = requestAnimationFrame(animate);
 
+      const elapsed = (Date.now() - start_time) * 0.001;
+      if (shaderMat) {
+        shaderMat.uniforms.time.value = elapsed;
+      }
+
       const scrollOffset = (window.scrollY || 0) * 0.8;
-      const position = ((Date.now() - start_time) * 0.03 + scrollOffset) % 8000;
+      const position = (elapsed * 30 + scrollOffset) % 8000;
 
       camera.position.x += (mouseX - camera.position.x) * 0.01;
       camera.position.y += (-mouseY - camera.position.y) * 0.01;
