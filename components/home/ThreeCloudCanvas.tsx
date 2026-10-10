@@ -80,7 +80,7 @@ export default function ThreeCloudCanvas() {
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(width, height);
-    renderer.setClearColor(0x000000, 0);
+    renderer.setClearColor(0x08070b, 1);
     container.appendChild(renderer.domElement);
 
     const fog = new THREE.Fog(0x08070b, -100, 3000);

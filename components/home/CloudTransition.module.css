@@ -7,7 +7,7 @@
   margin-bottom: -80px;
   overflow: hidden;
   pointer-events: none;
-  background: transparent;
+  background: #08070b;
   /* Feather the top and bottom with a multi-stop smooth easing gradient */
   mask-image: linear-gradient(
     to bottom,
