@@ -23,9 +23,12 @@ const cloudShader = {
       float depth = gl_FragCoord.z / gl_FragCoord.w;
       float fogFactor = smoothstep( fogNear, fogFar, depth );
 
-      gl_FragColor = texture2D( map, vUv );
-      gl_FragColor.w *= pow( gl_FragCoord.z, 20.0 );
-      gl_FragColor = mix( gl_FragColor, vec4( fogColor , gl_FragColor.w ), fogFactor );
+      vec4 tex = texture2D( map, vUv );
+      float nearFade = pow( gl_FragCoord.z, 20.0 );
+      float alpha = tex.a * nearFade * ( 1.0 - fogFactor );
+
+      vec3 col = mix( tex.rgb, fogColor, fogFactor );
+      gl_FragColor = vec4( col, alpha );
     }
   `,
 };
@@ -33,7 +36,7 @@ const cloudShader = {
 /**
  * Live Clouds with Three.js
  * Merged plane geometries with custom fog / depth shader.
- * Source: DenDionigi / Mr.doob / FreeFrontend
+ * Zero hard edges with full alpha transparency and smooth horizon evaporation.
  */
 export default function ThreeCloudCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -61,7 +64,7 @@ export default function ThreeCloudCanvas() {
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(width, height);
-    renderer.setClearColor(0x08070b, 1);
+    renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
     const fog = new THREE.Fog(0x08070b, -100, 3000);
