@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-09",
+  "route": "/",
+  "order": [
+    "RANGraph",
+    "GraphMARL",
+    "DARVS",
+    "USMHACS"
+  ],
+  "checks": {
+    "modelTests": 26,
+    "typecheck": "pass",
+    "finalBuild": "pass after reviewer anchor fix",
+    "lintErrors": 0,
+    "inheritedLintWarnings": 2,
+    "detectorFindings": 0,
+    "rastersMissingProvenance": 0,
+    "selectedImagePixels": "All four decoded images match the supplied attachments",
+    "routes": "Home, all four projects and preserved demo return 200",
+    "browser": "Scan to hero; next slide; keyboard End/Home and ArrowRight with focus/Enter; View all/deck; Pause/resume; native project navigation and Back restore; direct Work and RANGraph notes anchors operated"
+  },
+  "limits": [
+    "FPS/Core Web Vitals not benchmarked",
+    "OS reduced-motion and real touch hardware not exercised",
+    "Screen-reader/complete contrast compliance not certified"
+  ],
+  "screenshots": [
+    "project-deck-desktop.jpg",
+    "project-deck-762.jpg",
+    "project-deck-mobile.jpg",
+    "project-deck-all-covers.png",
+    "project-deck-note-anchor.png"
+  ],
+  "serverSession": 16738,
+  "preserved": {
+    "rangraphDemo": "/demo/projects",
+    "archiveSha256": "e1c4ebd684e163b81007dc48539e0e43bb697e6da8aaad2e840ed45ec8e77528",
+    "tubesSha256": "676abd6ccd18742a36dcb4ffce66a2052a4f203f240cd8cf97c6ea33a181f81b"
+  },
+  "anchorChecks": {
+    "desktopWorkTop": 99.94,
+    "narrowWorkTop": 100.22,
+    "sharedLocalMargin": "0px",
+    "rangraphNotesTop": 99.74,
+    "globalDesktopPadding": "100px",
+    "researchTop": 99.75,
+    "mobileWorkTop": 25.14
+  }
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "name": "flow-field",
+    "package": "@designcodeio/threeui@1.2.0",
+    "originalFrameSha256": "78b530adc34ef2b5a82785951c361d8575442a57b4bcfc38bf4e4023c5d139ac",
+    "shippingFrameSha256": "207954574f3e6869a9c12ba3668a3a11055ac2ed5c685e7d092da5a7699a6751",
+    "changes": [
+      "removed unused Tailwind/Iconify/Google-font/analytics services",
+      "self-hosted original GSAP runtime"
+    ]
+  },
+  {
+    "name": "matrix-field",
+    "package": "@designcodeio/threeui@1.2.0",
+    "originalFrameSha256": "695a6c6012630124a20e17e1ed5f9d67dbf592e4a9102aabf63634738247660c",
+    "shippingFrameSha256": "5f81e18f4bd70c17e479abc0c13d9cbcdd6ea1c2df12f099c141ab7b69a64724",
+    "changes": [
+      "removed unused Tailwind/Iconify/Google-font/analytics services",
+      "self-hosted original GSAP runtime"
+    ]
+  },
+  {
+    "name": "constellation-field",
+    "package": "@designcodeio/threeui@1.2.0",
+    "originalFrameSha256": "2d4749c7ca7cb72d8548a05ed28f21d5dd82e6bd79ed6448c8708a0826376af6",
+    "shippingFrameSha256": "804b9098850bd747aec7c6a3900881aa59566cb9fd9bd0398388e10bf5db07e7",
+    "changes": [
+      "removed unused Tailwind/Iconify/Google-font/analytics services",
+      "self-hosted original GSAP runtime"
+    ]
+  },
+  {
+    "name": "gateway-flow",
+    "package": "@designcodeio/threeui@1.2.0",
+    "originalFrameSha256": "1c454ab9d17274190131073272a8b7d83f6ae7d6638ac387fed7af1f31171d3f",
+    "shippingFrameSha256": "6342bfe74f25fc3096c8cd2d0697da9dd9e4507617932b757ff160fe3615cd97",
+    "changes": [
+      "removed unused Tailwind/Iconify/Google-font/analytics services",
+      "self-hosted original GSAP runtime"
+    ]
+  }
+]

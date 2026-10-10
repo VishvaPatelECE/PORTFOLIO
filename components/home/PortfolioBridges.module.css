@@ -1,0 +1,12 @@
+.interests { padding-block:64px 44px; }
+.interests h2,.notes h2 { font-family:"Anybody Variable",sans-serif; font-size:clamp(30px,3vw,44px); font-weight:440; letter-spacing:-.03em; line-height:1.08; margin:0 0 28px; }
+.interests h2 span,.notes h2 span { color:var(--gold); }
+.interests p { display:flex; flex-wrap:wrap; gap:12px 40px; font-family:"Anybody Variable",sans-serif; font-size:clamp(32px,4.3vw,62px); font-weight:440; line-height:1.12; letter-spacing:-.035em; color:var(--text); }
+.interests p span:first-child { color:var(--gold); }
+.interests p span:last-child { color:var(--muted); }
+.notes { padding-block:52px 76px; }
+.notes > div { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px; }
+.notes a { display:flex; align-items:center; justify-content:space-between; gap:18px; min-height:72px; padding-block:16px; border-top:1px solid var(--line); font-family:"Anybody Variable",sans-serif; font-size:clamp(22px,2vw,28px); line-height:1.22; letter-spacing:-.025em; }
+.notes a svg { flex-shrink:0; color:var(--gold); }
+.notes a:focus-visible { outline:2px solid var(--signal); outline-offset:5px; }
+@media(max-width:760px) { .interests { padding-block:36px 28px; } .interests p { flex-direction:column; gap:12px; } .notes { padding-block:36px 48px; } .notes > div { grid-template-columns:1fr; gap:4px; } }

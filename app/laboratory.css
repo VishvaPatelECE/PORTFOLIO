@@ -1,0 +1,1484 @@
+/* The revised world: machined metal, coated optics, dark glass and routed light.
+   Physical depth is authored in Three.js. DOM surfaces are CSS approximations. */
+:root {
+  --surface: #0c141b;
+  --surface-high: #15212b;
+  --line: #26323d;
+  --muted: #a6b4bc;
+  --chrome: #d2dad9;
+  --signal-soft: #68d7db;
+}
+body {
+  background: radial-gradient(
+    ellipse at 78% 0%,
+    #101d2a 0,
+    #08070b 40%,
+    #08070b 100%
+  );
+  font-size: 16px;
+}
+html {
+  scrollbar-color: #324551 #090d12;
+}
+::selection {
+  background: #b99d73;
+  color: #08070b;
+}
+.site-header {
+  border-bottom: 0;
+  position: relative;
+  z-index: 5;
+  height: 86px;
+}
+.site-header nav {
+  padding: 6px;
+  gap: 2px;
+  background: linear-gradient(135deg, #dce6e60d, #101a2399);
+  border: 1px solid #9cbac426;
+  border-radius: 100px;
+  box-shadow:
+    inset 0 1px 0 #ffffff16,
+    0 8px 24px #00000035;
+  backdrop-filter: blur(18px);
+}
+.site-header nav a {
+  padding: 9px 18px;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  border-radius: 100px;
+}
+.site-header nav a[aria-current="page"] {
+  color: var(--text);
+  background: #c6ded512;
+  box-shadow: inset 0 1px 0 #ffffff16;
+}
+.site-header nav a[aria-current="page"]::after {
+  display: none;
+}
+.brand sup {
+  display: none;
+}
+.brand {
+  font-size: 12px;
+}
+.header-cv {
+  color: #c8d5da;
+  font-size: 12px;
+}
+.laboratory-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 730px;
+  margin-top: -86px;
+  padding-top: 86px;
+}
+.laboratory-ground {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.laboratory-ground::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 76% 47%, #11394990, transparent 36%),
+    radial-gradient(ellipse at 89% 27%, #b99d7323, transparent 27%),
+    linear-gradient(115deg, #08070b 12%, #0d1520 69%, #080b0f);
+}
+.laboratory-ground::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 100%, transparent, #08070b 88%);
+}
+.laboratory-inner {
+  position: relative;
+  min-height: 706px;
+  padding-top: 44px;
+  padding-bottom: 22px;
+}
+.laboratory-name {
+  position: relative;
+  z-index: 2;
+  width: 55%;
+  pointer-events: none;
+}
+.laboratory-name h1 {
+  font-size: clamp(80px, 8.7vw, 125px);
+  line-height: 0.91;
+  font-weight: 470;
+  letter-spacing: -0.04em;
+  font-variation-settings: "wdth" 110;
+  outline: none;
+}
+.laboratory-name h1 > span {
+  display: block;
+}
+.laboratory-name h1 > span + span {
+  margin-left: 48px;
+  color: #d3d9d7;
+}
+.identity-dot {
+  color: var(--signal-soft);
+}
+.laboratory-role {
+  color: #b99d73;
+  margin-top: 26px;
+  font-size: 17px;
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+}
+.laboratory-manifesto {
+  position: relative;
+  z-index: 2;
+  margin-top: 26px;
+  max-width: 380px;
+}
+.laboratory-manifesto > p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #a7b9c5;
+  max-width: 34ch;
+  text-wrap: pretty;
+}
+.laboratory-manifesto em {
+  font-style: normal;
+  color: var(--text);
+}
+.ignition-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 23px;
+  padding: 7px 24px 7px 7px;
+  min-height: 54px;
+  font-size: 14px;
+  color: #e8eeee;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #30434d, #182731 48%, #11212b);
+  border: 1px solid #6c9baf70;
+  box-shadow:
+    inset 0 1px 0 #f8ffff32,
+    inset 0 -2px 4px #0007,
+    0 10px 30px #0005;
+  transition:
+    box-shadow 0.25s var(--ease),
+    transform 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+.ignition-symbol {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, #d3b991, #846b49);
+  color: #142129;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 1px 0 #fff8,
+    0 3px 8px #0006;
+}
+.ignition-link > span {
+  position: relative;
+  z-index: 1;
+}
+.ignition-link i {
+  position: absolute;
+  inset: -50%;
+  transform: translateX(-90%) rotate(20deg);
+  background: linear-gradient(
+    90deg,
+    transparent 40%,
+    #8ddbf047 50%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+.ignition-link:hover {
+  color: #fff;
+  border-color: #8ce0de;
+  box-shadow:
+    inset 0 1px 0 #f8ffff40,
+    0 14px 40px #00283265;
+  transform: translateY(-2px);
+}
+.ignition-link:hover i {
+  transform: translateX(90%) rotate(20deg);
+  transition: transform 0.8s var(--ease);
+}
+.ignition-link:active {
+  transform: translateY(1px) scale(0.98);
+}
+.laboratory-about {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  margin: 20px 0 0 18px;
+  color: #b3c2c8;
+}
+.assembly-stage {
+  position: absolute;
+  right: -6%;
+  top: -14px;
+  width: 73%;
+  height: 580px;
+  z-index: 1;
+}
+.assembly-renderer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.assembly-renderer:active {
+  cursor: grabbing;
+}
+.assembly-renderer canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.assembly-renderer:focus-visible {
+  outline-offset: -14px;
+  outline-style: dashed;
+}
+.assembly-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+  pointer-events: none;
+}
+.assembly-stage.scene-ready .assembly-fallback {
+  display: none;
+}
+.fallback-lens {
+  width: 270px;
+  height: 270px;
+  border-radius: 50%;
+  transform: rotateX(42deg) rotateZ(-15deg);
+  background: radial-gradient(
+    circle,
+    #54d4d4 0 5%,
+    #021923 6% 26%,
+    #27495c 27% 31%,
+    #0c1117 32% 40%,
+    #91a6ad 41% 43%,
+    #19242c 44% 57%,
+    #9fa8a1 58% 60%,
+    #0e171f 61% 68%,
+    #b99d73 69% 70%,
+    #1c2730 71%
+  );
+  box-shadow:
+    0 40px 65px #000b,
+    inset 4px 10px 14px #ffffee33;
+}
+.assembly-label {
+  position: absolute;
+  right: 16%;
+  top: 74px;
+  z-index: 3;
+  color: #bbcec9;
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  pointer-events: none;
+  font-family: "Recursive Variable", monospace;
+  font-variation-settings: "MONO" 1;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+.assembly-label small {
+  display: block;
+  font-family: "Recursive Variable", sans-serif;
+  font-variation-settings: "MONO" 0;
+  font-size: 11px;
+  color: #8fa2af;
+  margin-top: 6px;
+  letter-spacing: 0;
+}
+.assembly-label-line {
+  display: block;
+  width: 60px;
+  margin-top: 8px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #789899);
+}
+.assembly-tools {
+  position: absolute;
+  z-index: 3;
+  bottom: 45px;
+  right: 15%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.assembly-tools button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #7b9aa336;
+  background: #13232b85;
+  border-radius: 50%;
+  color: #b9c9cf;
+  backdrop-filter: blur(8px);
+}
+.assembly-tools button:hover {
+  background: #36525d;
+  color: #fff;
+}
+.assembly-tools span {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  font-size: 10px;
+  color: #9cafb8;
+  margin-left: 10px;
+}
+.laboratory-selector {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  width: 100%;
+  margin-top: 55px;
+  padding: 15px 0;
+  border-top: 1px solid #68899530;
+  border-bottom: 1px solid #68899530;
+  gap: 0;
+}
+.laboratory-selector button {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 12px 25px;
+  gap: 20px;
+  text-align: left;
+  min-height: 74px;
+  color: #879daa;
+}
+.laboratory-selector button + button {
+  border-left: 1px solid #68899530;
+}
+.laboratory-selector button > svg {
+  margin-left: auto;
+}
+.laboratory-selector strong {
+  display: block;
+  font-family: "Anybody Variable", sans-serif;
+  font-size: 22px;
+  font-weight: 480;
+  letter-spacing: -0.025em;
+}
+.laboratory-selector small {
+  display: block;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #7f96a4;
+  margin-top: 4px;
+}
+.laboratory-selector button[aria-pressed="true"] {
+  color: #e4e8e0;
+  background: radial-gradient(ellipse at 20% 100%, #194c582e, transparent 75%);
+}
+.laboratory-selector button[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  height: 2px;
+  left: 25px;
+  right: 25px;
+  background: #75d4d4;
+  box-shadow: 0 4px 14px #0bd2de55;
+}
+.selector-glyph {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  color: #87a9b2;
+}
+.laboratory-selector button[aria-pressed="true"] .selector-glyph {
+  color: #b99d73;
+}
+.laboratory-pipeline {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1fr 1.8fr;
+  gap: 40px;
+  padding: 27px 0 7px;
+}
+.pipeline-title > span {
+  font-size: 13px;
+  color: #ced8d7;
+}
+.pipeline-title small {
+  display: block;
+  color: #7f929e;
+  font-size: 11px;
+  margin-top: 3px;
+}
+.pipeline-stage-list {
+  display: flex;
+  align-items: center;
+}
+.pipeline-stage-list button {
+  position: relative;
+  padding: 9px 12px 18px;
+  flex: 1;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  color: #849aa6;
+  border-bottom: 1px solid #48616d;
+}
+.pipeline-stage-list button i {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border: 1px solid #547780;
+  bottom: -3px;
+  left: calc(50% - 2.5px);
+  background: #0b131b;
+  border-radius: 50%;
+}
+.pipeline-stage-list button[aria-pressed="true"] {
+  color: #bee1db;
+  border-bottom-color: #69c7ce;
+}
+.pipeline-stage-list button[aria-pressed="true"] i {
+  background: #81e8e6;
+  box-shadow: 0 2px 9px #00aebd;
+  border-color: #81e8e6;
+}
+.entry-replay-container {
+  position: absolute;
+  right: 0;
+  top: 9px;
+  z-index: 3;
+}
+.entry-replay-container .replay {
+  position: static;
+  padding: 7px 0;
+  font-size: 9px;
+  color: #899faa;
+}
+.entry-replay-container:has(.entry) {
+  position: static;
+}
+.entry {
+  background: radial-gradient(ellipse at 50% 50%, #0a1923, #03070c 75%);
+}
+.entry .entry-top,
+.entry .entry-bottom {
+  z-index: 4;
+}
+.entry .entry-top .button {
+  border-radius: 100px;
+  background: linear-gradient(145deg, #e3d5b6, #ad956e);
+  color: #152029;
+  border: 1px solid #e6d8bf;
+  box-shadow:
+    inset 0 1px 0 #fff7,
+    0 8px 25px #0007;
+}
+.entry-annotation strong {
+  color: #83e0e4;
+}
+.entry-side {
+  color: #8ba3b0;
+}
+.systems-section {
+  padding-top: 104px;
+}
+.section-intro {
+  position: relative;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 30px;
+}
+.section-intro > .mono {
+  display: none;
+}
+.section-intro h2 {
+  font-size: clamp(42px, 5.6vw, 76px);
+  line-height: 1.03;
+  font-weight: 440;
+}
+.section-intro .muted {
+  color: #8babb7;
+}
+.section-intro > p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+.project-feature {
+  border-top: 0;
+  margin-top: 65px;
+  padding: 0;
+  gap: 0;
+}
+.project-copy {
+  position: relative;
+  z-index: 2;
+  padding: 42px 8% 42px 0;
+}
+.project-copy h3 {
+  font-size: 60px;
+  letter-spacing: -0.03em;
+  color: #dce4df;
+  font-weight: 460;
+}
+.project-number {
+  font-size: 11px;
+  color: #b99d73;
+  margin-bottom: 16px;
+}
+.project-deck {
+  color: #a5bdc8;
+  font-size: 24px;
+  line-height: 1.3;
+  margin-top: 22px;
+}
+.project-summary {
+  font-size: 15px;
+  line-height: 1.65;
+  margin-top: 22px;
+  color: #8fa8b5;
+}
+.project-footnote {
+  color: #8199a5;
+  margin-top: 26px;
+  font-size: 9px;
+}
+.button {
+  border-radius: 100px;
+  background: linear-gradient(145deg, #24363f, #131f28);
+  border-color: #59737d;
+  box-shadow:
+    inset 0 1px 0 #ffffff20,
+    0 6px 20px #0003;
+  font-size: 11px;
+  color: #c9d9dc;
+  padding-inline: 22px;
+  min-height: 48px;
+}
+.button:hover {
+  background: linear-gradient(145deg, #3f535b, #19333e);
+  border-color: #8ab8ba;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.button:active {
+  transform: translateY(1px);
+}
+.detection-art {
+  background:
+    radial-gradient(ellipse at 50% 35%, #1f515c8a, transparent 63%),
+    linear-gradient(135deg, #152632, #080c12);
+  min-height: 460px;
+  overflow: hidden;
+  border: 1px solid #698e9833;
+  border-radius: 28px 5px 5px 28px;
+  box-shadow:
+    inset 0 1px 0 #abdadd15,
+    0 20px 70px #0005;
+}
+.detection-art > svg {
+  filter: drop-shadow(0 16px 8px #0009);
+  transform: perspective(900px) rotateX(11deg) rotateY(-14deg);
+  transition: transform 0.6s var(--ease);
+  opacity: 0.9;
+}
+.detection-art:hover > svg {
+  transform: perspective(900px) rotateX(0) rotateY(-4deg) scale(1.03);
+}
+.detection-art::before {
+  content: none;
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  left: calc(50% - 130px);
+  top: 85px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #132c3c 5%,
+    #79b9c131 40%,
+    #050e19 41% 51%,
+    #a0b8b550 52% 53%,
+    #152637 54% 66%,
+    #b99d7355 67% 68%,
+    #14313e 69% 76%,
+    transparent 77%
+  );
+  box-shadow:
+    14px 28px 40px #0008,
+    inset 6px 4px 12px #a6eef22a;
+  transform: rotateX(20deg) rotateY(-20deg);
+}
+.hardware-feature {
+  margin-top: 90px;
+}
+.hardware-feature .project-copy {
+  padding-left: 12%;
+  padding-right: 0;
+}
+.hardware-art {
+  position: relative;
+  min-height: 460px;
+  background:
+    radial-gradient(ellipse at 50% 40%, #27454180, transparent 63%),
+    linear-gradient(150deg, #11232c, #080d12);
+  border: 1px solid #698e9833;
+  border-radius: 5px 28px 28px 5px;
+  box-shadow:
+    inset 0 1px 0 #abdadd15,
+    0 20px 70px #0005;
+}
+.ic-visual {
+  transform: perspective(700px) rotateX(28deg) rotateY(-22deg) rotateZ(10deg);
+  background: linear-gradient(140deg, #3d555b, #10181e 48%, #24323a);
+  border: 1px solid #93a2a0;
+  box-shadow:
+    8px 15px 0 #060c11,
+    16px 26px 35px #0009,
+    inset 0 2px 0 #cddcce3d;
+  color: #e3d7bc;
+  width: 75%;
+  padding-block: 36px;
+  transition: transform 0.6s var(--ease);
+}
+.hardware-art:hover .ic-visual {
+  transform: perspective(700px) rotateX(17deg) rotateY(-12deg) rotateZ(4deg);
+}
+.ic-pins {
+  background: repeating-linear-gradient(
+    90deg,
+    #bda780 0 8px,
+    transparent 8px 17px
+  );
+  filter: drop-shadow(0 2px 1px #000);
+}
+.hardware-track {
+  color: #bac7c9;
+}
+.research-section {
+  margin-top: 110px;
+  padding-top: 48px;
+  border-top-color: #314650;
+}
+.research-head > .mono {
+  color: #b99d73;
+}
+.rangraph-feature {
+  gap: 9%;
+}
+.rangraph-feature h2 {
+  font-size: clamp(38px, 4.8vw, 65px);
+  line-height: 1.07;
+  font-weight: 430;
+}
+.rangraph-feature h2 em {
+  font-style: normal;
+  color: #93b5bf;
+}
+.record-art {
+  background:
+    radial-gradient(ellipse at 70% 70%, #0e59613b, transparent 70%),
+    linear-gradient(145deg, #142732, #0a1017);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow:
+    inset 0 1px 0 #a0d5df22,
+    0 18px 55px #0005;
+  border: 1px solid #738f9630;
+}
+.record-art > svg {
+  filter: drop-shadow(0 6px 7px #007d8450);
+}
+.source-line {
+  padding: 18px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.record-art .source-line > svg {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  filter: none;
+}
+.research-placeholder {
+  border-top: 1px solid #293a45;
+  margin-top: 50px;
+  background: none;
+}
+.supporting {
+  padding-top: 110px;
+}
+.supporting h2 {
+  font-size: 44px;
+  font-weight: 430;
+}
+.work-row {
+  border-color: #293c45;
+}
+.site-footer {
+  position: relative;
+  margin-top: 100px;
+  padding-top: 65px;
+  border-top-color: #31454e;
+  background: radial-gradient(ellipse at 85% 35%, #19474b30, transparent 60%);
+}
+.contact-lead h2 {
+  font-size: clamp(42px, 5vw, 76px);
+  font-weight: 430;
+}
+.contact-lead h2 span {
+  color: #9bafb5;
+}
+.contact-links a {
+  border-color: #35515a;
+  background: linear-gradient(120deg, #21323b80, #0a121b);
+  border-radius: 100px;
+  padding: 14px 24px;
+  box-shadow: inset 0 1px 0 #a9c6d415;
+}
+.contact-links a:hover {
+  background: #24434d;
+  color: #e6e7da;
+}
+.page-heading {
+  position: relative;
+  padding-top: 40px;
+  padding-bottom: 42px;
+}
+.page-heading h1 {
+  font-size: clamp(56px, 6.5vw, 92px);
+  font-weight: 440;
+}
+.heading-meta {
+  color: #b99d73;
+}
+.page-heading::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 80%;
+  height: 400px;
+  top: -80px;
+  right: -5%;
+  background: radial-gradient(ellipse at 75% 45%, #13445048, transparent 70%);
+  pointer-events: none;
+}
+.instrument {
+  background: linear-gradient(135deg, #15222c, #0a1018 60%);
+  border: 1px solid #607b8738;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 1px 0 #d9ffff17,
+    0 25px 70px #0006;
+  overflow: hidden;
+}
+.instrument-bar {
+  background: #06101975;
+  color: #9fbbc9;
+  border-bottom-color: #36545e;
+  font-size: 10px;
+}
+.stage-rail {
+  border-bottom-color: #3a515b;
+  background: #10202b50;
+}
+.stage-rail button {
+  font-size: 13px;
+  color: #c1d0d5;
+  transition: background 0.25s var(--ease);
+}
+.stage-rail button[aria-pressed="true"] {
+  background: linear-gradient(145deg, #244c5760, #12323e);
+  color: #b8ebeb;
+}
+.stage-visual {
+  background: radial-gradient(ellipse at 50% 50%, #1c4a5b46, transparent 65%);
+}
+.hardware-status {
+  background: linear-gradient(105deg, #26312d33, #0b172280);
+}
+.hardware-status h2 {
+  font-size: 48px;
+  font-weight: 440;
+}
+.circuit-diagram {
+  background: radial-gradient(ellipse at 50% 45%, #17455045, transparent 65%);
+}
+.input-control,
+.sensor-list button {
+  min-height: 52px;
+}
+.input-control:hover,
+.sensor-list button:hover {
+  background: #1e3a4470;
+}
+.scenario-controls button {
+  background: linear-gradient(135deg, #263b44, #111d27);
+  border-color: #647d8550;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 0 #c3deeb1a;
+  min-height: 46px;
+}
+.scenario-controls button:hover {
+  border-color: #66b2be;
+  background: #1e4450;
+}
+.pipeline-rail {
+  background: #07121b;
+}
+.pipeline-rail button {
+  min-height: 66px;
+  font-size: 12px;
+}
+.pipeline-rail button[aria-pressed="true"] {
+  background: linear-gradient(140deg, #265c624d, #0d2937);
+  color: #b9eeee;
+}
+.graph-region {
+  background: radial-gradient(ellipse at 40% 45%, #133d4f75, #0a121a);
+}
+.graph-node {
+  background: linear-gradient(145deg, #28414d, #101e29);
+  box-shadow:
+    inset 0 1px 0 #d5efff28,
+    0 8px 20px #0006;
+  border-radius: 10px;
+}
+.graph-node.gnb {
+  background: linear-gradient(145deg, #5c5040, #201f22);
+}
+.graph-node[aria-pressed="true"] {
+  box-shadow:
+    inset 0 1px 0 #e7ffff30,
+    0 8px 25px #0b707135;
+}
+.record-inspector {
+  background: #08111ab3;
+}
+.inspector-tabs button {
+  font-size: 11px;
+}
+.education-grid,
+.practice-grid {
+  border-color: #304650;
+}
+.about-monogram {
+  background: radial-gradient(ellipse at 50% 60%, #1d535348, transparent 65%);
+  color: #bfa883;
+}
+@media (min-width: 1600px) {
+  .laboratory-inner {
+    min-height: 770px;
+  }
+  .assembly-stage {
+    height: 620px;
+  }
+  .laboratory-selector {
+    margin-top: 80px;
+  }
+}
+@media (max-width: 1100px) {
+  .laboratory-name h1 {
+    font-size: 88px;
+  }
+  .laboratory-name {
+    width: 57%;
+  }
+  .assembly-stage {
+    right: -15%;
+    width: 80%;
+    top: 15px;
+    height: 515px;
+  }
+  .assembly-label {
+    right: 20%;
+    top: 25px;
+  }
+  .laboratory-inner {
+    min-height: 675px;
+  }
+  .laboratory-role {
+    font-size: 15px;
+  }
+  .laboratory-manifesto > p {
+    font-size: 15px;
+    max-width: 32ch;
+  }
+  .laboratory-selector {
+    margin-top: 42px;
+  }
+  .laboratory-selector button {
+    padding-inline: 16px;
+    gap: 12px;
+  }
+  .laboratory-selector strong {
+    font-size: 19px;
+  }
+  .site-header nav a {
+    padding-inline: 12px;
+  }
+  .laboratory-pipeline {
+    grid-template-columns: 1fr 1.8fr;
+    gap: 15px;
+  }
+  .project-copy h3 {
+    font-size: 46px;
+  }
+}
+@media (max-width: 760px) {
+  .site-header {
+    height: 76px;
+  }
+  .site-header nav {
+    border-radius: 18px;
+    padding: 14px;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: #101b25f5;
+  }
+  .site-header nav a {
+    font-size: 13px;
+    padding: 14px 18px;
+  }
+  .site-header .menu-toggle {
+    background: #1d2c37;
+    border: 1px solid #4f68743d;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+  }
+  .brand {
+    font-size: 11px;
+  }
+  .laboratory-hero {
+    margin-top: -76px;
+    padding-top: 76px;
+    min-height: auto;
+  }
+  .laboratory-inner {
+    padding-top: 27px;
+    min-height: auto;
+    padding-bottom: 32px;
+  }
+  .laboratory-name {
+    width: 100%;
+  }
+  .laboratory-name h1 {
+    font-size: clamp(68px, 18vw, 105px);
+    line-height: 0.91;
+    font-variation-settings: "wdth" 110;
+  }
+  .laboratory-name h1 > span + span {
+    margin-left: 35px;
+  }
+  .laboratory-role {
+    margin-top: 22px;
+    font-size: 14px;
+  }
+  .assembly-stage {
+    position: relative;
+    height: 350px;
+    width: 124%;
+    right: auto;
+    top: auto;
+    margin: -7px -12% -14px;
+  }
+  .assembly-label {
+    right: 13%;
+    top: 15px;
+    font-size: 8px;
+  }
+  .assembly-label small {
+    font-size: 9px;
+  }
+  .assembly-label-line {
+    width: 30px;
+  }
+  .assembly-tools {
+    bottom: 13px;
+    right: 15%;
+  }
+  .assembly-tools span {
+    font-size: 9px;
+  }
+  .assembly-tools button {
+    width: 44px;
+    height: 44px;
+  }
+  .laboratory-manifesto {
+    position: relative;
+    margin-top: 23px;
+    max-width: 100%;
+  }
+  .laboratory-manifesto > p {
+    font-size: 15px;
+    max-width: 34ch;
+  }
+  .ignition-link {
+    margin-top: 18px;
+    min-height: 52px;
+    font-size: 13px;
+  }
+  .laboratory-about {
+    font-size: 11px;
+    margin-left: 12px;
+  }
+  .laboratory-selector {
+    margin-top: 30px;
+    padding: 8px 0;
+  }
+  .laboratory-selector button {
+    padding: 10px 7px;
+    justify-content: center;
+    flex-direction: column;
+    gap: 7px;
+    text-align: center;
+    min-height: 89px;
+  }
+  .laboratory-selector button > svg {
+    display: none;
+  }
+  .laboratory-selector strong {
+    font-size: 16px;
+  }
+  .laboratory-selector small {
+    display: none;
+  }
+  .selector-glyph {
+    width: 24px;
+  }
+  .selector-glyph svg {
+    width: 24px;
+    height: 24px;
+  }
+  .laboratory-selector button[aria-pressed="true"]::after {
+    bottom: -8px;
+    left: 8px;
+    right: 8px;
+  }
+  .laboratory-pipeline {
+    grid-template-columns: 1fr;
+    gap: 11px;
+    padding-top: 20px;
+  }
+  .pipeline-title > span {
+    font-size: 12px;
+  }
+  .pipeline-title small {
+    display: none;
+  }
+  .pipeline-stage-list button {
+    padding: 13px 2px 17px;
+    font-size: 9px;
+    letter-spacing: 0;
+    min-height: 44px;
+  }
+  .entry-replay-container {
+    top: 8px;
+  }
+  .entry-replay-container .replay {
+    font-size: 8px;
+  }
+  .systems-section {
+    padding-top: 66px;
+  }
+  .section-intro {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .section-intro h2 {
+    font-size: 46px;
+  }
+  .section-intro p {
+    font-size: 15px;
+  }
+  .project-feature {
+    margin-top: 34px;
+    gap: 20px;
+  }
+  .project-copy {
+    padding: 0;
+  }
+  .project-copy h3 {
+    font-size: 48px;
+  }
+  .project-number {
+    margin-bottom: 12px;
+  }
+  .project-deck {
+    font-size: 21px;
+    margin-top: 14px;
+  }
+  .project-summary {
+    margin-top: 16px;
+    font-size: 15px;
+  }
+  .detection-art {
+    min-height: 315px;
+    border-radius: 16px;
+  }
+  .detection-art::before {
+    width: 200px;
+    height: 200px;
+    left: calc(50% - 100px);
+    top: 65px;
+  }
+  .hardware-feature {
+    margin-top: 58px;
+  }
+  .hardware-feature .project-copy {
+    padding: 0;
+  }
+  .hardware-art {
+    min-height: 340px;
+    border-radius: 16px;
+  }
+  .ic-visual {
+    margin-top: 35px;
+    padding-block: 25px;
+  }
+  .research-section {
+    margin-top: 70px;
+    padding-top: 30px;
+  }
+  .rangraph-feature {
+    gap: 28px;
+  }
+  .rangraph-feature h2 {
+    font-size: 42px;
+  }
+  .record-art {
+    padding: 22px;
+  }
+  .supporting {
+    padding-top: 65px;
+  }
+  .supporting h2 {
+    font-size: 36px;
+  }
+  .site-footer {
+    margin-top: 65px;
+    padding-top: 40px;
+  }
+  .page-heading {
+    padding-top: 24px;
+    padding-bottom: 28px;
+  }
+  .page-heading h1 {
+    font-size: clamp(42px, 12vw, 65px);
+  }
+  .instrument {
+    border-radius: 12px;
+  }
+  .instrument-bar {
+    font-size: 8px;
+  }
+  .stage-rail button {
+    font-size: 11px;
+  }
+  .pipeline-rail button {
+    font-size: 10px;
+    min-height: 62px;
+  }
+  .input-control,
+  .sensor-list button {
+    min-height: 54px;
+  }
+  .graph-node {
+    border-radius: 7px;
+  }
+}
+@media (max-width: 365px) {
+  .laboratory-about {
+    display: flex;
+    margin-left: 0;
+    margin-top: 15px;
+  }
+  .assembly-stage {
+    height: 300px;
+  }
+  .assembly-tools span {
+    display: none;
+  }
+  .laboratory-name h1 {
+    font-size: 18.3vw;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .site-header nav,
+  .assembly-tools button {
+    backdrop-filter: none;
+    background: #14212b;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ignition-link,
+  .detection-art > svg,
+  .ic-visual {
+    transition: none;
+  }
+  .ignition-link:hover,
+  .detection-art:hover > svg,
+  .hardware-art:hover .ic-visual {
+    transform: none;
+  }
+  .ignition-link i {
+    display: none;
+  }
+}
+
+/* Actual Three.js project views, with readable model-specific fallback. */
+.project-assembly {
+  position: relative;
+  width: 100%;
+  height: 380px;
+}
+.project-assembly .assembly-renderer {
+  cursor: default;
+}
+.project-assembly .architecture-overview {
+  margin: 0 auto;
+}
+.detection-art,
+.hardware-art {
+  display: block;
+  padding: 24px 24px 18px;
+}
+.detection-art .art-footer,
+.hardware-art .art-footer {
+  position: static;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  color: #95b0bd;
+}
+.hardware-art .art-caption {
+  position: static;
+  display: flex;
+  justify-content: space-between;
+}
+.architecture-overview {
+  width: min(360px, 90%);
+  margin: 0;
+  color: #bbd7df;
+}
+.architecture-overview > strong {
+  display: block;
+  font-family: "Anybody Variable", sans-serif;
+  font-weight: 460;
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+.architecture-overview ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.architecture-overview li {
+  padding: 7px 10px;
+  border-bottom: 1px solid #355461;
+  font-size: 13px;
+}
+.architecture-overview svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 190px;
+}
+.architecture-overview line {
+  stroke: #63bfc6;
+  stroke-width: 1.5;
+}
+.architecture-overview circle {
+  fill: #101e29;
+  stroke: #b99d73;
+  stroke-width: 1.5;
+}
+.architecture-overview text {
+  fill: #bed6de;
+  font-size: 13px;
+}
+.architecture-overview figcaption {
+  font-size: 11px;
+  color: #a9bbc7;
+  margin-top: 16px;
+}
+.assembly-stage:not(.scene-ready) .assembly-label {
+  display: none;
+}
+.assembly-stage:not(.scene-ready) .assembly-tools {
+  top: 8px;
+  bottom: auto;
+  right: 13%;
+}
+.research-head {
+  justify-content: flex-end;
+}
+.section-intro h2 {
+  grid-column: auto;
+}
+.work-row {
+  grid-template-columns: 1fr;
+}
+.work-row p {
+  grid-column: 1;
+}
+@media (max-width: 760px) {
+  .laboratory-inner {
+    padding-top: 24px;
+    padding-bottom: 18px;
+  }
+  .laboratory-name h1 {
+    font-size: 15vw;
+  }
+  .laboratory-name h1 > span + span {
+    margin-left: 23px;
+  }
+  .laboratory-role {
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .laboratory-manifesto {
+    margin-top: 14px;
+  }
+  .laboratory-manifesto > p {
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: none;
+  }
+  .ignition-link {
+    margin-top: 12px;
+    min-height: 48px;
+    padding-right: 20px;
+    font-size: 12px;
+    gap: 11px;
+  }
+  .ignition-symbol {
+    width: 34px;
+    height: 34px;
+  }
+  .laboratory-about {
+    font-size: 10px;
+    margin-top: 0;
+    margin-left: 10px;
+  }
+  .assembly-stage {
+    height: 230px;
+    margin-top: -5px;
+    margin-bottom: -8px;
+  }
+  .assembly-label {
+    right: 13%;
+    top: 8px;
+  }
+  .assembly-label small {
+    font-size: 8px;
+  }
+  .assembly-tools {
+    right: 13%;
+    bottom: 1px;
+  }
+  .assembly-tools button {
+    width: 44px;
+    height: 44px;
+  }
+  .assembly-tools span {
+    font-size: 8px;
+  }
+  .laboratory-selector {
+    margin-top: 18px;
+    padding-block: 4px;
+  }
+  .laboratory-selector button {
+    min-height: 64px;
+    padding-block: 7px;
+    gap: 4px;
+  }
+  .laboratory-selector strong {
+    font-size: 14px;
+  }
+  .selector-glyph svg {
+    width: 20px;
+    height: 20px;
+  }
+  .laboratory-selector button[aria-pressed="true"]::after {
+    bottom: -4px;
+  }
+  .laboratory-pipeline {
+    padding-top: 14px;
+    gap: 6px;
+  }
+  .pipeline-stage-list button {
+    min-height: 44px;
+    padding-bottom: 12px;
+  }
+  .project-assembly {
+    height: 260px;
+  }
+  .detection-art,
+  .hardware-art {
+    min-height: auto;
+    padding: 19px 14px;
+  }
+  .architecture-overview {
+    width: 80%;
+  }
+  .assembly-fallback .architecture-overview > strong {
+    font-size: 20px;
+    margin-bottom: 7px;
+  }
+  .assembly-fallback .architecture-overview ol {
+    gap: 0;
+    grid-template-columns: 1fr 1fr;
+  }
+  .assembly-fallback .architecture-overview li {
+    font-size: 10px;
+    padding: 7px;
+  }
+  .assembly-fallback .architecture-overview svg {
+    height: 130px;
+    max-height: 130px;
+  }
+  .assembly-fallback .architecture-overview text {
+    font-size: 18px;
+  }
+  .architecture-overview figcaption {
+    margin-top: 10px;
+  }
+}
+@media (max-width: 365px) {
+  .laboratory-name h1 {
+    font-size: 15.8vw;
+  }
+  .assembly-stage {
+    height: 220px;
+  }
+  .laboratory-about {
+    display: inline-flex;
+    margin-left: 8px;
+    font-size: 9px;
+  }
+}

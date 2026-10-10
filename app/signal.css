@@ -1,0 +1,624 @@
+.reference-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  background: #08070b;
+}
+.reference-field > iframe,
+.reference-field > div {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.signal-hero {
+  position: relative;
+  isolation: isolate;
+  background: #08070b;
+  overflow: hidden;
+  margin-top: -86px;
+}
+.signal-hero > .reference-field {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 10%,
+    #000 78%,
+    transparent
+  );
+}
+.signal-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    #08070bd9 0%,
+    #08070b69 39%,
+    #08070b0a 70%,
+    #08070b44
+  );
+}
+.signal-composition {
+  position: relative;
+  z-index: 2;
+  min-height: min(900px, 100svh);
+  padding-top: 132px;
+  padding-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1.16fr 1fr;
+  grid-template-rows: minmax(440px, 1fr) 82px 66px;
+  column-gap: 5vw;
+  align-items: center;
+}
+.signal-identity {
+  align-self: center;
+  padding-bottom: 25px;
+}
+.signal-identity h1 {
+  font-family: "Anybody Variable", sans-serif;
+  font-variation-settings: "wdth" 112;
+  font-weight: 440;
+  font-size: clamp(78px, 8.5vw, 122px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+.signal-identity h1 > span {
+  display: block;
+}
+.signal-identity h1 > span + span {
+  margin-left: 30px;
+}
+.signal-dot {
+  color: #b99d73;
+}
+.signal-role {
+  color: #d5c6a9;
+  font-size: 17px;
+  max-width: 28ch;
+  line-height: 1.4;
+  margin: 30px 0 0;
+}
+.signal-statement {
+  max-width: 37ch;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #b5c1c8;
+  margin: 20px 0 0;
+}
+.signal-actions {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-top: 26px;
+}
+.signal-actions > a:not(.real-ignition) {
+  display: inline-flex;
+  gap: 9px;
+  align-items: center;
+  font-size: 11px;
+  color: #c8c8bc;
+  min-height: 44px;
+}
+.real-ignition {
+  display: block;
+  padding: 6px;
+  border-radius: 21px;
+  width: 246px;
+  height: 70px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #484843, #1b1b1a 55%, #343b3c);
+  box-shadow:
+    0 16px 36px #0008,
+    inset 0 1px 0 #dfd4bd4a;
+  transition: transform 0.2s ease-out;
+}
+.real-ignition:hover {
+  transform: translateY(-2px);
+}
+.real-ignition:active {
+  transform: translateY(1px);
+}
+.real-ignition-well {
+  display: grid;
+  position: relative;
+  isolation: isolate;
+  place-items: center;
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  background: #160e06;
+}
+.real-ignition canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.real-ignition-well > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  color: #fff1d8;
+  font-size: 12px;
+  font-weight: 500;
+  text-shadow: 0 1px 7px #000;
+}
+.signal-artifact {
+  position: relative;
+  height: 490px;
+  min-width: 0;
+}
+.holo-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;
+}
+.holo-canvas:focus-visible {
+  outline: 2px solid #00aebd;
+  outline-offset: -10px;
+  border-radius: 16px;
+}
+.holo-canvas[aria-hidden="true"] { pointer-events: none; }
+.signal-overview {
+  position: absolute;
+  inset: 55px 35px 70px;
+  background: #111c23;
+  border: 1px solid #b99d7345;
+  border-radius: 16px;
+}
+.signal-overview .architecture-overview {
+  min-height: 100%;
+  padding: 35px;
+}
+.signal-overview .architecture-overview strong {
+  font-size: 30px;
+}
+.signal-artifact-controls {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+}
+.signal-artifact-controls button {
+  min-width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  padding: 0 12px;
+  border: 1px solid #8a80583d;
+  background: #121414a8;
+  color: #c7c9c2;
+  border-radius: 22px;
+  backdrop-filter: blur(10px);
+}
+.signal-artifact-controls button[aria-pressed="true"] {
+  border-color: #b99d73;
+  color: #ead9b8;
+}
+.signal-artifact-controls button:hover {
+  background: #314344c2;
+}
+.signal-artifact-controls span {
+  font-size: 10px;
+}
+.signal-system-dock {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-self: end;
+  border-top: 1px solid #d3c29e4f;
+  border-bottom: 1px solid #d3c29e29;
+  background: #08070b9c;
+  backdrop-filter: blur(15px);
+}
+.signal-system-dock button {
+  position: relative;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 17px 24px;
+  min-height: 80px;
+  color: #aab0ac;
+  border-right: 1px solid #c9b28426;
+}
+.signal-system-dock button:last-child {
+  border-right: 0;
+}
+.signal-system-dock strong {
+  font-family: "Anybody Variable", sans-serif;
+  font-weight: 480;
+  font-size: 21px;
+  letter-spacing: -0.025em;
+}
+.signal-system-dock small {
+  grid-row: 2;
+  font-size: 10px;
+  color: #a6b4bc;
+  margin-top: 4px;
+}
+.signal-system-dock svg {
+  grid-column: 2;
+  grid-row: 1/3;
+  align-self: center;
+}
+.signal-system-dock button[aria-pressed="true"] {
+  color: #f0e6d2;
+  background: linear-gradient(110deg, #b99d731e, transparent);
+}
+.signal-system-dock button[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: #cbb180;
+}
+.signal-system-context {
+  grid-column: 1/-1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  color: #d4c7ac;
+  font-size: 12px;
+  padding-top: 13px;
+}
+.signal-system-context p {
+  margin: 0;
+}
+.signal-system-context > span {
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  color: #a6b4bc;
+}
+.signal-replay {
+  position: absolute;
+  top: 100px;
+  right: 0;
+}
+.signal-replay .replay {
+  position: static;
+  padding: 0;
+}
+.reference-home .project-feature {
+  display: block;
+  position: relative;
+  isolation: isolate;
+  min-height: 0;
+  border-bottom: 1px solid #bba87726;
+  overflow: hidden;
+  padding: 42px 0;
+}
+.reference-home .project-feature > .reference-field {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 22%,
+    #000 76%,
+    transparent
+  );
+  opacity: 0.8;
+}
+.reference-home .project-feature::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(90deg, #08070be6, #08070b65 50%, #08070bda);
+  pointer-events: none;
+}
+.reference-home .project-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 80px);
+  padding: 30px 15px;
+}
+.reference-home .project-details .project-summary {
+  max-width: 52ch;
+  margin-top: 0;
+}
+.reference-home .research-section {
+  position: relative;
+  isolation: isolate;
+}
+.reference-home .research-section > .reference-field {
+  inset: -30px -5.5vw;
+  opacity: 0.58;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 20%,
+    #000 72%,
+    transparent
+  );
+}
+.reference-home .research-head,
+.reference-home .rangraph-feature,
+.reference-home .research-placeholder {
+  position: relative;
+  z-index: 1;
+}
+.reference-home .rangraph-feature > div:first-child {
+  background: linear-gradient(90deg, #08070bc9, transparent);
+}
+.reference-home .rangraph-feature {
+  display: block;
+}
+.reference-home .rangraph-feature .project-details > p {
+  margin-top: 0;
+}
+body:has(.signal-hero) .main-nav {
+  background: #08070b66;
+  box-shadow: none;
+  border-color: #b99d7333;
+}
+@media (min-width: 1600px) {
+  .signal-composition {
+    min-height: 950px;
+  }
+  .signal-artifact {
+    height: 580px;
+  }
+}
+@media (max-width: 1100px) {
+  .signal-composition {
+    column-gap: 20px;
+    padding-top: 110px;
+    grid-template-rows: minmax(400px, 1fr) 82px 66px;
+  }
+  .signal-identity h1 {
+    font-size: 9.5vw;
+  }
+  .signal-artifact {
+    height: 430px;
+  }
+  .signal-actions {
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .signal-role {
+    font-size: 15px;
+    margin-top: 22px;
+  }
+  .signal-statement {
+    font-size: 14px;
+    margin-top: 16px;
+  }
+  .signal-system-context > span {
+    max-width: 52%;
+    text-align: right;
+    line-height: 1.7;
+  }
+}
+@media (max-width: 760px) {
+  .reference-home .project-feature {
+    padding: 20px 0 30px;
+  }
+  .reference-home .project-copy {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    padding: 20px 0;
+  }
+  .signal-composition {
+    min-height: 0;
+    padding-top: 96px;
+    padding-bottom: 20px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    column-gap: 0;
+  }
+  .signal-identity {
+    padding-bottom: 0;
+  }
+  .signal-identity h1 {
+    font-size: 16vw;
+    line-height: 0.9;
+  }
+  .signal-identity h1 > span + span {
+    margin-left: 24px;
+  }
+  .signal-role {
+    margin-top: 17px;
+    font-size: 12px;
+    max-width: none;
+  }
+  .signal-statement {
+    margin-top: 13px;
+    font-size: 14px;
+    line-height: 1.65;
+    max-width: 38ch;
+  }
+  .signal-actions {
+    margin-top: 17px;
+    gap: 16px;
+    flex-wrap: nowrap;
+  }
+  .real-ignition {
+    width: 196px;
+    height: 58px;
+    padding: 5px;
+    border-radius: 18px;
+  }
+  .real-ignition-well {
+    border-radius: 13px;
+  }
+  .real-ignition-well > span {
+    font-size: 10px;
+    gap: 8px;
+  }
+  .signal-actions > a:not(.real-ignition) {
+    font-size: 10px;
+    gap: 5px;
+  }
+  .signal-artifact {
+    height: 250px;
+    margin-top: 5px;
+  }
+  .signal-artifact-controls {
+    bottom: 0;
+    gap: 7px;
+  }
+  .signal-artifact-controls button {
+    height: 44px;
+  }
+  .signal-overview {
+    inset: 15px 5px 55px;
+  }
+  .signal-overview .architecture-overview {
+    padding: 16px;
+  }
+  .signal-overview .architecture-overview strong {
+    font-size: 22px;
+  }
+  .signal-overview .architecture-overview li {
+    padding: 5px 0;
+  }
+  .signal-artifact:not(.is-ready) {
+    height: auto;
+    min-height: 250px;
+    padding: 15px 5px 60px;
+  }
+  .signal-artifact:not(.is-ready) > .holo-canvas {
+    position: absolute;
+    inset: 0;
+  }
+  .signal-artifact:not(.is-ready) .signal-overview {
+    position: relative;
+    inset: auto;
+  }
+  .signal-overview .architecture-overview {
+    width: 100%;
+    min-height: 0;
+  }
+  .signal-overview .architecture-overview strong {
+    margin-bottom: 8px;
+  }
+  .signal-overview .architecture-overview ol {
+    gap: 0;
+  }
+  .signal-overview .architecture-overview li {
+    padding: 4px 0;
+    line-height: 1.45;
+  }
+  .signal-overview .architecture-overview svg {
+    max-height: 150px;
+  }
+  .signal-overview .architecture-overview text {
+    font-size: 18px;
+  }
+  .signal-overview .architecture-overview figcaption {
+    margin-top: 8px;
+  }
+  .signal-system-dock {
+    margin-top: 20px;
+  }
+  .signal-system-dock button {
+    min-height: 64px;
+    padding: 10px 10px;
+    grid-template-columns: 1fr;
+  }
+  .signal-system-dock strong {
+    font-size: 16px;
+  }
+  .signal-system-dock small {
+    font-size: 8px;
+    margin-top: 4px;
+  }
+  .signal-system-dock svg {
+    display: none;
+  }
+  .signal-system-dock button[aria-pressed="true"]::after {
+    left: 10px;
+    right: 10px;
+  }
+  .signal-system-context {
+    font-size: 10px;
+    display: block;
+    padding-top: 13px;
+  }
+  .signal-system-context > span {
+    display: block;
+    max-width: none;
+    text-align: left;
+    font-size: 8px;
+    line-height: 1.7;
+    margin-top: 7px;
+  }
+  .signal-replay {
+    top: 82px;
+  }
+  .signal-replay .replay {
+    font-size: 8px;
+  }
+  .signal-shade {
+    background: linear-gradient(
+      to bottom,
+      #08070baf,
+      #08070b69 42%,
+      #08070b16 70%,
+      #08070bbb
+    );
+  }
+  .reference-home .project-feature {
+    padding: 24px 0;
+    min-height: 0;
+  }
+  .reference-home .project-copy {
+    padding: 25px 0;
+  }
+  .reference-home .hardware-feature::after,
+  .reference-home .project-feature::after {
+    background: linear-gradient(to bottom, #08070ba6, #08070b30);
+  }
+}
+@media (max-width: 365px) {
+  .signal-composition {
+    padding-top: 88px;
+  }
+  .signal-artifact {
+    height: 220px;
+  }
+  .signal-actions {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .signal-role {
+    font-size: 11px;
+  }
+  .signal-system-dock strong {
+    font-size: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .real-ignition {
+    transition: none;
+  }
+  .real-ignition:hover {
+    transform: none;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .signal-system-dock,
+  .signal-artifact-controls button {
+    backdrop-filter: none;
+    background: #101317;
+  }
+}
