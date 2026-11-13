@@ -1,0 +1,669 @@
+/* --- PART 1: Typographic Kinetic Stream directly beneath Hero --- */
+.kineticSection {
+  position: relative;
+  isolation: isolate;
+  background: var(--bg);
+  padding: 24px 0 32px 0;
+  overflow-x: clip;
+  z-index: 1;
+}
+
+.kineticArea {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow-x: clip;
+  user-select: none;
+}
+
+.lineMask {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 6px 0;
+}
+
+.kineticLine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 2vw, 26px);
+  white-space: nowrap;
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(28px, 3.8vw, 60px);
+  font-weight: 320;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  will-change: transform;
+}
+
+.accentBar {
+  display: inline-block;
+  width: clamp(28px, 4vw, 76px);
+  height: 3px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.accentBarCyan {
+  background: var(--signal);
+  box-shadow: 0 0 14px rgba(0, 174, 189, 0.45);
+}
+
+.accentBarGold {
+  background: var(--gold);
+  box-shadow: 0 0 14px rgba(185, 157, 115, 0.45);
+}
+
+.italicText {
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(232, 224, 210, 0.94);
+}
+
+/* --- PART 2: Pinned Horizontal Scroll Section --- */
+.carouselContainer {
+  position: relative;
+  height: 400vh;
+  width: 100%;
+  background: var(--bg);
+}
+
+.stickyStage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 0 28px 0;
+  background: var(--bg);
+}
+
+/* Section Header */
+.headerBlock {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 24px;
+  margin-bottom: clamp(32px, 3.6vh, 42px);
+  flex-shrink: 0;
+}
+
+.eyebrow {
+  font-family: "Recursive Variable", sans-serif;
+  font-variation-settings: "MONO" 0, "CASL" 0;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eyebrowDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--signal);
+  box-shadow: 0 0 8px var(--signal);
+}
+
+.title {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(38px, 5.2vw, 68px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.titleDot {
+  color: var(--gold);
+}
+
+.lead {
+  font-family: "Recursive Variable", sans-serif;
+  font-variation-settings: "MONO" 0, "CASL" 0;
+  font-size: clamp(14px, 1.4vw, 17px);
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+/* Track Viewport with 3D Perspective Stage */
+.trackViewport {
+  --card-w: clamp(490px, 35vw, 560px);
+  width: 100%;
+  overflow: visible;
+  position: relative;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+}
+
+.cardsTrack {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 32px;
+  width: max-content;
+  padding-left: calc((100vw - var(--card-w)) / 2);
+  padding-right: calc((100vw - var(--card-w)) / 2);
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* --- DISCIPLINE CARD: Generous Full-Space Typography matching Reference --- */
+.noWrap {
+  white-space: nowrap;
+}
+
+.card {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  width: var(--card-w);
+  min-width: var(--card-w);
+  min-height: 480px;
+  height: clamp(480px, 52vh, 520px);
+  flex-shrink: 0;
+  background: rgba(12, 12, 16, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(213, 198, 169, 0.24);
+  border-radius: 22px;
+  padding: clamp(32px, 2.6vw, 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  cursor: default;
+  transition:
+    background-color 0.4s var(--ease),
+    border-color 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+
+/* Strictly scroll-driven spotlight: only the scroll-selected card activates */
+.cardSelected {
+  background-color: rgba(16, 16, 22, 0.96);
+}
+
+/* Cyan Theme Card */
+.cardCyan {
+  border-color: rgba(0, 174, 189, 0.26);
+}
+
+.cardCyan .capabilityIndex {
+  color: var(--signal);
+}
+
+.cardCyan.cardSelected {
+  border-color: rgba(0, 174, 189, 0.65);
+  box-shadow: 0 22px 52px rgba(0, 0, 0, 0.65);
+}
+
+.cardCyan.cardSelected .cardNumber {
+  color: var(--signal);
+  text-shadow: 0 0 14px rgba(0, 174, 189, 0.35);
+}
+
+/* Gold Theme Card */
+.cardGold {
+  border-color: rgba(185, 157, 115, 0.28);
+}
+
+.cardGold .capabilityIndex {
+  color: var(--gold);
+}
+
+.cardGold.cardSelected {
+  border-color: rgba(185, 157, 115, 0.65);
+  box-shadow: 0 22px 52px rgba(0, 0, 0, 0.65);
+}
+
+.cardGold.cardSelected .cardNumber {
+  color: var(--gold);
+  text-shadow: 0 0 14px rgba(185, 157, 115, 0.35);
+}
+
+.cardGold .spotlight {
+  background: radial-gradient(circle, rgba(185, 157, 115, 0.12) 0%, transparent 70%);
+}
+
+/* Restrained Soft Radial Light reacting to cursor */
+.spotlight {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Top Header Row: Title on left with room to expand, Number watermark on right */
+.cardTop {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  min-height: 80px;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+
+.cardTitle {
+  font-family: "Cakra", sans-serif;
+  font-size: var(--card-title-size, 36px);
+  color: #fff;
+  flex: 1;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+  transition: font-size 0.15s ease, line-height 0.15s ease;
+}
+
+/* Typography Option: Zarathustra (Ornate Jugendstil / Art Nouveau Revival Serif) */
+.titleZarathustra {
+  font-family: "Zarathustra", serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+/* Typography Option: Cakra (OoM Type Experimental Geometric Display) */
+.titleCakra {
+  font-family: "Cakra", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+}
+
+/* Typography Option: Bluu Next (Jean-Baptiste Morizot Sharp Heavy Serif) */
+.titleBluuNext {
+  font-family: "Bluu Next", serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* Typography Option: Geom (Cedric Müller / BestFreeFonts Geometric Display) */
+.titleGeom {
+  font-family: "Geom", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+/* Typography Option: Bagnard (Napoleonic Prisoner Historic Serif) */
+.titleBagnard {
+  font-family: "Bagnard", serif;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+/* Typography Option: Nouveau (Death of Typography Art Nouveau Display) */
+.titleNouveau {
+  font-family: "Nouveau", serif, cursive;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.18;
+}
+
+/* Typography Option: Getai Grotesk (Death of Typography Calligraphic Stage Grotesque) */
+.titleGetaiGrotesk {
+  font-family: "Getai Grotesk", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+/* Typography Option: Melete (Sora Sagano Futuristic Sci-Fi Bank Grotesk) */
+.titleMelete {
+  font-family: "Melete", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.14;
+}
+
+/* Typography Option: Texturina (Sharp Contemporary Editorial Serif - User Requested) */
+.titleTexturina {
+  font-family: "Texturina Variable", serif;
+  font-variation-settings: "opsz" 36;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+/* Typography Option: Fraunces (Wonky Old-Style Display Serif with dramatic curves) */
+.titleFraunces {
+  font-family: "Fraunces Variable", serif;
+  font-variation-settings: "opsz" 72, "WONK" 1;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+/* Typography Option: Instrument Serif (Sleek Geometric High-Fashion Editorial) */
+.titleInstrument {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+}
+
+/* Typography Option: Syne (Avant-Garde Sculptural Modern Display) */
+.titleSyne {
+  font-family: "Syne Variable", sans-serif;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+
+/* Typography Option: Anybody (Heavy Industrial Geometric Display) */
+.titleAnybody {
+  font-family: "Anybody Variable", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+/* Description pushed down close to the capabilities list */
+.cardDesc {
+  position: relative;
+  z-index: 2;
+  font-family: "Recursive Variable", sans-serif;
+  font-variation-settings: "MONO" 0, "CASL" 0;
+  font-size: clamp(14px, 1.05vw, 15.5px);
+  line-height: 1.6;
+  color: rgba(232, 224, 210, 0.76);
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+/* Large Subtle Top-Right Watermark Number */
+.cardNumber {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(52px, 4vw, 68px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: rgba(232, 224, 210, 0.18);
+  user-select: none;
+  pointer-events: none;
+  flex-shrink: 0;
+  margin-top: -4px;
+  transition:
+    color 0.4s ease,
+    text-shadow 0.4s ease;
+}
+
+/* Simple Numbered Capability Rows with Full-Width Separators */
+.capabilitiesList {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  padding-top: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.capabilityRow {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+.capabilityRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.capabilityIndex {
+  font-family: "Recursive Variable", sans-serif;
+  font-variation-settings: "MONO" 0, "CASL" 0;
+  font-size: clamp(14px, 1.05vw, 16px);
+  font-weight: 600;
+  flex-shrink: 0;
+  width: 24px;
+  transition: color 0.3s ease;
+}
+
+.capabilityTitle {
+  font-family: "Recursive Variable", sans-serif;
+  font-variation-settings: "MONO" 0, "CASL" 0;
+  font-size: clamp(17.5px, 1.25vw, 20.5px);
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  flex: 1;
+  transition: color 0.3s ease;
+}
+
+.card:hover .capabilityTitle,
+.cardHovered .capabilityTitle {
+  color: #fff;
+}
+
+/* Responsive Touch Devices */
+@media (hover: none) {
+  .spotlight {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .carouselContainer {
+    height: 360svh;
+  }
+
+  .stickyStage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+    padding: 72px 0 20px;
+    justify-content: center;
+  }
+
+  .headerBlock {
+    padding: 0 20px;
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: clamp(32px, 9vw, 48px);
+    margin-bottom: 6px;
+  }
+
+  .lead {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .trackViewport {
+    --card-w: clamp(284px, 78vw, 440px);
+    overflow: visible;
+    perspective: 1200px;
+  }
+
+  .cardsTrack {
+    gap: 20px;
+    padding-left: calc((100vw - var(--card-w)) / 2);
+    padding-right: calc((100vw - var(--card-w)) / 2);
+  }
+
+  .card {
+    width: var(--card-w);
+    min-width: var(--card-w);
+    height: clamp(340px, 49svh, 430px);
+    min-height: 0;
+    padding: 24px 20px;
+  }
+
+  .cardTop {
+    min-height: 48px;
+    margin-bottom: 8px;
+    gap: 10px;
+  }
+
+  .cardTitle {
+    font-size: clamp(20px, 5.4vw, 28px);
+  }
+
+  .cardNumber {
+    font-size: clamp(34px, 8.5vw, 48px);
+  }
+
+  .cardDesc {
+    font-size: 13px;
+    line-height: 1.48;
+    margin-bottom: 12px;
+  }
+
+  .capabilityRow {
+    padding: 10px 0;
+    gap: 12px;
+  }
+
+  .capabilityIndex {
+    font-size: 12.5px;
+    width: 20px;
+  }
+
+  .capabilityTitle {
+    font-size: 14.5px;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 640px) {
+  .kineticLine {
+    flex-wrap: wrap;
+    white-space: normal;
+    font-size: clamp(22px, 6.2vw, 28px);
+    gap: 8px 12px;
+    padding: 0 16px;
+  }
+}
+
+/* Batch 3: Reachable multi-column static grid when reduced motion or explicit Pause is active */
+.carouselContainer[data-static="true"] {
+  height: auto;
+}
+
+.carouselContainer[data-static="true"] .stickyStage {
+  position: relative;
+  height: auto;
+  overflow-x: clip;
+  overflow-y: visible;
+  padding: clamp(48px, 6vh, 80px) 0;
+}
+
+.carouselContainer[data-static="true"] .trackViewport {
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 24px;
+  overflow-x: clip;
+  overflow-y: visible;
+  perspective: none;
+}
+
+.carouselContainer[data-static="true"] .cardsTrack {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 24px;
+  width: 100%;
+  padding: 0;
+  transform: none !important;
+  transform-style: flat;
+  will-change: auto;
+}
+
+.carouselContainer[data-static="true"] .card {
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carouselContainer {
+    height: auto;
+  }
+
+  .stickyStage {
+    position: relative;
+    height: auto;
+    overflow-x: clip;
+    overflow-y: visible;
+    padding: clamp(48px, 6vh, 80px) 0;
+  }
+
+  .trackViewport {
+    width: 100%;
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 0 24px;
+    overflow-x: clip;
+    overflow-y: visible;
+    perspective: none;
+  }
+
+  .cardsTrack {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+    gap: 24px;
+    width: 100%;
+    padding: 0;
+    transform: none !important;
+    transform-style: flat;
+    will-change: auto;
+  }
+
+  .card {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 0;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    will-change: auto;
+  }
+}

@@ -1,0 +1,623 @@
+/* ==========================================================================
+   VISHVA PATEL — PURE EDITORIAL CINEMATIC NAVIGATION (V3)
+   Persistent, universal floating header with clean scroll transitions.
+   Three-line kinetic hamburger morphing to symmetric X with 90deg spin.
+   Expansive, wide editorial drawer with god-level masked motion physics.
+   Zero AI slop. 100% transparent on scroll, pure floating trigger.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. UNIVERSAL FLOATING HEADER (Transparent, unencumbered)
+   -------------------------------------------------------------------------- */
+.cinematic-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 clamp(24px, 5vw, 64px);
+  box-sizing: border-box;
+  background: transparent !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  pointer-events: none; /* Allows all clicks to pass through transparent empty space */
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ensure no opaque background bar on scroll — STRICTLY transparent */
+.cinematic-header[data-scrolled="true"] {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Ensure navbar is completely hidden and unclickable during DARVS scan page */
+.cinematic-header[data-scan-active="true"],
+body:has(.scan-entry) .cinematic-header,
+html:has(.scan-entry) .cinematic-header,
+body.darvs-scan-active .cinematic-header,
+body[data-darvs-active="true"] .cinematic-header {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  transform: translateY(-16px) !important;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s !important;
+}
+
+/* Ensure any legacy centered pill nav styles are silenced */
+.cinematic-header nav.legacy-pill-nav,
+.site-header nav.legacy-pill-nav {
+  display: none !important;
+}
+
+/* Top-Right: Header Actions Cluster */
+.cinematic-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  pointer-events: auto;
+  margin-left: auto;
+}
+
+/* Minimalist Editorial Header CV Link (Matching View Certificate Style) */
+.cinematic-header-cv-editorial {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0 6px 0;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(13px, 1.05vw, 15px);
+  font-weight: 550;
+  letter-spacing: 0.04em;
+  color: #ded6c8;
+  cursor: pointer;
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.2s ease;
+}
+
+.cinematic-header-cv-editorial::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: auto;
+  width: 42%;
+  height: 1.5px;
+  background: var(--gold, #b99d73);
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              background-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.cinematic-header-cv-editorial:hover {
+  color: #ffffff;
+}
+
+.cinematic-header-cv-editorial:hover::after {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(185, 157, 115, 0.7);
+}
+
+.cinematic-header-cv-editorial .editorial-cv-arrow {
+  color: var(--gold, #b99d73);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.2s ease;
+}
+
+.cinematic-header-cv-editorial:hover .editorial-cv-arrow {
+  transform: translate(3px, -2px);
+  color: #ffffff;
+}
+
+/* On scroll OR when drawer is open: CV button hides, ONLY the navbar icon floats! */
+.cinematic-header[data-scrolled="true"] .cinematic-header-cv-editorial,
+.cinematic-header[data-drawer-open="true"] .cinematic-header-cv-editorial {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+}
+
+/* Inside project pages and subpages: strictly hide CV button on top right */
+body:not(:has(.reference-home)) .cinematic-header-cv-editorial {
+  display: none !important;
+}
+
+/* Drawer Direct Email Footer */
+.drawer-email-footer {
+  margin-top: clamp(28px, 5vh, 48px);
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-email-direct {
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(16px, 1.4vw, 20px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, text-shadow 0.2s ease;
+}
+
+.drawer-email-direct:hover {
+  color: #ffffff;
+  opacity: 0.9;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.45);
+  transform: translateX(3px);
+}
+
+/* Floating Circular Hamburger Trigger (Mechanical luxury tactile feel) */
+.cinematic-trigger-circle {
+  position: relative;
+  z-index: 1002;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px; /* Clean, balanced spacing for three horizontal bars */
+  border-radius: 50%;
+  background: #0d0c11;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  pointer-events: auto;
+  transform: rotate(0deg);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              background-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+.cinematic-trigger-circle:hover {
+  border-color: rgba(185, 157, 115, 0.45);
+  background: #15141c;
+  transform: scale(1.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75), 0 0 20px rgba(185, 157, 115, 0.2);
+}
+.cinematic-trigger-circle:focus-visible {
+  outline: 2px solid #00aebd;
+  outline-offset: 4px;
+}
+
+/* Kinetic Three-Line Hamburger */
+.cinematic-trigger-circle .bar {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background-color: #f2ede4;
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s ease;
+}
+
+/* Open State: 90deg kinetic spin + Three horizontal bars morph into a crisp X */
+.cinematic-trigger-circle[data-open="true"] {
+  background: #14131b;
+  border-color: rgba(185, 157, 115, 0.5);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(185, 157, 115, 0.2);
+  transform: rotate(90deg);
+}
+.cinematic-trigger-circle[data-open="true"]:hover {
+  transform: rotate(90deg) scale(1.06);
+}
+.cinematic-trigger-circle[data-open="true"] .bar-top {
+  transform: translateY(6.5px) rotate(45deg);
+  background-color: #ffffff;
+}
+.cinematic-trigger-circle[data-open="true"] .bar-mid {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.cinematic-trigger-circle[data-open="true"] .bar-bot {
+  transform: translateY(-6.5px) rotate(-45deg);
+  background-color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   2. PAGE SPACING & SEAMLESS HERO INTEGRATION
+   -------------------------------------------------------------------------- */
+/* Subpages: ensure top page content starts below the fixed header (except project pages where full-bleed hero starts at top: 0) */
+main.wrap {
+  padding-top: 84px;
+}
+main.project-page-main {
+  padding-top: 0 !important;
+}
+
+/* Home page hero: starts at y=0 so fixed header floats seamlessly over it */
+.reference-home .signal-hero {
+  margin-top: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. BACKDROP OVERLAY
+   -------------------------------------------------------------------------- */
+.cinematic-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  background: rgba(4, 3, 7, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.76, 0, 0.24, 1),
+              backdrop-filter 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.cinematic-backdrop[data-open="true"] {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.62s cubic-bezier(0.16, 1, 0.3, 1),
+              backdrop-filter 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   4. PURE EDITORIAL SLIDE-OUT DRAWER (God-Level Fluid Motion Physics)
+   -------------------------------------------------------------------------- */
+.cinematic-drawer-pure {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  width: min(600px, 48vw); /* Strictly max 50% space on portfolio */
+  max-width: 50vw;
+  background: #08070b;
+  border-left: 1px solid rgba(185, 157, 115, 0.15);
+  box-shadow: -40px 0 120px rgba(0, 0, 0, 0.96), inset 1px 0 0 rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(48px, 8vh, 90px) clamp(36px, 4.5vw, 72px);
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  visibility: hidden;
+  transform: translateX(100%);
+  will-change: transform, visibility;
+}
+
+/* Opening Motion: High-velocity acceleration settling into velvet stillness */
+.cinematic-drawer-pure[data-open="true"] {
+  visibility: visible;
+  transform: translateX(0);
+  transition: transform 0.62s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.62s step-start;
+}
+
+/* Closing Motion: Weighty, silky power-curve sweep out */
+.cinematic-drawer-pure[data-has-opened="true"]:not([data-open="true"]) {
+  visibility: hidden;
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1),
+              visibility 0.5s step-end;
+}
+
+/* Navigation List Wrapper */
+.drawer-pure-nav-wrapper {
+  width: 100%;
+}
+
+.drawer-pure-nav {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.8vh, 20px); /* Refined, balanced spacing */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.drawer-pure-item {
+  position: relative;
+}
+
+/* Overflow-hidden mask for each nav item to enable god-level sliding reveals */
+.drawer-pure-mask {
+  overflow: hidden;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   STAGGERED MASK ENTRANCE (Opening Animation)
+   -------------------------------------------------------------------------- */
+.cinematic-drawer-pure[data-open="true"] .drawer-pure-link {
+  animation: pureMaskRevealUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.cinematic-drawer-pure[data-open="true"] .drawer-pure-item:nth-child(1) .drawer-pure-link { animation-delay: 0.10s; }
+.cinematic-drawer-pure[data-open="true"] .drawer-pure-item:nth-child(2) .drawer-pure-link { animation-delay: 0.15s; }
+.cinematic-drawer-pure[data-open="true"] .drawer-pure-item:nth-child(3) .drawer-pure-link { animation-delay: 0.20s; }
+.cinematic-drawer-pure[data-open="true"] .drawer-pure-item:nth-child(4) .drawer-pure-link { animation-delay: 0.25s; }
+.cinematic-drawer-pure[data-open="true"] .drawer-pure-item:nth-child(5) .drawer-pure-link { animation-delay: 0.30s; }
+.cinematic-drawer-pure[data-open="true"] .drawer-pure-item:nth-child(6) .drawer-pure-link { animation-delay: 0.35s; }
+
+@keyframes pureMaskRevealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(115%) rotate(1.2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   REVERSE STAGGERED MASK EXIT (Closing Animation)
+   Cascades down and recedes as the panel glides out!
+   -------------------------------------------------------------------------- */
+.cinematic-drawer-pure[data-has-opened="true"]:not([data-open="true"]) .drawer-pure-link {
+  animation: pureMaskExitDown 0.32s cubic-bezier(0.7, 0, 0.84, 0) both;
+}
+.cinematic-drawer-pure[data-has-opened="true"]:not([data-open="true"]) .drawer-pure-item:nth-child(6) .drawer-pure-link { animation-delay: 0.00s; }
+.cinematic-drawer-pure[data-has-opened="true"]:not([data-open="true"]) .drawer-pure-item:nth-child(5) .drawer-pure-link { animation-delay: 0.03s; }
+.cinematic-drawer-pure[data-has-opened="true"]:not([data-open="true"]) .drawer-pure-item:nth-child(4) .drawer-pure-link { animation-delay: 0.06s; }
+.cinematic-drawer-pure[data-has-opened="true"]:not([data-open="true"]) .drawer-pure-item:nth-child(3) .drawer-pure-link { animation-delay: 0.09s; }
+.cinematic-drawer-pure[data-has-opened="true"]:not([data-open="true"]) .drawer-pure-item:nth-child(2) .drawer-pure-link { animation-delay: 0.12s; }
+.cinematic-drawer-pure[data-has-opened="true"]:not([data-open="true"]) .drawer-pure-item:nth-child(1) .drawer-pure-link { animation-delay: 0.15s; }
+
+@keyframes pureMaskExitDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   THE LINK: Refined, elegant sizing & fluid hover kinetics (+2px typography)
+   -------------------------------------------------------------------------- */
+.drawer-pure-link {
+  display: inline-flex;
+  align-items: baseline;
+  text-decoration: none;
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(40px, 4.6vw, 60px); /* Refined size: +2px bigger per user request */
+  font-weight: 380;
+  font-variation-settings: "wdth" 105;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: rgba(242, 237, 228, 0.74);
+  white-space: nowrap;
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              font-weight 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              letter-spacing 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.35s ease,
+              text-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  will-change: transform, opacity;
+}
+.drawer-pure-link:focus-visible {
+  outline: 2px solid #00aebd;
+  outline-offset: 6px;
+  border-radius: 6px;
+}
+
+/* Sibling Focus Dimming (Originkit Editorial Depth) */
+.drawer-pure-nav:hover .drawer-pure-link:not(:hover) {
+  opacity: 0.32 !important;
+  filter: blur(0.35px);
+  transform: scale(0.985);
+}
+.drawer-pure-nav:hover .drawer-pure-link:hover {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   ORIGINKIT DUAL-LAYER ROLLING TEXT ENGINE
+   Hover triggers smooth slot-reel vertical roll with cubic-bezier deceleration
+   -------------------------------------------------------------------------- */
+.drawer-link-roll {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  height: 1.15em;
+  line-height: 1.15em;
+  vertical-align: middle;
+}
+
+.roll-line {
+  display: inline-flex;
+  align-items: baseline;
+  height: 1.15em;
+  line-height: 1.15em;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.roll-secondary {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  color: #ffffff;
+}
+
+/* Rolling text hover trigger */
+.drawer-pure-link:hover .roll-primary {
+  transform: translateY(-100%);
+}
+.drawer-pure-link:hover .roll-secondary {
+  transform: translateY(-100%);
+}
+
+/* Trailing Golden Dot on each link */
+.drawer-pure-link .nav-dot {
+  color: #b99d73;
+  margin-left: 3px;
+  display: inline-block;
+  transition: color 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.35s ease;
+}
+
+/* External Link Arrow */
+.drawer-pure-link .ext-arrow {
+  margin-left: 8px;
+  opacity: 0.45;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover Interaction: Weight Swell + Color Shift + Kinetic Glide */
+.drawer-pure-link:hover {
+  color: #ffffff;
+  font-weight: 620;
+  font-variation-settings: "wdth" 108;
+  letter-spacing: -0.022em;
+  transform: translateX(14px);
+  text-shadow: 0 0 24px rgba(185, 157, 115, 0.22);
+  opacity: 1 !important;
+  filter: none !important;
+}
+.drawer-pure-link:hover .nav-dot {
+  color: #00aebd;
+  transform: scale(1.4);
+  text-shadow: 0 0 16px #00aebd, 0 0 24px rgba(0, 174, 189, 0.6);
+}
+.drawer-pure-link:hover .ext-arrow {
+  opacity: 1;
+  color: #00aebd;
+  transform: translate(3px, -3px);
+}
+
+/* Active Section Indicator */
+.drawer-pure-link[data-active="true"] {
+  color: #ffffff;
+  font-weight: 560;
+  opacity: 1 !important;
+}
+.drawer-pure-link[data-active="true"] .nav-dot {
+  color: #00aebd;
+  animation: activeDotPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes activeDotPulse {
+  0%, 100% {
+    transform: scale(1.1);
+    text-shadow: 0 0 8px rgba(0, 174, 189, 0.6);
+  }
+  50% {
+    transform: scale(1.45);
+    text-shadow: 0 0 18px #00aebd, 0 0 28px rgba(0, 174, 189, 0.85);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. REDUCED MOTION & RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .cinematic-drawer-pure,
+  .cinematic-backdrop,
+  .cinematic-trigger-circle,
+  .cinematic-trigger-circle .bar,
+  .drawer-pure-link,
+  .roll-line,
+  .nav-dot {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .roll-secondary {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cinematic-drawer-pure {
+    width: min(540px, 62vw);
+    max-width: 65vw;
+    padding: clamp(40px, 6vh, 72px) clamp(30px, 4.5vw, 56px);
+  }
+  .drawer-pure-link {
+    font-size: clamp(36px, 5.5vw, 50px);
+  }
+}
+
+@media (max-width: 768px) {
+  .cinematic-drawer-pure {
+    width: min(440px, 86vw);
+    max-width: 90vw;
+    padding: 36px 24px;
+  }
+  .drawer-pure-link {
+    font-size: clamp(30px, 7vw, 42px);
+  }
+  .cinematic-header {
+    height: 72px;
+    padding: 0 20px;
+  }
+  main.wrap {
+    padding-top: 72px;
+  }
+  .cinematic-brand {
+    font-size: 11px;
+    gap: 8px;
+  }
+  .cinematic-brand svg {
+    width: 24px;
+    height: 24px;
+  }
+  .cinematic-header-actions {
+    gap: 12px;
+  }
+  .cinematic-header-cv-editorial {
+    font-size: 11.5px;
+    gap: 5px;
+    padding: 6px 0 4px 0;
+  }
+  .cinematic-trigger-circle {
+    width: 44px;
+    height: 44px;
+    gap: 4px;
+  }
+  .cinematic-trigger-circle .bar {
+    width: 18px;
+  }
+  .cinematic-trigger-circle[data-open="true"] .bar-top {
+    transform: translateY(5.5px) rotate(45deg);
+  }
+  .cinematic-trigger-circle[data-open="true"] .bar-bot {
+    transform: translateY(-5.5px) rotate(-45deg);
+  }
+  .cinematic-drawer-pure {
+    width: 100vw !important;
+    padding: 40px 24px !important;
+    justify-content: center;
+  }
+  .drawer-pure-link {
+    font-size: clamp(32px, 8.5vw, 44px) !important;
+  }
+  .drawer-pure-nav {
+    gap: 14px;
+  }
+}

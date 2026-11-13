@@ -3,16 +3,31 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { vertexShader, fragmentShader } from "@/three/ignition/shaders";
+import { trackPortfolioEvent } from "@/lib/analytics/ga4";
 
 /** Original ThreeUI Ignition shader in a native, accessible portfolio link. */
 export default function IgnitionLink({
   href,
   children,
   paused = false,
+  target,
+  rel,
+  className,
+  ariaLabel,
+  ctaId,
+  sourceSurface,
+  onClick,
 }: {
   href: string;
   children: React.ReactNode;
   paused?: boolean;
+  target?: string;
+  rel?: string;
+  className?: string;
+  ariaLabel?: string;
+  ctaId?: string;
+  sourceSurface?: string;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const link = useRef<HTMLAnchorElement>(null);
@@ -144,6 +159,9 @@ export default function IgnitionLink({
     const resize = new ResizeObserver(schedule);
     resize.observe(surface);
     anchor.addEventListener("pointerenter", over);
+    anchor.addEventListener("pointerdown", over);
+    anchor.addEventListener("pointerup", out);
+    anchor.addEventListener("pointercancel", out);
     anchor.addEventListener("pointerleave", out);
     anchor.addEventListener("focus", over);
     anchor.addEventListener("blur", out);
@@ -158,6 +176,9 @@ export default function IgnitionLink({
       observer.disconnect();
       resize.disconnect();
       anchor.removeEventListener("pointerenter", over);
+      anchor.removeEventListener("pointerdown", over);
+      anchor.removeEventListener("pointerup", out);
+      anchor.removeEventListener("pointercancel", out);
       anchor.removeEventListener("pointerleave", out);
       anchor.removeEventListener("focus", over);
       anchor.removeEventListener("blur", out);
@@ -170,8 +191,40 @@ export default function IgnitionLink({
       gl.deleteShader(fragment);
     };
   }, []);
+  const handleAnchorClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    trackPortfolioEvent("cta_click", {
+      cta_id: ctaId || (href.includes("certificate") ? "experience_view_certificate" : "hero_explore_projects"),
+      target: href,
+      source_surface: sourceSurface || (href.includes("certificate") ? "home_experience" : "hero"),
+    });
+    if (onClick) {
+      onClick(event);
+      return;
+    }
+    if (href.startsWith("/#") || href.startsWith("#")) {
+      event.preventDefault();
+      const targetId = href.split("#")[1];
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        const top = targetEl.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top,
+          behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        });
+      }
+    }
+  };
+
   return (
-    <Link ref={link} href={href} className="real-ignition">
+    <Link
+      ref={link}
+      href={href}
+      target={target}
+      rel={rel}
+      className={`real-ignition ${className || ""}`.trim()}
+      aria-label={ariaLabel}
+      onClick={handleAnchorClick}
+    >
       <span className="real-ignition-well">
         <canvas
           ref={canvas}

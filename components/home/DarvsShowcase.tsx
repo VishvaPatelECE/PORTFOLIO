@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useId, useReducer, useRef, useState, type MouseEvent, type PointerEvent } from "react";
+import { useCallback, useEffect, useId, useReducer, useRef, useState, useSyncExternalStore, type MouseEvent, type PointerEvent } from "react";
 import { motion, useInView, useMotionTemplate, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Camera, Check, ChevronDown, Fingerprint, Pause, Play, RotateCcw, ScanFace, ScanLine, ShieldCheck } from "lucide-react";
 import { darvsStages } from "@/lib/content/darvs";
@@ -58,10 +58,14 @@ function Pipeline({ state, stage }: { state: DarvsPreviewState; stage: number })
   );
 }
 
+const emptySubscribe = () => () => {};
+
 export default function DarvsShowcase({ headingLevel = "h3" }: { headingLevel?: "h2" | "h3" }) {
   const root = useRef<HTMLElement>(null);
   const visible = useInView(root, { amount: .12 });
+  const isHydrated = useSyncExternalStore(emptySubscribe, () => true, () => false);
   const reduced = useReducedMotion();
+  const effectiveReduced = isHydrated ? !!reduced : false;
   const { paused, setPaused } = useHomeMotion();
   const [stage, setStage] = useState(0);
   const [state, dispatch] = useReducer(darvsPreviewReducer, initialDarvsPreview);
@@ -162,7 +166,7 @@ export default function DarvsShowcase({ headingLevel = "h3" }: { headingLevel?: 
             {stage === 3 && <dl className="showcase-conditions"><div><dt>Liveness</dt><dd>{state.responses === 3 ? "Complete" : "Incomplete"}</dd></div><div><dt>Identity</dt><dd>{state.match ? "Match" : "No match"}</dd></div><div><dt>Decision</dt><dd>{darvsPreviewDecision(state)}</dd></div></dl>}
           </div>
           <div className="showcase-run-controls"><button className="text-button" onClick={example}>Run example<Play size={14} /></button><button className="showcase-reset" onClick={reset} aria-label="Reset DARVS example"><RotateCcw size={16} /></button></div>
-          <button className="showcase-pause" aria-pressed={paused} disabled={!!reduced} onClick={() => setPaused(!paused)}>{paused ? <Play size={14} /> : <Pause size={14} />}{paused ? "Resume motion" : "Pause motion"}</button>
+          <button className="showcase-pause" aria-pressed={paused} disabled={effectiveReduced} onClick={() => setPaused(!paused)}>{paused ? <Play size={14} /> : <Pause size={14} />}{paused ? "Resume motion" : "Pause motion"}</button>
         </aside>
       </div>
       <div className="showcase-notes">

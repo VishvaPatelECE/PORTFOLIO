@@ -96,23 +96,30 @@ export const INITIAL_STATE: SystemState = {
   logs: [],
 };
 
-const TOP_ROW_Y = 120;
+const TOP_ROW_Y = 90;
 const TOP_ROW_START_X = 230;
 const TOP_ROW_STEP = 170;
 const DIAMOND_EDGE_X = 46;
 
+const SENSOR_LABELS: Record<string, string> = {
+  magnetic: "magnetic REED",
+  temp: "tempERATURE SENSOR",
+  pressure: "pressure SENSOR",
+  laser: "laser DIODE",
+};
+
 const POS: Record<PosKey, [number, number]> = {
-  env: [80, TOP_ROW_Y],
+  env: [88, TOP_ROW_Y],
   sens: [TOP_ROW_START_X, TOP_ROW_Y],
   key: [TOP_ROW_START_X + TOP_ROW_STEP, TOP_ROW_Y],
   code: [TOP_ROW_START_X + TOP_ROW_STEP * 2, TOP_ROW_Y],
   delay: [TOP_ROW_START_X + TOP_ROW_STEP * 3, TOP_ROW_Y],
   tamper: [TOP_ROW_START_X + TOP_ROW_STEP * 4, TOP_ROW_Y],
-  reset: [80, 470],
-  latch: [320, 400],
-  and: [620, 400],
-  solenoid: [820, 400],
-  door: [980, 400],
+  reset: [88, 310],
+  latch: [320, 310],
+  and: [620, 310],
+  solenoid: [820, 310],
+  door: [980, 310],
 };
 
 const addLog = (state: SystemState, msg: string, level: LogType = "info"): SystemState => ({
@@ -232,6 +239,8 @@ const StatusDiamond = ({ title, status, icon: Icon, pulsing, onClick, hint }: St
 const USMHACSPanel = () => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const [isMuted, setIsMuted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
   const scenarioTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const delayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lockoutRepeatTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -240,6 +249,27 @@ const USMHACSPanel = () => {
   const previousDoorOpenRef = useRef(false);
 
   const sensorsOk = Object.values(state.sensors).every((v) => v);
+
+  useEffect(() => {
+    const updateScale = () => {
+      if (!containerRef.current) return;
+      const availableWidth = containerRef.current.clientWidth;
+      if (availableWidth > 0) {
+        // Proportionally scale so the 1040px circuit is always contained in this space without overflow
+        const s = Math.min(1, availableWidth / 1040);
+        setScale(s);
+      }
+    };
+
+    updateScale();
+    const ro = new ResizeObserver(() => updateScale());
+    if (containerRef.current) ro.observe(containerRef.current);
+    window.addEventListener("resize", updateScale);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", updateScale);
+    };
+  }, []);
 
   useEffect(() => {
     if (delayTimerRef.current) {
@@ -473,7 +503,7 @@ const USMHACSPanel = () => {
   };
 
   const paths: PathDef[] = [
-    { id: "env-sens", d: makeHPath(POS.env[0] + 70, POS.env[1], POS.sens[0] - 45, POS.sens[1]), color: "slate", active: true },
+    { id: "env-sens", d: makeHPath(POS.env[0] + 83, POS.env[1], POS.sens[0] - 45, POS.sens[1]), color: "slate", active: true },
     { id: "sens-latch", d: makeVPath(POS.sens[0], POS.sens[1] + 30, POS.latch[0], POS.latch[1] - 40), color: "red", active: !sensorsOk },
     { id: "code-latch", d: makeVPath(POS.code[0], POS.code[1] + 30, POS.latch[0], POS.latch[1] - 40), color: "red", active: state.codeState === "wrong" },
     { id: "tamper-latch", d: makeVPath(POS.tamper[0] - 10, POS.tamper[1] + 30, POS.latch[0] + 80, POS.latch[1] - 40), color: "red", active: state.tamperDetected },
@@ -496,20 +526,23 @@ const USMHACSPanel = () => {
         .path-active { animation: flow 0.8s linear infinite; }
       `}</style>
 
-      <div className="w-full max-w-7xl flex flex-wrap justify-between items-center mb-4 gap-4">
-        <h1 className="text-xl font-bold text-[#e8e0d2] font-mono">USMHACS HARDWARE SECURITY DIAGRAM</h1>
-        <div className="flex gap-2">
-          <button onClick={() => runScenario("perfect")} className="btn-spectrum group flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-[#00aebd]">
+      <div className="w-full max-w-7xl flex flex-wrap justify-between items-center mb-3 gap-3">
+        <div style={{ fontFamily: "var(--font-mono, monospace)" }} className="text-xs sm:text-sm md:text-base font-bold tracking-wider text-[#e8e0d2] uppercase flex items-center gap-2">
+          <span>USMHACS Hardware Security Diagram</span>
+          <span className={`inline-block h-2 w-2 rounded-full ${state.isLatched ? "bg-[#ff5a5f] animate-ping" : state.doorOpen ? "bg-[#00aebd]" : "bg-[#b99d73]"}`} />
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button onClick={() => runScenario("perfect")} className="btn-spectrum group flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#00aebd]">
             <span className="btn-spectrum-layer" />
-            <span className="btn-spectrum-text flex items-center gap-2"><Shield size={14} /> Perfect Entry</span>
+            <span className="btn-spectrum-text flex items-center gap-1.5"><Shield size={13} /> Perfect Entry</span>
           </button>
-          <button onClick={() => runScenario("brute")} className="btn-spectrum group flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-[#ff5a5f]">
+          <button onClick={() => runScenario("brute")} className="btn-spectrum group flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#ff5a5f]">
             <span className="btn-spectrum-layer" />
-            <span className="btn-spectrum-text flex items-center gap-2"><ShieldAlert size={14} /> Brute Force</span>
+            <span className="btn-spectrum-text flex items-center gap-1.5"><ShieldAlert size={13} /> Brute Force</span>
           </button>
-          <button onClick={() => runScenario("breach")} className="btn-spectrum group flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-[#d5c6a9]">
+          <button onClick={() => runScenario("breach")} className="btn-spectrum group flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#d5c6a9]">
             <span className="btn-spectrum-layer" />
-            <span className="btn-spectrum-text flex items-center gap-2"><Activity size={14} /> Env Breach</span>
+            <span className="btn-spectrum-text flex items-center gap-1.5"><Activity size={13} /> Env Breach</span>
           </button>
           <button
             onClick={() => {
@@ -524,7 +557,7 @@ const USMHACSPanel = () => {
                 return next;
               });
             }}
-            className={`btn-spectrum group flex items-center gap-2 px-3 py-1.5 text-xs font-medium ${isMuted ? "text-[#afaea2]" : "text-[#00aebd]"}`}
+            className={`btn-spectrum group flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium ${isMuted ? "text-[#afaea2]" : "text-[#00aebd]"}`}
           >
             <span className="btn-spectrum-layer" />
             <span className="btn-spectrum-text">{isMuted ? "Sound: OFF" : "Sound: ON"}</span>
@@ -532,9 +565,24 @@ const USMHACSPanel = () => {
         </div>
       </div>
 
-      <div className="w-full max-w-7xl overflow-x-auto rounded-xl border border-white/5 bg-linear-to-br from-[#08070b] to-[#101014] shadow-[0_10px_26px_rgba(13,27,42,0.28)] custom-scrollbar">
-        <div className="relative w-260 h-140 mx-auto">
-          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1040 560">
+      <div
+        ref={containerRef}
+        className="w-full max-w-7xl rounded-xl border border-[#b99d73]/25 bg-gradient-to-br from-[#08070b] to-[#101014] p-3 sm:p-4 shadow-[0_10px_26px_rgba(13,27,42,0.28)] overflow-hidden transition-all duration-300"
+      >
+        <div
+          className="relative w-full overflow-hidden flex justify-center items-start"
+          style={{ height: `${Math.round(400 * scale)}px` }}
+        >
+          <div
+            className="absolute top-0 left-1/2"
+            style={{
+              width: "1040px",
+              height: "400px",
+              transform: `translateX(-50%) scale(${scale})`,
+              transformOrigin: "top center",
+            }}
+          >
+            <svg className="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1040 400">
             {paths.map((p) => (
               <path
                 key={p.id}
@@ -555,13 +603,23 @@ const USMHACSPanel = () => {
           ))}
 
           <DiagramNode pos={POS.env}>
-            <div className="w-35 rounded border border-white/10 bg-[#101014] p-3">
-              <h3 className="mb-2 text-center text-[10px] font-bold text-[#e8e0d2]">MONITORED ENV.</h3>
+            <div className="w-[166px] rounded-lg border border-white/10 bg-[#101014] p-2.5 shadow-md">
+              <div
+                style={{
+                  fontSize: "10.5px",
+                  fontFamily: "var(--font-mono, monospace)",
+                  letterSpacing: "0.08em",
+                  lineHeight: 1.2,
+                }}
+                className="mb-2 text-center font-bold text-[#e8e0d2] whitespace-nowrap"
+              >
+                MONITORED ENV.
+              </div>
               <div className="space-y-1">
                 {Object.entries(state.sensors).map(([k, safe]) => (
-                  <div key={k} className="flex justify-between border-b border-white/10 pb-0.5 text-[9px]">
-                    <span className="capitalize">{k}</span>
-                    <span className={safe ? "text-[#00aebd]" : "text-[#ff5a5f]"}>{safe ? "SAFE" : "FAULT"}</span>
+                  <div key={k} className="flex justify-between items-center border-b border-white/10 pb-0.5 text-[8.5px] font-mono tracking-tight">
+                    <span className="text-[#afaea2]">{SENSOR_LABELS[k] ?? k}</span>
+                    <span className={safe ? "text-[#00aebd] font-semibold" : "text-[#ff5a5f] font-semibold"}>{safe ? "SAFE" : "FAULT"}</span>
                   </div>
                 ))}
               </div>
@@ -611,7 +669,7 @@ const USMHACSPanel = () => {
           </DiagramNode>
 
           <DiagramNode pos={POS.solenoid}>
-            <div className="w-25 rounded-lg border border-white/15 bg-[#101014] p-3 text-center">
+            <div className="w-[100px] rounded-lg border border-white/15 bg-[#101014] p-3 text-center">
               <span className="block text-xs font-mono text-[#e8e0d2]">solenoid</span>
               <span className="block text-xs font-mono text-[#e8e0d2]">relay lock</span>
             </div>
@@ -626,77 +684,49 @@ const USMHACSPanel = () => {
         </div>
       </div>
 
-      <div className="mt-5 w-full max-w-7xl rounded-xl border border-white/5 bg-linear-to-br from-[#08070b] to-[#101014] p-4">
-        <h3 className="mb-2 font-mono text-[0.9rem] font-semibold uppercase tracking-[0.12em] text-[#afaea2]">System Console Log</h3>
-        <div className="space-y-1 h-32 overflow-y-auto pr-2 font-mono text-[0.9rem] [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {state.logs.map((log, i) => (
-            <div key={`${log.time}-${i}`} className={`p-1.5 rounded border-l-2 ${
-              log.type === "error"
-                ? "bg-[#351719]/30 border-[#ff5a5f] text-[#ffc0c2]"
-                : log.type === "success"
-                  ? "bg-[#0d2529]/30 border-[#00aebd] text-[#89d1d8]"
-                  : log.type === "warn"
-                    ? "bg-[#2b2218]/30 border-[#b99d73] text-[#d5c6a9]"
-                    : "bg-[#17171c]/25 border-[#b99d73] text-[#e8e0d2]"
-            }`}>
-              <span className="mr-2 opacity-55 text-[#afaea2]">[{log.time}]</span>
-              {log.msg}
+      {/* Integrated Live Hardware Bus Telemetry Bar */}
+      <div className="mt-3 w-full rounded-lg border border-white/10 bg-[#0c0c10] px-3.5 py-2.5">
+        <div className="flex items-center justify-between mb-1.5 pb-1 border-b border-white/5">
+          <div className="flex items-center gap-2">
+            <span className={`inline-block h-2 w-2 rounded-full ${state.isLatched ? "bg-[#ff5a5f] animate-ping" : state.doorOpen ? "bg-[#00aebd]" : "bg-[#b99d73]"}`} />
+            <span className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.14em] text-[#afaea2]">
+              Hardware Bus Telemetry
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-[10px] text-[#afaea2]/70">
+              Status: {state.isLatched ? <span className="text-[#ff5a5f] font-bold">LATCHED FAULT</span> : state.doorOpen ? <span className="text-[#00aebd] font-bold">UNLOCKED</span> : <span className="text-[#b99d73] font-medium">ARMED STANDBY</span>}
+            </span>
+          </div>
+        </div>
+        <div className="space-y-1 max-h-16 overflow-y-auto pr-1 font-mono text-[11px] [scrollbar-width:thin] [scrollbar-color:rgba(185,157,115,0.3)_rgba(10,10,14,0.8)]">
+          {state.logs.length === 0 ? (
+            <div className="text-[10px] text-[#afaea2]/50 italic">
+              Awaiting input transition... Click buttons above to test scenarios or toggle diamond gates.
             </div>
-          ))}
+          ) : (
+            state.logs.slice(0, 3).map((log, i) => (
+              <div
+                key={`${log.time}-${i}`}
+                className={`flex items-start gap-2 rounded px-2 py-0.5 border-l-2 ${
+                  log.type === "error"
+                    ? "bg-[#351719]/40 border-[#ff5a5f] text-[#ffc0c2]"
+                    : log.type === "success"
+                      ? "bg-[#0d2529]/40 border-[#00aebd] text-[#89d1d8]"
+                      : log.type === "warn"
+                        ? "bg-[#2b2218]/40 border-[#b99d73] text-[#d5c6a9]"
+                        : "bg-[#17171c]/40 border-[#b99d73] text-[#e8e0d2]"
+                }`}
+              >
+                <span className="text-[#afaea2]/50 shrink-0 text-[9.5px]">[{log.time}]</span>
+                <span className="leading-tight">{log.msg}</span>
+              </div>
+            ))
+          )}
         </div>
       </div>
-
-      <div className="mt-5 grid w-full max-w-7xl gap-4 lg:grid-cols-2">
-        <article className="rounded-xl border border-white/5 bg-linear-to-br from-[#08070b] to-[#101014] p-4">
-          <p className="font-mono text-[0.9rem] font-semibold uppercase tracking-[0.12em] text-[#00aebd]">Logic Execution Flow</p>
-          <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[0.9rem] font-semibold">
-            <span className="rounded-md border border-[#00aebd]/40 bg-[#00aebd]/12 px-2 py-0.5 text-[#00aebd]">Sensors</span>
-            <span className="text-[#afaea2]">-&gt;</span>
-            <span className="rounded-md border border-[#b99d73]/40 bg-[#b99d73]/12 px-2 py-0.5 text-[#b99d73]">Key</span>
-            <span className="text-[#afaea2]">-&gt;</span>
-            <span className="rounded-md border border-[#00aebd]/40 bg-[#00aebd]/12 px-2 py-0.5 text-[#00aebd]">Code</span>
-            <span className="text-[#afaea2]">-&gt;</span>
-            <span className="rounded-md border border-[#b99d73]/40 bg-[#b99d73]/12 px-2 py-0.5 text-[#b99d73]">Delay</span>
-            <span className="text-[#afaea2]">-&gt;</span>
-            <span className="rounded-md border border-[#ff5a5f]/40 bg-[#ff5a5f]/12 px-2 py-0.5 text-[#ff5a5f]">Tamper</span>
-            <span className="text-[#afaea2]">-&gt;</span>
-            <span className="rounded-md border border-[#b99d73]/40 bg-[#b99d73]/12 px-2 py-0.5 text-[#b99d73]">AND</span>
-            <span className="text-[#afaea2]">-&gt;</span>
-            <span className="rounded-md border border-[#00aebd]/40 bg-[#00aebd]/12 px-2 py-0.5 text-[#00aebd]">Unlock</span>
-          </div>
-          <p className="mt-2 text-[0.95rem] font-normal text-[#b5c1c8]">
-            Access is granted only when every gate reports a valid hardware condition.
-          </p>
-        </article>
-
-        <article className="rounded-xl border border-white/5 bg-linear-to-br from-[#08070b] to-[#101014] p-4">
-          <p className="font-mono text-[0.9rem] font-semibold uppercase tracking-[0.12em] text-[#ff5a5f]">Attack Handling</p>
-          <ul className="mt-2 space-y-1 text-[0.95rem] font-normal text-[#b5c1c8]">
-            <li>Brute force attempt -&gt; lockout latch triggered.</li>
-            <li>Environment breach -&gt; tamper latch preserved until safe reset.</li>
-            <li>Wrong code sequence -&gt; authentication rejected and path blocked.</li>
-          </ul>
-        </article>
-
-        <article className="rounded-xl border border-white/5 bg-linear-to-br from-[#08070b] to-[#101014] p-4">
-          <p className="font-mono text-[0.9rem] font-semibold uppercase tracking-[0.12em] text-[#b99d73]">Engineering Decisions</p>
-          <ul className="mt-2 space-y-1 text-[0.95rem] font-normal text-[#b5c1c8]">
-            <li className="text-[#e8e0d2]"><span className="text-[#b99d73] font-semibold">No MCU</span> -&gt; eliminates software attack surface</li>
-            <li>SR latch -&gt; persistent tamper memory.</li>
-            <li>Delay block -&gt; prevents rapid retry abuse.</li>
-            <li><span className="text-[#00aebd]">Decoder/logic path</span> -&gt; deterministic access behavior.</li>
-          </ul>
-        </article>
-
-        <article className="rounded-xl border border-white/5 bg-linear-to-br from-[#08070b] to-[#101014] p-4">
-          <p className="font-mono text-[0.9rem] font-semibold uppercase tracking-[0.12em] text-[#00aebd]">Security Philosophy</p>
-          <p className="mt-2 text-[0.95rem] font-normal text-[#b5c1c8]">
-            Hardware-enforced deterministic security eliminates software vulnerabilities and ensures predictable
-            system behavior.
-          </p>
-        </article>
-      </div>
     </div>
+  </div>
   );
 };
 

@@ -6,10 +6,15 @@ export default defineConfig([
   ...nextTs,
   globalIgnores([
     ".next/**",
+    ".claude/**",
+    ".remember/**",
     "node_modules/**",
     ".design-tools/**",
-    "public/threeui/runtime/**",
-    "public/vendor/tubes/**",
+    "public/threeui/**",
+    "public/vendor/**",
+    "test-results/**",
+    "scratch/**",
+    "scripts/**",
     "next-env.d.ts",
   ]),
 ]);

@@ -1,118 +1,319 @@
 "use client";
 
+import { useState, useRef, useCallback, useSyncExternalStore, MouseEvent, KeyboardEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
-import { useInView, useReducedMotion } from "framer-motion";
-import { ArrowLeft, ArrowRight, LayoutList, Pause, Play } from "lucide-react";
-import { featuredProjects, workbenchProjects } from "@/lib/content/projects";
+import { useRouter } from "next/navigation";
+import { useReducedMotion } from "framer-motion";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { featuredProjects } from "@/lib/content/projects";
 import { projectCovers } from "@/lib/content/project-covers";
+import { projectSlugFromHref, trackPortfolioEvent } from "@/lib/analytics/ga4";
 import { useHomeMotion } from "./HomeMotion";
 import SignalTubes from "./SignalTubes";
+import NeonBorder from "@/components/ui/NeonBorder";
+import VariableProximityText from "@/components/ui/text/VariableProximityText";
 import styles from "./ProjectCards.module.css";
 
-const positionKey = "vishva-project-deck-position";
+const projectMoods = [
+  { primary: "rgba(0, 174, 189, 0.16)", border: "rgba(0, 174, 189, 0.45)", tag: "WIRELESS GRAPH LAB" },
+  { primary: "rgba(185, 157, 115, 0.16)", border: "rgba(185, 157, 115, 0.45)", tag: "MULTI-AGENT RL" },
+  { primary: "rgba(0, 174, 189, 0.2)", border: "rgba(0, 174, 189, 0.5)", tag: "BIOMETRIC AUTH" },
+  { primary: "rgba(185, 157, 115, 0.18)", border: "rgba(185, 157, 115, 0.5)", tag: "HARDWARE SECURITY" },
+];
 
-export default function ProjectCards() {
-  const root = useRef<HTMLElement>(null), track = useRef<HTMLOListElement>(null);
-  const current = useRef(0), pending = useRef(false), restored = useRef(false);
-  const reduced = useReducedMotion(), visible = useInView(root, { amount: .05 });
+const emptySubscribe = () => () => {};
+
+export default function ProjectCards({ showTubes = true }: { showTubes?: boolean } = {}) {
+  const router = useRouter();
+  const root = useRef<HTMLElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const mouseRafId = useRef(0);
+  const [active, setActive] = useState(0);
+  const isHydrated = useSyncExternalStore(emptySubscribe, () => true, () => false);
+  const reduced = useReducedMotion();
+  const effectiveReduced = isHydrated ? !!reduced : false;
   const { paused, setPaused } = useHomeMotion();
-  const [active, setActive] = useState(0), [viewAll, setViewAll] = useState(false), [hidden, setHidden] = useState(false);
-  const moving = visible && !reduced && !paused && !hidden;
-  const remember = useCallback((index: number) => {
-    current.current = index; setActive(index);
-    try { sessionStorage.setItem(positionKey, String(index)); } catch { /* Storage is optional. */ }
+
+  // Kinetic Cursor Hover — instant, self-stabilizing expansion
+  const handleCardPointerEnter = useCallback((idx: number) => {
+    setActive(idx);
   }, []);
-  const select = useCallback((index: number, instant: boolean) => {
-    const list = track.current;
-    if (!list || !list.children[1]) return;
-    const first = list.children[0] as HTMLElement, second = list.children[1] as HTMLElement;
-    const next = Math.max(0, Math.min(featuredProjects.length - 1, index));
-    pending.current = true; remember(next);
-    list.scrollTo({ left: next * (second.offsetLeft - first.offsetLeft), behavior: instant ? "instant" : "smooth" });
-    if (instant) pending.current = false;
-  }, [remember]);
-  useEffect(() => {
-    const change = () => setHidden(document.hidden);
-    change(); document.addEventListener("visibilitychange", change);
-    return () => document.removeEventListener("visibilitychange", change);
-  }, []);
-  useEffect(() => {
-    const list = track.current;
-    if (!list || viewAll) return;
-    if (!restored.current) {
-      restored.current = true;
-      try { const saved = Number(sessionStorage.getItem(positionKey)); if (Number.isInteger(saved)) current.current = Math.max(0, Math.min(3, saved)); } catch { /* Native first cover remains available. */ }
-    }
-    select(current.current, true);
-    let frame = 0, settle: ReturnType<typeof setTimeout> | undefined;
-    const measure = () => {
-      if (pending.current) return;
-      const first = list.children[0] as HTMLElement, second = list.children[1] as HTMLElement;
-      const step = second.offsetLeft - first.offsetLeft;
-      if (step > 0) {
-        const next = Math.max(0, Math.min(3, Math.round(list.scrollLeft / step)));
-        if (current.current !== next) remember(next);
+
+  const handleCardClick = useCallback((idx: number, href: string) => {
+    if (idx === active) {
+      const slug = projectSlugFromHref(href);
+      if (slug) {
+        trackPortfolioEvent("project_open", {
+          project_slug: slug,
+          source_surface: "home_gallery",
+        });
       }
-    };
-    const done = () => {
-      pending.current = false; measure();
-    };
-    const scroll = () => {
-      if (!frame) frame = requestAnimationFrame(() => { frame = 0; measure(); });
-      clearTimeout(settle); settle = setTimeout(done, 140);
-    };
-    const interrupt = () => { pending.current = false; };
-    const resize = new ResizeObserver(() => select(current.current, true));
-    resize.observe(list);
-    list.addEventListener("scroll", scroll, { passive: true }); list.addEventListener("scrollend", done);
-    list.addEventListener("touchstart", interrupt, { passive: true }); list.addEventListener("wheel", interrupt, { passive: true });
-    return () => {
-      resize.disconnect(); cancelAnimationFrame(frame); clearTimeout(settle);
-      list.removeEventListener("scroll", scroll); list.removeEventListener("scrollend", done);
-      list.removeEventListener("touchstart", interrupt); list.removeEventListener("wheel", interrupt);
-    };
-  }, [viewAll, remember, select]);
-  useEffect(() => { if (!moving && !viewAll) select(current.current, true); }, [moving, viewAll, select]);
-  const keyboard = (event: KeyboardEvent<HTMLOListElement>) => {
-    if (viewAll || event.altKey || event.ctrlKey || event.metaKey) return;
-    const target = event.key === "ArrowRight" ? current.current + 1 : event.key === "ArrowLeft" ? current.current - 1 : event.key === "Home" ? 0 : event.key === "End" ? 3 : null;
-    if (target !== null) {
-      event.preventDefault();
-      const next = Math.max(0, Math.min(3, target));
-      select(next, true);
-      track.current?.children[next]?.querySelector<HTMLAnchorElement>("a")?.focus({ preventScroll: true });
+      if (typeof document !== "undefined" && "startViewTransition" in document) {
+        document.startViewTransition(() => {
+          router.push(href);
+        });
+      } else {
+        router.push(href);
+      }
+    } else {
+      setActive(idx);
     }
-  };
-  return <section ref={root} id="systems" className={styles.section} aria-labelledby="project-cards-title" data-moving={moving} data-view-all={viewAll}>
-    <span id="research" className={styles.anchor} />
-    <SignalTubes />
-    <header className={`${styles.heading} wrap`}>
-      <h2 id="project-cards-title">Selected work<span>.</span></h2>
-      <div className={styles.tools}>
-        <button onClick={() => setViewAll(!viewAll)} aria-pressed={viewAll} aria-label={viewAll ? "Show project deck" : "View all projects"}><LayoutList size={17} /><span>{viewAll ? "Show deck" : "View all"}</span></button>
-        <button onClick={() => setPaused(!paused)} disabled={!!reduced} aria-pressed={paused} aria-label={paused ? "Resume project motion" : "Pause project motion"}>{paused ? <Play size={17} /> : <Pause size={17} />}</button>
+  }, [active, router]);
+
+  // Stepper / Keyboard Selection
+  const selectCard = useCallback((idx: number) => {
+    const nextIdx = Math.max(0, Math.min(featuredProjects.length - 1, idx));
+    setActive(nextIdx);
+  }, []);
+
+  // Keyboard navigation
+  const handleKeyDown = useCallback((e: KeyboardEvent<HTMLElement>) => {
+    if (e.target !== e.currentTarget) return;
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+      e.preventDefault();
+      selectCard((active + 1) % featuredProjects.length);
+    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+      e.preventDefault();
+      selectCard((active - 1 + featuredProjects.length) % featuredProjects.length);
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      selectCard(0);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      selectCard(featuredProjects.length - 1);
+    }
+  }, [active, selectCard]);
+
+  // Cursor Parallax Inspection on Active Card (GPU transform, throttled via rAF)
+  const handleMouseMove = useCallback((e: MouseEvent<HTMLDivElement>, idx: number) => {
+    if (idx !== active || paused || reduced) return;
+    const card = cardRefs.current[idx];
+    if (!card) return;
+
+    if (mouseRafId.current) return;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+
+    mouseRafId.current = requestAnimationFrame(() => {
+      mouseRafId.current = 0;
+      const rect = card.getBoundingClientRect();
+      const x = (clientX - rect.left) / rect.width - 0.5;
+      const y = (clientY - rect.top) / rect.height - 0.5;
+
+      card.style.setProperty("--mouse-parallax-x", `${x * 28}px`);
+      card.style.setProperty("--mouse-parallax-y", `${y * 18}px`);
+    });
+  }, [active, paused, reduced]);
+
+  const handleMouseLeave = useCallback((idx: number) => {
+    const card = cardRefs.current[idx];
+    if (!card) return;
+    if (mouseRafId.current) {
+      cancelAnimationFrame(mouseRafId.current);
+      mouseRafId.current = 0;
+    }
+    card.style.setProperty("--mouse-parallax-x", "0px");
+    card.style.setProperty("--mouse-parallax-y", "0px");
+  }, []);
+
+  const currentMood = projectMoods[active] || projectMoods[0];
+
+  return (
+    <section
+      ref={root}
+      id="projects"
+      className={styles.section}
+      aria-labelledby="project-cards-title"
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
+    >
+      <span id="systems" aria-hidden="true" className={styles.anchor} />
+      <span id="research" aria-hidden="true" className={styles.anchor} />
+      {showTubes && <SignalTubes />}
+
+      {/* Atmosphere Aura synced to active project */}
+      <div
+        className={styles.ambientAura}
+        style={{
+          background: `radial-gradient(circle at 55% 45%, ${currentMood.primary} 0%, rgba(8, 7, 11, 0) 65%)`,
+        }}
+      />
+
+      <div className={`${styles.stageInner} wrap`}>
+        {/* Section Header with live counter and tactile motion controls */}
+        <header className={styles.heading}>
+          <div className={styles.headingLeft}>
+            <h2 id="project-cards-title">
+              <VariableProximityText
+                text="Projects"
+                as="span"
+                fromWeight={440}
+                toWeight={860}
+                radius={180}
+                dotColor="var(--gold, #b99d73)"
+              />
+            </h2>
+          </div>
+
+          <div className={styles.tools}>
+            <div className={styles.stepperGroup}>
+              <button
+                type="button"
+                className={styles.stepBtn}
+                onClick={() => selectCard(active - 1)}
+                disabled={active === 0}
+                aria-label="Previous project"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <div className={styles.indicatorPill}>
+                <span className={styles.currentSlide}>0{active + 1}</span>
+                <span className={styles.slash}>/</span>
+                <span className={styles.totalSlides}>0{featuredProjects.length}</span>
+              </div>
+              <button
+                type="button"
+                className={styles.stepBtn}
+                onClick={() => selectCard(active + 1)}
+                disabled={active === featuredProjects.length - 1}
+                aria-label="Next project"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setPaused(!paused)}
+              disabled={effectiveReduced}
+              aria-pressed={paused}
+              aria-label={paused ? "Resume motion" : "Pause motion"}
+              className={styles.pauseBtn}
+            >
+              {paused ? <Play size={16} /> : <Pause size={16} />}
+            </button>
+          </div>
+        </header>
+
+        {/* Kinetic Horizontal Accordion Deck — Normal Document Flow */}
+        <div className={styles.accordionContainer}>
+          {featuredProjects.map((project, idx) => {
+            const isActive = active === idx;
+            const cover = projectCovers[project.kind];
+            const mood = projectMoods[idx];
+
+            return (
+              <div
+                key={project.name}
+                ref={(el) => {
+                  cardRefs.current[idx] = el;
+                }}
+                className={`${styles.panel} ${isActive ? styles.panelActive : styles.panelCollapsed}`}
+                onPointerEnter={() => handleCardPointerEnter(idx)}
+                onClick={(e) => {
+                  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                  handleCardClick(idx, project.href);
+                }}
+                onKeyDown={(e) => {
+                  if (e.target !== e.currentTarget) return;
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    if (!e.repeat) handleCardClick(idx, project.href);
+                  } else {
+                    handleKeyDown(e);
+                  }
+                }}
+                onMouseMove={(e) => handleMouseMove(e, idx)}
+                onMouseLeave={() => handleMouseLeave(idx)}
+                role="button"
+                tabIndex={0}
+                aria-expanded={isActive}
+                aria-label={`${project.name} - ${project.field}`}
+                style={{
+                  borderColor: isActive ? mood.border : undefined,
+                }}
+              >
+                {/* Travelling Neon Perimeter Beam when selected / active */}
+                {isActive && !effectiveReduced && (
+                  <NeonBorder
+                    color={idx % 2 === 0 ? "#00aebd" : "#b99d73"}
+                    borderRadiusPx={20}
+                    thickness={5.5}
+                    borderSize={46}
+                    glow={25}
+                    speed={16}
+                  />
+                )}
+
+                {/* Parallax Image Background */}
+                <div className={styles.imageViewport}>
+                  <div
+                    className={styles.imageInner}
+                    style={{
+                      transform: "translate3d(var(--mouse-parallax-x, 0px), var(--mouse-parallax-y, 0px), 0)",
+                    }}
+                  >
+                    <Image
+                      src={cover.image}
+                      alt={cover.alt}
+                      fill
+                      sizes="(max-width: 900px) 100vw, 1200px"
+                      priority={idx === 0}
+                      className={styles.coverImg}
+                    />
+                  </div>
+                  <div className={styles.scrimOverlay} />
+                </div>
+
+                {/* Top Badges */}
+                <div
+                  className={`${styles.badgeCluster} ${isActive ? styles.badgeActive : styles.badgeCollapsed
+                    }`}
+                >
+                  <span className={styles.metaBadge}>{mood.tag}</span>
+                  <span className={styles.categoryBadge}>{project.field}</span>
+                </div>
+
+                {/* Typography Layer: Centered vertical titles for closed cards, horizontal for active */}
+                <div className={styles.typographyStage}>
+                  <div
+                    className={`${styles.morphTitle} ${isActive ? styles.titleActive : styles.titleCollapsed
+                      }`}
+                  >
+                    <span className={styles.projectIndex}>0{idx + 1}</span>
+                    <h3 className={styles.projectName}>{project.name}</h3>
+                  </div>
+
+                  {/* Staged Tagline & Action Button */}
+                  <div
+                    aria-hidden={!isActive}
+                    inert={!isActive}
+                    className={`${styles.slidingContainer} ${isActive ? styles.slidingActive : styles.slidingCollapsed
+                      }`}
+                  >
+                    <p className={styles.projectLine}>{project.line}</p>
+                    <Link
+                      href={project.href}
+                      tabIndex={isActive ? 0 : -1}
+                      className={styles.actionBtn}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+                        e.preventDefault();
+                        handleCardClick(idx, project.href);
+                      }}
+                    >
+                      <span>{project.action}</span>
+                      <ArrowUpRight size={15} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </header>
-    <div className={`${styles.window} wrap`}>
-      <ol ref={track} className={styles.track} tabIndex={viewAll ? undefined : 0} aria-label="Project deck. Use left and right arrows to browse." onKeyDown={keyboard}>
-        {featuredProjects.map((project, index) => {
-          const cover = projectCovers[project.kind];
-          return <li key={project.name} className={styles.slide}>
-            <Link href={project.href} prefetch={false} className={styles.cover} aria-label={`Open ${project.name} project`} onFocus={() => { if (!viewAll) select(index, true); }}>
-              <Image src={cover.image} alt={cover.alt} fill sizes="(max-width: 600px) 85vw, (max-width: 900px) 90vw, 1080px" placeholder="blur" draggable={false} />
-              <h3>{project.name}</h3>
-            </Link>
-          </li>;
-        })}
-      </ol>
-      {!viewAll && <div className={styles.navigation}>
-        <div className={styles.positions} role="group" aria-label="Choose a project">{featuredProjects.map((project, index) => <button key={project.name} aria-label={`Show ${project.name}`} aria-pressed={active === index} onClick={event => select(index, event.detail === 0 || !moving)}><span /></button>)}</div>
-        <div className={styles.arrows}><button aria-label="Previous project" disabled={active === 0} onClick={event => select(current.current - 1, event.detail === 0 || !moving)}><ArrowLeft size={21} /></button><button aria-label="Next project" disabled={active === 3} onClick={event => select(current.current + 1, event.detail === 0 || !moving)}><ArrowRight size={21} /></button></div>
-        <p className="sr-only" role="status" aria-live="polite">{featuredProjects[active].name}, {active + 1} of 4</p>
-      </div>}
-      <div className={styles.supporting}>{workbenchProjects.map(project => <Link key={project.name} prefetch={false} href={project.href}>{project.name}</Link>)}</div>
-    </div>
-  </section>;
+    </section>
+  );
 }

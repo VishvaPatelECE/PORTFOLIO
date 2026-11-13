@@ -1,5 +1,6 @@
 node_modules/
 .next/
+.eslintcache
 out/
 *.tsbuildinfo
 .env*
@@ -8,3 +9,11 @@ coverage/
 test-results/
 .design-tools/
 preview.*.log
+.claude/
+.playwright-mcp/
+scratch/
+master_cv/
+docs/audits/**
+docs/screenshots/**
+docs/artwork/references/**
+docs/**/*.zip

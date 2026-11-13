@@ -1,128 +1,170 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { ArrowUpRight, Menu, X } from "lucide-react";
-import { MotionConfig } from "framer-motion";
+import { useSyncExternalStore, useState, useRef, useEffect } from "react";
+import { MotionConfig, useReducedMotion } from "framer-motion";
+import { BrandOrbs } from "@designcodeio/threeui";
 import { links } from "@/lib/content/site";
+import { trackPortfolioEvent } from "@/lib/analytics/ga4";
+import CosmicBG from "@/components/ui/CosmicBG";
+import {
+  ContactHeroTagline,
+  ContactSupportingHeadline,
+} from "@/components/footer/ContactTagline";
+
+import CinematicNavbar from "@/components/navigation/CinematicNavbar";
+
+const emptySubscribe = () => () => { };
 
 export function MotionProvider({ children }: { children: React.ReactNode }) {
   return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }
+
 export function Header() {
-  const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  return (
-    <header className="site-header">
-      <Link
-        href="/"
-        className="brand"
-        aria-label="VishvaProjects home"
-        onClick={() => setOpen(false)}
-      >
-        <svg width="29" height="29" viewBox="0 0 30 30" aria-hidden="true">
-          <path
-            d="M3 5h7l5 15L20 5h7L15 28Z"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          />
-          <path d="M2 17h26M15 2v26" stroke="currentColor" opacity=".4" />
-        </svg>
-        <span>
-          VISHVA<span className="brand-light">PROJECTS</span>
-          <sup>V.03</sup>
-        </span>
-      </Link>
-      <button
-        className="menu-toggle icon-button"
-        onClick={() => setOpen(!open)}
-        aria-label={open ? "Close navigation" : "Open navigation"}
-        aria-expanded={open}
-        aria-controls="main-nav"
-      >
-        {open ? <X size={20} /> : <Menu size={20} />}
-      </button>
-      <nav
-        id="main-nav"
-        aria-label="Main navigation"
-        className={open ? "nav-open" : ""}
-      >
-        {[
-          ["HOME", "/"],
-          ["SYSTEMS", "/#systems"],
-          ["RESEARCH", "/research"],
-          ["ABOUT", "/about"],
-          ["CONTACT", "/#contact"],
-        ].map(([label, href]) => (
-          <Link
-            key={label}
-            href={href}
-            aria-current={pathname === href ? "page" : undefined}
-            onClick={(event) => {
-              setOpen(false);
-              if (pathname === "/" && href.includes("#")) {
-                event.preventDefault();
-                const target = href.split("#")[1];
-                window.location.hash = target;
-                document
-                  .getElementById(target)
-                  ?.scrollIntoView({
-                    behavior: matchMedia("(prefers-reduced-motion: reduce)")
-                      .matches
-                      ? "auto"
-                      : "smooth",
-                  });
-              }
-            }}
-          >
-            {label}
-          </Link>
-        ))}
-      </nav>
-      <a className="header-cv" href={links.cv} target="_blank" rel="noreferrer">
-        CV <ArrowUpRight size={14} />
-      </a>
-    </header>
-  );
+  return <CinematicNavbar />;
 }
 export function Footer() {
+  const pathname = usePathname();
+  const isHydrated = useSyncExternalStore(emptySubscribe, () => true, () => false);
+  const reduced = useReducedMotion();
+  const effectiveReduced = isHydrated ? Boolean(reduced) : false;
+  const footerRef = useRef<HTMLElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = footerRef.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined" || effectiveReduced) {
+      const raf = requestAnimationFrame(() => setIsVisible(true));
+      return () => cancelAnimationFrame(raf);
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "100px 0px 100px 0px", threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [effectiveReduced]);
+
+  // Contact section belongs exclusively on the main homepage
+  if (pathname !== "/") {
+    return null;
+  }
+
   return (
-    <footer id="contact" className="site-footer wrap">
-      <div className="contact-lead">
-        <h2>
-          Let’s build
-          <br />
-          <span>something real.</span>
-        </h2>
-        <a className="contact-email" href={links.email}>
-          vishva.viking@gmail.com <ArrowUpRight />
-        </a>
+    <div className="site-footer-band" style={{ position: "relative" }}>
+      <div className="contact-bg-layer" aria-hidden="true">
+        <CosmicBG
+          coreColor="#00e5ff"
+          midColor="#004c7a"
+          accentColor="#d9a33d"
+          outerColor="#ffffff"
+          brightness={32}
+          speed={15}
+          detail={18}
+          rotation={12}
+        />
+        <div className="contact-bg-overlay" />
       </div>
-      <div className="contact-links">
-        {[
-          ["EMAIL", links.email],
-          ["GITHUB", links.github],
-          ["LINKEDIN", links.linkedin],
-          ["READ CV", links.cv],
-        ].map(([name, href]) => (
-          <a
-            key={name}
-            href={href}
-            target={href.startsWith("mailto") ? undefined : "_blank"}
-            rel="noreferrer"
-          >
-            {name}
-            <ArrowUpRight size={17} />
-          </a>
-        ))}
-      </div>
-      <div className="footer-bottom">
-        <span>VISHVA PATEL · ENGINEERING IN PROGRESS</span>
-        <Link href="/credits">COLOPHON & SOURCES</Link>
-        <a href="#top">BACK TO TOP ↑</a>
-      </div>
-    </footer>
+      <footer
+        id="contact"
+        ref={footerRef}
+        className="site-footer wrap"
+        style={{ position: "relative", zIndex: 1, background: "transparent" }}
+      >
+        {/* LEFT SIDE: HERO TAGLINE */}
+        <div className="contact-hero-pane">
+          <ContactHeroTagline isVisible={isVisible} />
+        </div>
+
+        {/* RIGHT SIDE: SUPPORTING HEADLINE + INTERNSHIP + ICONS */}
+        <div className="contact-right-pane">
+          <div className="contact-supporting-wrapper">
+            <ContactSupportingHeadline isVisible={isVisible} />
+          </div>
+          <div className="contact-bottom-wrapper">
+            <div className="contact-links">
+              {(
+                [
+                  {
+                    name: "GMAIL",
+                    variant: "gmail" as const,
+                    ariaLabel: "Send email to Vishva Patel via Gmail",
+                    href: links.email,
+                    onTrack: () =>
+                      trackPortfolioEvent("contact_click", {
+                        channel: "email",
+                        source_surface: "footer_links",
+                      }),
+                  },
+                  {
+                    name: "GITHUB",
+                    variant: "github",
+                    ariaLabel: "Open Vishva Patel on GitHub",
+                    href: links.github,
+                    onTrack: () =>
+                      trackPortfolioEvent("contact_click", {
+                        channel: "github",
+                        source_surface: "footer_links",
+                      }),
+                  },
+                  {
+                    name: "LINKEDIN",
+                    variant: "linkedin",
+                    ariaLabel: "Open Vishva Patel on LinkedIn",
+                    href: links.linkedin,
+                    onTrack: () =>
+                      trackPortfolioEvent("contact_click", {
+                        channel: "linkedin",
+                        source_surface: "footer_links",
+                      }),
+                  },
+                  {
+                    name: "INSTAGRAM",
+                    variant: "instagram",
+                    ariaLabel: "Open Vishva Patel on Instagram",
+                    href: links.instagram,
+                    onTrack: () =>
+                      trackPortfolioEvent("contact_click", {
+                        channel: "instagram",
+                        source_surface: "footer_links",
+                      }),
+                  },
+                ] as const
+              ).map(({ name, variant, ariaLabel, href, onTrack }) => (
+                <a
+                  key={name}
+                  href={href}
+                  className="brand-orb-link"
+                  data-brand={variant}
+                  aria-label={ariaLabel}
+                  title={name}
+                  target={href.startsWith("mailto") ? undefined : "_blank"}
+                  rel={href.startsWith("mailto") ? undefined : "noreferrer"}
+                  onClick={onTrack}
+                >
+                  <BrandOrbs
+                    variant={variant}
+                    size="medium"
+                    mode="dark"
+                    speed={1}
+                    paused={effectiveReduced}
+                    aria-label={ariaLabel}
+                    style={{ pointerEvents: "none", width: "100%", height: "100%", display: "block" }}
+                  />
+                  <span className="sr-only">{name}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }
 export function PageHeading({

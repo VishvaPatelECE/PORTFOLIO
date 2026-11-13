@@ -6,14 +6,28 @@
     "dev": "next dev --hostname 127.0.0.1 --port 3003",
     "build": "next build",
     "start": "next start --hostname 127.0.0.1 --port 3003",
-    "lint": "eslint .",
+    "lint": "eslint . --cache --cache-strategy content --cache-location .eslintcache",
+    "lint:ci": "eslint . --cache --cache-strategy content --cache-location .eslintcache --max-warnings 2",
     "test": "tsx --test tests/*.test.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "postinstall": "node scripts/patch_threeui_gmail.mjs",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs}": "eslint --cache --cache-strategy content --cache-location .eslintcache --no-warn-ignored --max-warnings 2"
   },
   "dependencies": {
     "@designcodeio/threeui": "1.2.0",
     "@fontsource-variable/anybody": "^5.2.8",
+    "@fontsource-variable/fraunces": "^5.3.0",
     "@fontsource-variable/recursive": "^5.2.8",
+    "@fontsource-variable/syne": "^5.3.0",
+    "@fontsource-variable/texturina": "^5.3.0",
+    "@fontsource/aclonica": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@next/third-parties": "16.4.6",
+    "@paper-design/shaders": "^0.0.61",
+    "@paper-design/shaders-react": "^0.0.61",
     "framer-motion": "12.38.0",
     "lucide-react": "1.8.0",
     "next": "^16.4.3",
@@ -30,6 +44,8 @@
     "eslint": "^9",
     "eslint-config-next": "^16.4.3",
     "gsap": "3.12.2",
+    "husky": "9.1.7",
+    "lint-staged": "17.6.0",
     "tailwindcss": "^4",
     "tsx": "^4.20.0",
     "typescript": "^5"

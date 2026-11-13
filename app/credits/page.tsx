@@ -1,10 +1,29 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeading } from "@/components/Shell";
 import { links } from "@/lib/content/site";
-export const metadata = { title: "Colophon & sources" };
+import { breadcrumbJsonLd, buildPageMetadata, serializeJsonLd } from "@/lib/seo/site";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Colophon & Sources",
+  description:
+    "Technical provenance, open-source licenses, font attributions, and source-code boundaries for VishvaProjects V3.",
+  path: "/credits",
+});
 export default function Credits() {
   return (
     <main id="main" className="wrap">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(
+            breadcrumbJsonLd([
+              { name: "Home", path: "/" },
+              { name: "Colophon & Sources", path: "/credits" },
+            ])
+          ),
+        }}
+      />
       <PageHeading
         code="COLOPHON / PROVENANCE"
         title="Built on evidence."
@@ -25,12 +44,13 @@ export default function Credits() {
           colors adapted to V3. It is not connected to physical access hardware.
         </p>
         <p>
-          <a href={links.rangraph} target="_blank" rel="noreferrer">
-            RANGraph repository ↗
-          </a>{" "}
+          <Link href="/rangraph" className="text-link">
+            The RANGraph project →
+          </Link>{" "}
           provides the schema, golden fixture and TypeScript pipeline used in
           the explorer. The browser model does not execute Python. Layout
           positions are schematic; relationships come from the computed fixture.
+          Its repository and manuscript draft remain private in this phase.
         </p>
         <h2>Face asset</h2>
         <p>

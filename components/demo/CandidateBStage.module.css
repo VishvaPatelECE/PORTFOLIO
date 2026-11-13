@@ -1,0 +1,355 @@
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  isolation: isolate;
+  outline: none;
+}
+
+.ambientAura {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1200px;
+  height: 650px;
+  pointer-events: none;
+  transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.35;
+  z-index: 0;
+}
+
+/* Header */
+.heading {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.headingLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.badgeRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.candidateBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(185, 157, 115, 0.2);
+  border: 1px solid rgba(185, 157, 115, 0.5);
+  color: #ffdeab;
+}
+
+.candidateDesc {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #8c8a82;
+  text-transform: uppercase;
+}
+
+.title {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(32px, 3.8vw, 48px);
+  font-weight: 440;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  color: var(--text, #e8e0d2);
+  margin: 0;
+}
+
+.title span {
+  color: var(--gold, #b99d73);
+}
+
+.interactionHint {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--gold, #b99d73);
+  text-transform: uppercase;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stepperGroup {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 4px;
+}
+
+.stepBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #dcd7ce;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.stepBtn:hover:not(:disabled) {
+  background: rgba(185, 157, 115, 0.2);
+  color: #fff1d8;
+}
+
+.stepBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.indicatorPill {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  padding: 0 8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.currentSlide {
+  color: #b99d73;
+}
+
+.slash {
+  color: #55535c;
+  font-size: 11px;
+}
+
+.totalSlides {
+  color: #8c8a82;
+  font-size: 11px;
+}
+
+/* Horizontal Track with CSS Scroll Snap — 100% GPU Composited */
+.track {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 12px 16px 28px;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  flex: 0 0 min(840px, 78vw);
+  height: 480px;
+  scroll-snap-align: center;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0f0e14;
+  cursor: pointer;
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.38s ease, border-color 0.25s ease, box-shadow 0.38s ease;
+  will-change: transform, opacity;
+  outline: none;
+}
+
+.card:focus-visible {
+  border-color: #00aebd;
+  box-shadow: 0 0 0 2px rgba(0, 174, 189, 0.4);
+}
+
+.cardActive {
+  transform: scale(1);
+  opacity: 1;
+  border-color: rgba(185, 157, 115, 0.55);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.75);
+  cursor: default;
+}
+
+.cardPeeking {
+  transform: scale(0.94);
+  opacity: 0.6;
+}
+
+.cardPeeking:hover {
+  opacity: 0.85;
+  transform: scale(0.96);
+}
+
+/* Parallax Image Viewport */
+.imageViewport {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.coverImg {
+  object-fit: cover;
+  pointer-events: none;
+  transform: scale(1.06);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cardActive .coverImg {
+  transform: scale(1);
+}
+
+.scrimOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 7, 11, 0.25) 0%,
+    rgba(8, 7, 11, 0.1) 32%,
+    rgba(8, 7, 11, 0.68) 68%,
+    rgba(8, 7, 11, 0.94) 100%
+  );
+  pointer-events: none;
+}
+
+/* Badges */
+.badgeCluster {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.metaBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff1d8;
+  text-transform: uppercase;
+}
+
+.categoryBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #afaea2;
+  text-transform: uppercase;
+}
+
+/* Content Box */
+.contentBox {
+  position: absolute;
+  left: 36px;
+  bottom: 36px;
+  right: 36px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.projectIndex {
+  font-family: var(--font-mono, monospace);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold, #b99d73);
+}
+
+.projectName {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(28px, 3.4vw, 42px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8);
+}
+
+.projectLine {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(14px, 1.3vw, 16px);
+  color: #d4a574;
+  margin: 0;
+  line-height: 1.45;
+  max-width: 620px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+.actionRow {
+  margin-top: 6px;
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 22px;
+  border-radius: 999px;
+  background: rgba(185, 157, 115, 0.18);
+  border: 1px solid #b99d73;
+  color: #fff1d8;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.actionBtn:hover {
+  background: #b99d73;
+  color: #08070b;
+  box-shadow: 0 0 20px rgba(185, 157, 115, 0.4);
+}
+
+@media (max-width: 860px) {
+  .card {
+    flex: 0 0 88vw;
+    height: 420px;
+  }
+
+  .contentBox {
+    left: 20px;
+    right: 20px;
+    bottom: 24px;
+  }
+}

@@ -8,7 +8,7 @@ export const identityCard = {
 export const identityStageCopy: Record<(typeof identityCard.stages)[number], string> = {
   DESIGN: "Map inputs and constraints.",
   BUILD: "Connect the pieces.",
-  TEST: "Probe boundaries and failure.",
-  REFINE: "Improve what the tests expose.",
-  SHIP: "Make the work clear and usable.",
+  TEST: "Probe boundaries\nand failure.",
+  REFINE: "Improve what the\ntests expose.",
+  SHIP: "Make the work\nclear and usable.",
 };

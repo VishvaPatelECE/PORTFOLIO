@@ -46,7 +46,7 @@
   window.__SF_APPLY_CONTROLS = applyVisual;
 })();
 </script><style data-threeui-focus>
-html, body { width: 100% !important; height: 100% !important; min-height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; background: #0a0a0a !important; }
+html, body { width: 100% !important; height: 100% !important; min-height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; background: #08070b !important; }
 body { position: relative !important; display: flex !important; align-items: center !important; justify-content: center !important; }
 body > * { visibility: hidden !important; }
 body[data-threeui-ready] > [data-threeui-role] { visibility: visible !important; }
@@ -60,7 +60,7 @@ body[data-threeui-ready] > [data-threeui-role] { visibility: visible !important;
 <title>Flow Field with Particle Trails</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0a0a; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #08070b; }
   canvas { display: block; width: 100vw; height: 100vh; }
   .label {
     position: fixed;
@@ -70,7 +70,7 @@ body[data-threeui-ready] > [data-threeui-role] { visibility: visible !important;
     font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(200, 149, 108, 0.5);
+    color: rgba(0, 174, 189, 0.5);
     z-index: 10;
     pointer-events: none;
     user-select: none;
@@ -204,7 +204,7 @@ const SimplexNoise = (function() {
     canvas.style.height = H + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     // Fill with background on resize to avoid flash
-    ctx.fillStyle = '#0a0a0a';
+    ctx.fillStyle = '#08070b';
     ctx.fillRect(0, 0, W, H);
   }
 
@@ -223,15 +223,15 @@ const SimplexNoise = (function() {
   });
 
   // ── Color palette ──
-  // Warm tones: amber, gold, coral, with variations
+  // VishvaProjects site identity: Signal Cyan (#00aebd), Laboratory Gold (#b99d73), Ivory & Deep Slate
   const palette = [
-    { r: 200, g: 149, b: 108 }, // amber  #c8956c
-    { r: 212, g: 165, b: 116 }, // gold   #d4a574
-    { r: 224, g: 120, b: 80  }, // coral  #e07850
-    { r: 190, g: 130, b: 90  }, // dark amber
-    { r: 230, g: 180, b: 140 }, // light gold
-    { r: 210, g: 100, b: 70  }, // deep coral
-    { r: 180, g: 160, b: 120 }, // muted gold
+    { r: 0,   g: 174, b: 189 }, // Signal Cyan       #00aebd
+    { r: 64,  g: 196, b: 206 }, // Light Cyan Accent #40c4ce
+    { r: 185, g: 157, b: 115 }, // Laboratory Gold    #b99d73
+    { r: 213, g: 198, b: 169 }, // Pale Ivory         #d5c6a9
+    { r: 28,  g: 108, b: 135 }, // Deep Teal
+    { r: 0,   g: 150, b: 168 }, // Electric Cyan
+    { r: 145, g: 122, b: 92  }, // Muted Gold Accent
   ];
 
   function lerpColor(a, b, t) {
@@ -280,8 +280,8 @@ const SimplexNoise = (function() {
   let time = 0;
 
   function draw() {
-    // Fade previous frame with dark overlay — creates trailing effect
-    ctx.fillStyle = 'rgba(10, 10, 10, 0.03)';
+    // Fade previous frame with dark overlay — creates trailing effect in #08070b
+    ctx.fillStyle = 'rgba(8, 7, 11, 0.035)';
     ctx.fillRect(0, 0, W, H);
 
     time += 0.0008 * ((window.__SF_CONTROLS&&window.__SF_CONTROLS.speed)||0);
@@ -341,7 +341,7 @@ const SimplexNoise = (function() {
   }
 
   // Initial fill
-  ctx.fillStyle = '#0a0a0a';
+  ctx.fillStyle = '#08070b';
   ctx.fillRect(0, 0, W, H);
 
   requestAnimationFrame(draw);

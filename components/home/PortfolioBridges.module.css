@@ -1,12 +1,275 @@
-.interests { padding-block:64px 44px; }
-.interests h2,.notes h2 { font-family:"Anybody Variable",sans-serif; font-size:clamp(30px,3vw,44px); font-weight:440; letter-spacing:-.03em; line-height:1.08; margin:0 0 28px; }
-.interests h2 span,.notes h2 span { color:var(--gold); }
-.interests p { display:flex; flex-wrap:wrap; gap:12px 40px; font-family:"Anybody Variable",sans-serif; font-size:clamp(32px,4.3vw,62px); font-weight:440; line-height:1.12; letter-spacing:-.035em; color:var(--text); }
-.interests p span:first-child { color:var(--gold); }
-.interests p span:last-child { color:var(--muted); }
-.notes { padding-block:52px 76px; }
-.notes > div { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px; }
-.notes a { display:flex; align-items:center; justify-content:space-between; gap:18px; min-height:72px; padding-block:16px; border-top:1px solid var(--line); font-family:"Anybody Variable",sans-serif; font-size:clamp(22px,2vw,28px); line-height:1.22; letter-spacing:-.025em; }
-.notes a svg { flex-shrink:0; color:var(--gold); }
-.notes a:focus-visible { outline:2px solid var(--signal); outline-offset:5px; }
-@media(max-width:760px) { .interests { padding-block:36px 28px; } .interests p { flex-direction:column; gap:12px; } .notes { padding-block:36px 48px; } .notes > div { grid-template-columns:1fr; gap:4px; } }
+.matrixSection {
+  padding-block: 72px 54px;
+}
+
+.matrixHeader {
+  margin-bottom: 36px;
+  max-width: 820px;
+}
+
+.matrixEyebrow {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--gold, #b99d73);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.matrixHeader h2,
+.notesHeader h2 {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(34px, 3.8vw, 52px);
+  font-weight: 440;
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+  margin: 0 0 16px;
+  color: var(--text, #e8e0d2);
+}
+
+.matrixHeader h2 span,
+.notesHeader h2 span {
+  color: var(--gold, #b99d73);
+}
+
+.matrixLead {
+  font-family: "Recursive Variable", sans-serif;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.55;
+  color: var(--muted, #a6b4bc);
+  margin: 0;
+  max-width: 720px;
+}
+
+.matrixGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.domainCard {
+  position: relative;
+  background: rgba(12, 20, 27, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 4px;
+  padding: 26px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.domainCard:hover {
+  border-color: rgba(0, 174, 189, 0.4);
+  background: rgba(12, 20, 27, 0.85);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.domainCode {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--gold, #b99d73);
+  font-weight: 550;
+}
+
+.cardCorner {
+  width: 8px;
+  height: 8px;
+  border-top: 1.5px solid var(--signal, #00aebd);
+  border-right: 1.5px solid var(--signal, #00aebd);
+  opacity: 0.6;
+}
+
+.domainTitle {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--text, #e8e0d2);
+  margin: 0 0 8px;
+  line-height: 1.15;
+}
+
+.domainSubtitle {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted, #a6b4bc);
+  margin: 0 0 20px;
+}
+
+.contractBox {
+  background: rgba(8, 7, 11, 0.65);
+  border-left: 2px solid var(--signal, #00aebd);
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border-radius: 0 3px 3px 0;
+}
+
+.contractLabel {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--signal, #00aebd);
+  margin-bottom: 4px;
+}
+
+.contractFlow {
+  font-family: var(--font-mono, monospace);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: var(--text, #e8e0d2);
+  margin: 0;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.focusBox {
+  margin-bottom: 22px;
+  flex-grow: 1;
+}
+
+.focusLabel {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--gold, #b99d73);
+  margin-bottom: 4px;
+}
+
+.focusText {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--muted, #a6b4bc);
+  margin: 0;
+}
+
+.cardFooter {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 14px;
+}
+
+.systemsLabel {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--muted, #a6b4bc);
+  margin-bottom: 8px;
+}
+
+.systemLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
+.systemLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11.5px;
+  color: var(--text, #e8e0d2);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.systemLink:hover {
+  color: var(--signal, #00aebd);
+}
+
+/* Engineering Notes Section */
+.notes {
+  padding-block: 64px 82px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.notesHeader {
+  margin-bottom: 32px;
+}
+
+.notesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.noteItem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 20px;
+  background: rgba(12, 20, 27, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.noteItem:hover {
+  border-color: rgba(185, 157, 115, 0.45);
+  background: rgba(12, 20, 27, 0.7);
+}
+
+.noteCode {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--gold, #b99d73);
+  margin-bottom: 6px;
+}
+
+.noteItem h4 {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(16px, 1.4vw, 19px);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--text, #e8e0d2);
+  margin: 0 0 6px;
+}
+
+.noteItem p {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--muted, #a6b4bc);
+  margin: 0;
+}
+
+.noteArrow {
+  flex-shrink: 0;
+  color: var(--gold, #b99d73);
+  margin-top: 4px;
+  transition: transform 0.2s ease;
+}
+
+.noteItem:hover .noteArrow {
+  transform: translate(2px, -2px);
+  color: var(--signal, #00aebd);
+}
+
+@media (max-width: 960px) {
+  .matrixGrid,
+  .notesGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .matrixSection {
+    padding-block: 48px 36px;
+  }
+
+  .notes {
+    padding-block: 48px 60px;
+  }
+}

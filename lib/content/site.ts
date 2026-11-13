@@ -1,9 +1,10 @@
 export const links = {
-  email: "mailto:vishva.viking@gmail.com",
-  github: "https://github.com/vishva-git",
+  email: "mailto:vishvapatel.ece@gmail.com",
+  github: "https://github.com/VishvaPatelECE",
   darvs: "https://github.com/vishva-git/DARVS",
-  rangraph: "https://github.com/VishvaPatelECE/RANGraph",
+  rangraph: "/rangraph",
   linkedin: "https://www.linkedin.com/in/vishva-patel-ece",
+  instagram: "https://www.instagram.com/vishva_1503/",
   cv: "/Vishva_Patel_CV.pdf",
 };
 export const systems = [

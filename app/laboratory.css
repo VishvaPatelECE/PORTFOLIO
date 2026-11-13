@@ -8,28 +8,29 @@
   --chrome: #d2dad9;
   --signal-soft: #68d7db;
 }
+
 body {
-  background: radial-gradient(
-    ellipse at 78% 0%,
-    #101d2a 0,
-    #08070b 40%,
-    #08070b 100%
-  );
+  background: var(--bg, #08070b);
+  background-color: #08070b;
   font-size: 16px;
 }
+
 html {
-  scrollbar-color: #324551 #090d12;
+  scrollbar-width: none;
 }
+
 ::selection {
   background: #b99d73;
   color: #08070b;
 }
+
 .site-header {
   border-bottom: 0;
   position: relative;
   z-index: 5;
   height: 86px;
 }
+
 .site-header nav {
   padding: 6px;
   gap: 2px;
@@ -41,30 +42,37 @@ html {
     0 8px 24px #00000035;
   backdrop-filter: blur(18px);
 }
+
 .site-header nav a {
   padding: 9px 18px;
   font-size: 11px;
   letter-spacing: 0.02em;
   border-radius: 100px;
 }
+
 .site-header nav a[aria-current="page"] {
   color: var(--text);
   background: #c6ded512;
   box-shadow: inset 0 1px 0 #ffffff16;
 }
+
 .site-header nav a[aria-current="page"]::after {
   display: none;
 }
+
 .brand sup {
   display: none;
 }
+
 .brand {
   font-size: 12px;
 }
+
 .header-cv {
   color: #c8d5da;
   font-size: 12px;
 }
+
 .laboratory-hero {
   position: relative;
   isolation: isolate;
@@ -73,12 +81,14 @@ html {
   margin-top: -86px;
   padding-top: 86px;
 }
+
 .laboratory-ground {
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
 }
+
 .laboratory-ground::before {
   content: "";
   position: absolute;
@@ -88,24 +98,28 @@ html {
     radial-gradient(ellipse at 89% 27%, #b99d7323, transparent 27%),
     linear-gradient(115deg, #08070b 12%, #0d1520 69%, #080b0f);
 }
+
 .laboratory-ground::after {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at 50% 100%, transparent, #08070b 88%);
 }
+
 .laboratory-inner {
   position: relative;
   min-height: 706px;
   padding-top: 44px;
   padding-bottom: 22px;
 }
+
 .laboratory-name {
   position: relative;
   z-index: 2;
   width: 55%;
   pointer-events: none;
 }
+
 .laboratory-name h1 {
   font-size: clamp(80px, 8.7vw, 125px);
   line-height: 0.91;
@@ -114,16 +128,20 @@ html {
   font-variation-settings: "wdth" 110;
   outline: none;
 }
-.laboratory-name h1 > span {
+
+.laboratory-name h1>span {
   display: block;
 }
-.laboratory-name h1 > span + span {
+
+.laboratory-name h1>span+span {
   margin-left: 48px;
   color: #d3d9d7;
 }
+
 .identity-dot {
   color: var(--signal-soft);
 }
+
 .laboratory-role {
   color: #b99d73;
   margin-top: 26px;
@@ -131,23 +149,27 @@ html {
   line-height: 1.45;
   letter-spacing: -0.015em;
 }
+
 .laboratory-manifesto {
   position: relative;
   z-index: 2;
   margin-top: 26px;
   max-width: 380px;
 }
-.laboratory-manifesto > p {
+
+.laboratory-manifesto>p {
   font-size: 17px;
   line-height: 1.6;
   color: #a7b9c5;
   max-width: 34ch;
   text-wrap: pretty;
 }
+
 .laboratory-manifesto em {
   font-style: normal;
   color: var(--text);
 }
+
 .ignition-link {
   display: inline-flex;
   align-items: center;
@@ -171,6 +193,7 @@ html {
     transform 0.25s var(--ease),
     border-color 0.25s var(--ease);
 }
+
 .ignition-symbol {
   position: relative;
   z-index: 1;
@@ -185,22 +208,23 @@ html {
     inset 0 1px 0 #fff8,
     0 3px 8px #0006;
 }
-.ignition-link > span {
+
+.ignition-link>span {
   position: relative;
   z-index: 1;
 }
+
 .ignition-link i {
   position: absolute;
   inset: -50%;
   transform: translateX(-90%) rotate(20deg);
-  background: linear-gradient(
-    90deg,
-    transparent 40%,
-    #8ddbf047 50%,
-    transparent 60%
-  );
+  background: linear-gradient(90deg,
+      transparent 40%,
+      #8ddbf047 50%,
+      transparent 60%);
   pointer-events: none;
 }
+
 .ignition-link:hover {
   color: #fff;
   border-color: #8ce0de;
@@ -209,13 +233,16 @@ html {
     0 14px 40px #00283265;
   transform: translateY(-2px);
 }
+
 .ignition-link:hover i {
   transform: translateX(90%) rotate(20deg);
   transition: transform 0.8s var(--ease);
 }
+
 .ignition-link:active {
   transform: translateY(1px) scale(0.98);
 }
+
 .laboratory-about {
   display: inline-flex;
   align-items: center;
@@ -224,6 +251,7 @@ html {
   margin: 20px 0 0 18px;
   color: #b3c2c8;
 }
+
 .assembly-stage {
   position: absolute;
   right: -6%;
@@ -232,6 +260,7 @@ html {
   height: 580px;
   z-index: 1;
 }
+
 .assembly-renderer {
   position: absolute;
   inset: 0;
@@ -239,18 +268,22 @@ html {
   touch-action: pan-y;
   cursor: grab;
 }
+
 .assembly-renderer:active {
   cursor: grabbing;
 }
+
 .assembly-renderer canvas {
   width: 100%;
   height: 100%;
   display: block;
 }
+
 .assembly-renderer:focus-visible {
   outline-offset: -14px;
   outline-style: dashed;
 }
+
 .assembly-fallback {
   position: absolute;
   inset: 0;
@@ -259,31 +292,32 @@ html {
   z-index: 1;
   pointer-events: none;
 }
+
 .assembly-stage.scene-ready .assembly-fallback {
   display: none;
 }
+
 .fallback-lens {
   width: 270px;
   height: 270px;
   border-radius: 50%;
   transform: rotateX(42deg) rotateZ(-15deg);
-  background: radial-gradient(
-    circle,
-    #54d4d4 0 5%,
-    #021923 6% 26%,
-    #27495c 27% 31%,
-    #0c1117 32% 40%,
-    #91a6ad 41% 43%,
-    #19242c 44% 57%,
-    #9fa8a1 58% 60%,
-    #0e171f 61% 68%,
-    #b99d73 69% 70%,
-    #1c2730 71%
-  );
+  background: radial-gradient(circle,
+      #54d4d4 0 5%,
+      #021923 6% 26%,
+      #27495c 27% 31%,
+      #0c1117 32% 40%,
+      #91a6ad 41% 43%,
+      #19242c 44% 57%,
+      #9fa8a1 58% 60%,
+      #0e171f 61% 68%,
+      #b99d73 69% 70%,
+      #1c2730 71%);
   box-shadow:
     0 40px 65px #000b,
     inset 4px 10px 14px #ffffee33;
 }
+
 .assembly-label {
   position: absolute;
   right: 16%;
@@ -299,6 +333,7 @@ html {
   font-size: 10px;
   letter-spacing: 0.06em;
 }
+
 .assembly-label small {
   display: block;
   font-family: "Recursive Variable", sans-serif;
@@ -308,6 +343,7 @@ html {
   margin-top: 6px;
   letter-spacing: 0;
 }
+
 .assembly-label-line {
   display: block;
   width: 60px;
@@ -315,6 +351,7 @@ html {
   height: 1px;
   background: linear-gradient(90deg, transparent, #789899);
 }
+
 .assembly-tools {
   position: absolute;
   z-index: 3;
@@ -324,6 +361,7 @@ html {
   align-items: center;
   gap: 6px;
 }
+
 .assembly-tools button {
   display: grid;
   place-items: center;
@@ -335,10 +373,12 @@ html {
   color: #b9c9cf;
   backdrop-filter: blur(8px);
 }
+
 .assembly-tools button:hover {
   background: #36525d;
   color: #fff;
 }
+
 .assembly-tools span {
   display: inline-flex;
   gap: 7px;
@@ -347,6 +387,7 @@ html {
   color: #9cafb8;
   margin-left: 10px;
 }
+
 .laboratory-selector {
   position: relative;
   z-index: 3;
@@ -358,6 +399,7 @@ html {
   border-bottom: 1px solid #68899530;
   gap: 0;
 }
+
 .laboratory-selector button {
   position: relative;
   flex: 1;
@@ -369,12 +411,15 @@ html {
   min-height: 74px;
   color: #879daa;
 }
-.laboratory-selector button + button {
+
+.laboratory-selector button+button {
   border-left: 1px solid #68899530;
 }
-.laboratory-selector button > svg {
+
+.laboratory-selector button>svg {
   margin-left: auto;
 }
+
 .laboratory-selector strong {
   display: block;
   font-family: "Anybody Variable", sans-serif;
@@ -382,6 +427,7 @@ html {
   font-weight: 480;
   letter-spacing: -0.025em;
 }
+
 .laboratory-selector small {
   display: block;
   font-size: 11px;
@@ -389,10 +435,12 @@ html {
   color: #7f96a4;
   margin-top: 4px;
 }
+
 .laboratory-selector button[aria-pressed="true"] {
   color: #e4e8e0;
   background: radial-gradient(ellipse at 20% 100%, #194c582e, transparent 75%);
 }
+
 .laboratory-selector button[aria-pressed="true"]::after {
   content: "";
   position: absolute;
@@ -403,15 +451,18 @@ html {
   background: #75d4d4;
   box-shadow: 0 4px 14px #0bd2de55;
 }
+
 .selector-glyph {
   display: grid;
   place-items: center;
   width: 35px;
   color: #87a9b2;
 }
+
 .laboratory-selector button[aria-pressed="true"] .selector-glyph {
   color: #b99d73;
 }
+
 .laboratory-pipeline {
   position: relative;
   z-index: 3;
@@ -420,20 +471,24 @@ html {
   gap: 40px;
   padding: 27px 0 7px;
 }
-.pipeline-title > span {
+
+.pipeline-title>span {
   font-size: 13px;
   color: #ced8d7;
 }
+
 .pipeline-title small {
   display: block;
   color: #7f929e;
   font-size: 11px;
   margin-top: 3px;
 }
+
 .pipeline-stage-list {
   display: flex;
   align-items: center;
 }
+
 .pipeline-stage-list button {
   position: relative;
   padding: 9px 12px 18px;
@@ -443,6 +498,7 @@ html {
   color: #849aa6;
   border-bottom: 1px solid #48616d;
 }
+
 .pipeline-stage-list button i {
   position: absolute;
   width: 5px;
@@ -453,37 +509,45 @@ html {
   background: #0b131b;
   border-radius: 50%;
 }
+
 .pipeline-stage-list button[aria-pressed="true"] {
   color: #bee1db;
   border-bottom-color: #69c7ce;
 }
+
 .pipeline-stage-list button[aria-pressed="true"] i {
   background: #81e8e6;
   box-shadow: 0 2px 9px #00aebd;
   border-color: #81e8e6;
 }
+
 .entry-replay-container {
   position: absolute;
   right: 0;
   top: 9px;
   z-index: 3;
 }
+
 .entry-replay-container .replay {
   position: static;
   padding: 7px 0;
   font-size: 9px;
   color: #899faa;
 }
+
 .entry-replay-container:has(.entry) {
   position: static;
 }
+
 .entry {
   background: radial-gradient(ellipse at 50% 50%, #0a1923, #03070c 75%);
 }
+
 .entry .entry-top,
 .entry .entry-bottom {
   z-index: 4;
 }
+
 .entry .entry-top .button {
   border-radius: 100px;
   background: linear-gradient(145deg, #e3d5b6, #ad956e);
@@ -493,74 +557,90 @@ html {
     inset 0 1px 0 #fff7,
     0 8px 25px #0007;
 }
+
 .entry-annotation strong {
   color: #83e0e4;
 }
+
 .entry-side {
   color: #8ba3b0;
 }
+
 .systems-section {
   padding-top: 104px;
 }
+
 .section-intro {
   position: relative;
   grid-template-columns: 1.15fr 1fr;
   gap: 30px;
 }
-.section-intro > .mono {
+
+.section-intro>.mono {
   display: none;
 }
+
 .section-intro h2 {
   font-size: clamp(42px, 5.6vw, 76px);
   line-height: 1.03;
   font-weight: 440;
 }
+
 .section-intro .muted {
   color: #8babb7;
 }
-.section-intro > p {
+
+.section-intro>p {
   font-size: 16px;
   line-height: 1.6;
 }
+
 .project-feature {
   border-top: 0;
   margin-top: 65px;
   padding: 0;
   gap: 0;
 }
+
 .project-copy {
   position: relative;
   z-index: 2;
   padding: 42px 8% 42px 0;
 }
+
 .project-copy h3 {
   font-size: 60px;
   letter-spacing: -0.03em;
   color: #dce4df;
   font-weight: 460;
 }
+
 .project-number {
   font-size: 11px;
   color: #b99d73;
   margin-bottom: 16px;
 }
+
 .project-deck {
   color: #a5bdc8;
   font-size: 24px;
   line-height: 1.3;
   margin-top: 22px;
 }
+
 .project-summary {
   font-size: 15px;
   line-height: 1.65;
   margin-top: 22px;
   color: #8fa8b5;
 }
+
 .project-footnote {
   color: #8199a5;
   margin-top: 26px;
   font-size: 9px;
 }
+
 .button {
   border-radius: 100px;
   background: linear-gradient(145deg, #24363f, #131f28);
@@ -573,15 +653,18 @@ html {
   padding-inline: 22px;
   min-height: 48px;
 }
+
 .button:hover {
   background: linear-gradient(145deg, #3f535b, #19333e);
   border-color: #8ab8ba;
   color: #fff;
   transform: translateY(-1px);
 }
+
 .button:active {
   transform: translateY(1px);
 }
+
 .detection-art {
   background:
     radial-gradient(ellipse at 50% 35%, #1f515c8a, transparent 63%),
@@ -594,15 +677,18 @@ html {
     inset 0 1px 0 #abdadd15,
     0 20px 70px #0005;
 }
-.detection-art > svg {
+
+.detection-art>svg {
   filter: drop-shadow(0 16px 8px #0009);
   transform: perspective(900px) rotateX(11deg) rotateY(-14deg);
   transition: transform 0.6s var(--ease);
   opacity: 0.9;
 }
-.detection-art:hover > svg {
+
+.detection-art:hover>svg {
   transform: perspective(900px) rotateX(0) rotateY(-4deg) scale(1.03);
 }
+
 .detection-art::before {
   content: none;
   position: absolute;
@@ -611,29 +697,30 @@ html {
   left: calc(50% - 130px);
   top: 85px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    #132c3c 5%,
-    #79b9c131 40%,
-    #050e19 41% 51%,
-    #a0b8b550 52% 53%,
-    #152637 54% 66%,
-    #b99d7355 67% 68%,
-    #14313e 69% 76%,
-    transparent 77%
-  );
+  background: radial-gradient(circle,
+      #132c3c 5%,
+      #79b9c131 40%,
+      #050e19 41% 51%,
+      #a0b8b550 52% 53%,
+      #152637 54% 66%,
+      #b99d7355 67% 68%,
+      #14313e 69% 76%,
+      transparent 77%);
   box-shadow:
     14px 28px 40px #0008,
     inset 6px 4px 12px #a6eef22a;
   transform: rotateX(20deg) rotateY(-20deg);
 }
+
 .hardware-feature {
   margin-top: 90px;
 }
+
 .hardware-feature .project-copy {
   padding-left: 12%;
   padding-right: 0;
 }
+
 .hardware-art {
   position: relative;
   min-height: 460px;
@@ -646,6 +733,7 @@ html {
     inset 0 1px 0 #abdadd15,
     0 20px 70px #0005;
 }
+
 .ic-visual {
   transform: perspective(700px) rotateX(28deg) rotateY(-22deg) rotateZ(10deg);
   background: linear-gradient(140deg, #3d555b, #10181e 48%, #24323a);
@@ -659,40 +747,47 @@ html {
   padding-block: 36px;
   transition: transform 0.6s var(--ease);
 }
+
 .hardware-art:hover .ic-visual {
   transform: perspective(700px) rotateX(17deg) rotateY(-12deg) rotateZ(4deg);
 }
+
 .ic-pins {
-  background: repeating-linear-gradient(
-    90deg,
-    #bda780 0 8px,
-    transparent 8px 17px
-  );
+  background: repeating-linear-gradient(90deg,
+      #bda780 0 8px,
+      transparent 8px 17px);
   filter: drop-shadow(0 2px 1px #000);
 }
+
 .hardware-track {
   color: #bac7c9;
 }
+
 .research-section {
   margin-top: 110px;
   padding-top: 48px;
   border-top-color: #314650;
 }
-.research-head > .mono {
+
+.research-head>.mono {
   color: #b99d73;
 }
+
 .rangraph-feature {
   gap: 9%;
 }
+
 .rangraph-feature h2 {
   font-size: clamp(38px, 4.8vw, 65px);
   line-height: 1.07;
   font-weight: 430;
 }
+
 .rangraph-feature h2 em {
   font-style: normal;
   color: #93b5bf;
 }
+
 .record-art {
   background:
     radial-gradient(ellipse at 70% 70%, #0e59613b, transparent 70%),
@@ -704,50 +799,62 @@ html {
     0 18px 55px #0005;
   border: 1px solid #738f9630;
 }
-.record-art > svg {
+
+.record-art>svg {
   filter: drop-shadow(0 6px 7px #007d8450);
 }
+
 .source-line {
   padding: 18px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.record-art .source-line > svg {
+
+.record-art .source-line>svg {
   width: 26px;
   height: 26px;
   flex: 0 0 26px;
   filter: none;
 }
+
 .research-placeholder {
   border-top: 1px solid #293a45;
   margin-top: 50px;
   background: none;
 }
+
 .supporting {
   padding-top: 110px;
 }
+
 .supporting h2 {
   font-size: 44px;
   font-weight: 430;
 }
+
 .work-row {
   border-color: #293c45;
 }
+
 .site-footer {
   position: relative;
-  margin-top: 100px;
+  margin-top: 0;
   padding-top: 65px;
-  border-top-color: #31454e;
-  background: radial-gradient(ellipse at 85% 35%, #19474b30, transparent 60%);
+  border-top-color: rgba(185, 157, 115, 0.16);
+  background: var(--bg, #08070b);
+  scroll-margin-top: 86px;
 }
+
 .contact-lead h2 {
   font-size: clamp(42px, 5vw, 76px);
   font-weight: 430;
 }
+
 .contact-lead h2 span {
   color: #9bafb5;
 }
+
 .contact-links a {
   border-color: #35515a;
   background: linear-gradient(120deg, #21323b80, #0a121b);
@@ -755,33 +862,28 @@ html {
   padding: 14px 24px;
   box-shadow: inset 0 1px 0 #a9c6d415;
 }
-.contact-links a:hover {
-  background: #24434d;
-  color: #e6e7da;
-}
+
+/* Brand orb link styling is managed in globals.css */
+
 .page-heading {
   position: relative;
   padding-top: 40px;
   padding-bottom: 42px;
 }
+
 .page-heading h1 {
   font-size: clamp(56px, 6.5vw, 92px);
   font-weight: 440;
 }
+
 .heading-meta {
   color: #b99d73;
 }
+
 .page-heading::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  width: 80%;
-  height: 400px;
-  top: -80px;
-  right: -5%;
-  background: radial-gradient(ellipse at 75% 45%, #13445048, transparent 70%);
-  pointer-events: none;
+  display: none !important;
 }
+
 .instrument {
   background: linear-gradient(135deg, #15222c, #0a1018 60%);
   border: 1px solid #607b8738;
@@ -791,46 +893,57 @@ html {
     0 25px 70px #0006;
   overflow: hidden;
 }
+
 .instrument-bar {
   background: #06101975;
   color: #9fbbc9;
   border-bottom-color: #36545e;
   font-size: 10px;
 }
+
 .stage-rail {
   border-bottom-color: #3a515b;
   background: #10202b50;
 }
+
 .stage-rail button {
   font-size: 13px;
   color: #c1d0d5;
   transition: background 0.25s var(--ease);
 }
+
 .stage-rail button[aria-pressed="true"] {
   background: linear-gradient(145deg, #244c5760, #12323e);
   color: #b8ebeb;
 }
+
 .stage-visual {
   background: radial-gradient(ellipse at 50% 50%, #1c4a5b46, transparent 65%);
 }
+
 .hardware-status {
   background: linear-gradient(105deg, #26312d33, #0b172280);
 }
+
 .hardware-status h2 {
   font-size: 48px;
   font-weight: 440;
 }
+
 .circuit-diagram {
   background: radial-gradient(ellipse at 50% 45%, #17455045, transparent 65%);
 }
+
 .input-control,
 .sensor-list button {
   min-height: 52px;
 }
+
 .input-control:hover,
 .sensor-list button:hover {
   background: #1e3a4470;
 }
+
 .scenario-controls button {
   background: linear-gradient(135deg, #263b44, #111d27);
   border-color: #647d8550;
@@ -838,24 +951,30 @@ html {
   box-shadow: inset 0 1px 0 #c3deeb1a;
   min-height: 46px;
 }
+
 .scenario-controls button:hover {
   border-color: #66b2be;
   background: #1e4450;
 }
+
 .pipeline-rail {
   background: #07121b;
 }
+
 .pipeline-rail button {
   min-height: 66px;
   font-size: 12px;
 }
+
 .pipeline-rail button[aria-pressed="true"] {
   background: linear-gradient(140deg, #265c624d, #0d2937);
   color: #b9eeee;
 }
+
 .graph-region {
   background: radial-gradient(ellipse at 40% 45%, #133d4f75, #0a121a);
 }
+
 .graph-node {
   background: linear-gradient(145deg, #28414d, #101e29);
   box-shadow:
@@ -863,91 +982,117 @@ html {
     0 8px 20px #0006;
   border-radius: 10px;
 }
+
 .graph-node.gnb {
   background: linear-gradient(145deg, #5c5040, #201f22);
 }
+
 .graph-node[aria-pressed="true"] {
   box-shadow:
     inset 0 1px 0 #e7ffff30,
     0 8px 25px #0b707135;
 }
+
 .record-inspector {
   background: #08111ab3;
 }
+
 .inspector-tabs button {
   font-size: 11px;
 }
+
 .education-grid,
-.practice-grid {
+.capabilities-section,
+.capability-card,
+.research-track-card {
   border-color: #304650;
 }
+
 .about-monogram {
   background: radial-gradient(ellipse at 50% 60%, #1d535348, transparent 65%);
   color: #bfa883;
 }
+
 @media (min-width: 1600px) {
   .laboratory-inner {
     min-height: 770px;
   }
+
   .assembly-stage {
     height: 620px;
   }
+
   .laboratory-selector {
     margin-top: 80px;
   }
 }
+
 @media (max-width: 1100px) {
   .laboratory-name h1 {
     font-size: 88px;
   }
+
   .laboratory-name {
     width: 57%;
   }
+
   .assembly-stage {
     right: -15%;
     width: 80%;
     top: 15px;
     height: 515px;
   }
+
   .assembly-label {
     right: 20%;
     top: 25px;
   }
+
   .laboratory-inner {
     min-height: 675px;
   }
+
   .laboratory-role {
     font-size: 15px;
   }
-  .laboratory-manifesto > p {
+
+  .laboratory-manifesto>p {
     font-size: 15px;
     max-width: 32ch;
   }
+
   .laboratory-selector {
     margin-top: 42px;
   }
+
   .laboratory-selector button {
     padding-inline: 16px;
     gap: 12px;
   }
+
   .laboratory-selector strong {
     font-size: 19px;
   }
+
   .site-header nav a {
     padding-inline: 12px;
   }
+
   .laboratory-pipeline {
     grid-template-columns: 1fr 1.8fr;
     gap: 15px;
   }
+
   .project-copy h3 {
     font-size: 46px;
   }
 }
+
 @media (max-width: 760px) {
   .site-header {
     height: 76px;
   }
+
   .site-header nav {
     border-radius: 18px;
     padding: 14px;
@@ -956,10 +1101,12 @@ html {
     right: 0;
     background: #101b25f5;
   }
+
   .site-header nav a {
     font-size: 13px;
     padding: 14px 18px;
   }
+
   .site-header .menu-toggle {
     background: #1d2c37;
     border: 1px solid #4f68743d;
@@ -967,34 +1114,42 @@ html {
     width: 44px;
     height: 44px;
   }
+
   .brand {
     font-size: 11px;
   }
+
   .laboratory-hero {
     margin-top: -76px;
     padding-top: 76px;
     min-height: auto;
   }
+
   .laboratory-inner {
     padding-top: 27px;
     min-height: auto;
     padding-bottom: 32px;
   }
+
   .laboratory-name {
     width: 100%;
   }
+
   .laboratory-name h1 {
     font-size: clamp(68px, 18vw, 105px);
     line-height: 0.91;
     font-variation-settings: "wdth" 110;
   }
-  .laboratory-name h1 > span + span {
+
+  .laboratory-name h1>span+span {
     margin-left: 35px;
   }
+
   .laboratory-role {
     margin-top: 22px;
     font-size: 14px;
   }
+
   .assembly-stage {
     position: relative;
     height: 350px;
@@ -1003,50 +1158,62 @@ html {
     top: auto;
     margin: -7px -12% -14px;
   }
+
   .assembly-label {
     right: 13%;
     top: 15px;
     font-size: 8px;
   }
+
   .assembly-label small {
     font-size: 9px;
   }
+
   .assembly-label-line {
     width: 30px;
   }
+
   .assembly-tools {
     bottom: 13px;
     right: 15%;
   }
+
   .assembly-tools span {
     font-size: 9px;
   }
+
   .assembly-tools button {
     width: 44px;
     height: 44px;
   }
+
   .laboratory-manifesto {
     position: relative;
     margin-top: 23px;
     max-width: 100%;
   }
-  .laboratory-manifesto > p {
+
+  .laboratory-manifesto>p {
     font-size: 15px;
     max-width: 34ch;
   }
+
   .ignition-link {
     margin-top: 18px;
     min-height: 52px;
     font-size: 13px;
   }
+
   .laboratory-about {
     font-size: 11px;
     margin-left: 12px;
   }
+
   .laboratory-selector {
     margin-top: 30px;
     padding: 8px 0;
   }
+
   .laboratory-selector button {
     padding: 10px 7px;
     justify-content: center;
@@ -1055,193 +1222,246 @@ html {
     text-align: center;
     min-height: 89px;
   }
-  .laboratory-selector button > svg {
+
+  .laboratory-selector button>svg {
     display: none;
   }
+
   .laboratory-selector strong {
     font-size: 16px;
   }
+
   .laboratory-selector small {
     display: none;
   }
+
   .selector-glyph {
     width: 24px;
   }
+
   .selector-glyph svg {
     width: 24px;
     height: 24px;
   }
+
   .laboratory-selector button[aria-pressed="true"]::after {
     bottom: -8px;
     left: 8px;
     right: 8px;
   }
+
   .laboratory-pipeline {
     grid-template-columns: 1fr;
     gap: 11px;
     padding-top: 20px;
   }
-  .pipeline-title > span {
+
+  .pipeline-title>span {
     font-size: 12px;
   }
+
   .pipeline-title small {
     display: none;
   }
+
   .pipeline-stage-list button {
     padding: 13px 2px 17px;
     font-size: 9px;
     letter-spacing: 0;
     min-height: 44px;
   }
+
   .entry-replay-container {
     top: 8px;
   }
+
   .entry-replay-container .replay {
     font-size: 8px;
   }
+
   .systems-section {
     padding-top: 66px;
   }
+
   .section-intro {
     grid-template-columns: 1fr;
     gap: 20px;
   }
+
   .section-intro h2 {
     font-size: 46px;
   }
+
   .section-intro p {
     font-size: 15px;
   }
+
   .project-feature {
     margin-top: 34px;
     gap: 20px;
   }
+
   .project-copy {
     padding: 0;
   }
+
   .project-copy h3 {
     font-size: 48px;
   }
+
   .project-number {
     margin-bottom: 12px;
   }
+
   .project-deck {
     font-size: 21px;
     margin-top: 14px;
   }
+
   .project-summary {
     margin-top: 16px;
     font-size: 15px;
   }
+
   .detection-art {
     min-height: 315px;
     border-radius: 16px;
   }
+
   .detection-art::before {
     width: 200px;
     height: 200px;
     left: calc(50% - 100px);
     top: 65px;
   }
+
   .hardware-feature {
     margin-top: 58px;
   }
+
   .hardware-feature .project-copy {
     padding: 0;
   }
+
   .hardware-art {
     min-height: 340px;
     border-radius: 16px;
   }
+
   .ic-visual {
     margin-top: 35px;
     padding-block: 25px;
   }
+
   .research-section {
     margin-top: 70px;
     padding-top: 30px;
   }
+
   .rangraph-feature {
     gap: 28px;
   }
+
   .rangraph-feature h2 {
     font-size: 42px;
   }
+
   .record-art {
     padding: 22px;
   }
+
   .supporting {
     padding-top: 65px;
   }
+
   .supporting h2 {
     font-size: 36px;
   }
+
   .site-footer {
-    margin-top: 65px;
+    margin-top: 0;
     padding-top: 40px;
   }
+
   .page-heading {
     padding-top: 24px;
     padding-bottom: 28px;
   }
+
   .page-heading h1 {
     font-size: clamp(42px, 12vw, 65px);
   }
+
   .instrument {
     border-radius: 12px;
   }
+
   .instrument-bar {
     font-size: 8px;
   }
+
   .stage-rail button {
     font-size: 11px;
   }
+
   .pipeline-rail button {
     font-size: 10px;
     min-height: 62px;
   }
+
   .input-control,
   .sensor-list button {
     min-height: 54px;
   }
+
   .graph-node {
     border-radius: 7px;
   }
 }
+
 @media (max-width: 365px) {
   .laboratory-about {
     display: flex;
     margin-left: 0;
     margin-top: 15px;
   }
+
   .assembly-stage {
     height: 300px;
   }
+
   .assembly-tools span {
     display: none;
   }
+
   .laboratory-name h1 {
     font-size: 18.3vw;
   }
 }
+
 @media (prefers-reduced-transparency: reduce) {
+
   .site-header nav,
   .assembly-tools button {
     backdrop-filter: none;
     background: #14212b;
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
+
   .ignition-link,
-  .detection-art > svg,
+  .detection-art>svg,
   .ic-visual {
     transition: none;
   }
+
   .ignition-link:hover,
-  .detection-art:hover > svg,
+  .detection-art:hover>svg,
   .hardware-art:hover .ic-visual {
     transform: none;
   }
+
   .ignition-link i {
     display: none;
   }
@@ -1253,17 +1473,21 @@ html {
   width: 100%;
   height: 380px;
 }
+
 .project-assembly .assembly-renderer {
   cursor: default;
 }
+
 .project-assembly .architecture-overview {
   margin: 0 auto;
 }
+
 .detection-art,
 .hardware-art {
   display: block;
   padding: 24px 24px 18px;
 }
+
 .detection-art .art-footer,
 .hardware-art .art-footer {
   position: static;
@@ -1272,23 +1496,27 @@ html {
   margin-top: 8px;
   color: #95b0bd;
 }
+
 .hardware-art .art-caption {
   position: static;
   display: flex;
   justify-content: space-between;
 }
+
 .architecture-overview {
   width: min(360px, 90%);
   margin: 0;
   color: #bbd7df;
 }
-.architecture-overview > strong {
+
+.architecture-overview>strong {
   display: block;
   font-family: "Anybody Variable", sans-serif;
   font-weight: 460;
   font-size: 26px;
   margin-bottom: 18px;
 }
+
 .architecture-overview ol {
   list-style: none;
   padding: 0;
@@ -1296,79 +1524,98 @@ html {
   display: grid;
   gap: 10px;
 }
+
 .architecture-overview li {
   padding: 7px 10px;
   border-bottom: 1px solid #355461;
   font-size: 13px;
 }
+
 .architecture-overview svg {
   display: block;
   width: 100%;
   height: auto;
   max-height: 190px;
 }
+
 .architecture-overview line {
   stroke: #63bfc6;
   stroke-width: 1.5;
 }
+
 .architecture-overview circle {
   fill: #101e29;
   stroke: #b99d73;
   stroke-width: 1.5;
 }
+
 .architecture-overview text {
   fill: #bed6de;
   font-size: 13px;
 }
+
 .architecture-overview figcaption {
   font-size: 11px;
   color: #a9bbc7;
   margin-top: 16px;
 }
+
 .assembly-stage:not(.scene-ready) .assembly-label {
   display: none;
 }
+
 .assembly-stage:not(.scene-ready) .assembly-tools {
   top: 8px;
   bottom: auto;
   right: 13%;
 }
+
 .research-head {
   justify-content: flex-end;
 }
+
 .section-intro h2 {
   grid-column: auto;
 }
+
 .work-row {
   grid-template-columns: 1fr;
 }
+
 .work-row p {
   grid-column: 1;
 }
+
 @media (max-width: 760px) {
   .laboratory-inner {
     padding-top: 24px;
     padding-bottom: 18px;
   }
+
   .laboratory-name h1 {
     font-size: 15vw;
   }
-  .laboratory-name h1 > span + span {
+
+  .laboratory-name h1>span+span {
     margin-left: 23px;
   }
+
   .laboratory-role {
     margin-top: 12px;
     font-size: 12px;
     line-height: 1.5;
   }
+
   .laboratory-manifesto {
     margin-top: 14px;
   }
-  .laboratory-manifesto > p {
+
+  .laboratory-manifesto>p {
     font-size: 14px;
     line-height: 1.5;
     max-width: none;
   }
+
   .ignition-link {
     margin-top: 12px;
     min-height: 48px;
@@ -1376,106 +1623,133 @@ html {
     font-size: 12px;
     gap: 11px;
   }
+
   .ignition-symbol {
     width: 34px;
     height: 34px;
   }
+
   .laboratory-about {
     font-size: 10px;
     margin-top: 0;
     margin-left: 10px;
   }
+
   .assembly-stage {
     height: 230px;
     margin-top: -5px;
     margin-bottom: -8px;
   }
+
   .assembly-label {
     right: 13%;
     top: 8px;
   }
+
   .assembly-label small {
     font-size: 8px;
   }
+
   .assembly-tools {
     right: 13%;
     bottom: 1px;
   }
+
   .assembly-tools button {
     width: 44px;
     height: 44px;
   }
+
   .assembly-tools span {
     font-size: 8px;
   }
+
   .laboratory-selector {
     margin-top: 18px;
     padding-block: 4px;
   }
+
   .laboratory-selector button {
     min-height: 64px;
     padding-block: 7px;
     gap: 4px;
   }
+
   .laboratory-selector strong {
     font-size: 14px;
   }
+
   .selector-glyph svg {
     width: 20px;
     height: 20px;
   }
+
   .laboratory-selector button[aria-pressed="true"]::after {
     bottom: -4px;
   }
+
   .laboratory-pipeline {
     padding-top: 14px;
     gap: 6px;
   }
+
   .pipeline-stage-list button {
     min-height: 44px;
     padding-bottom: 12px;
   }
+
   .project-assembly {
     height: 260px;
   }
+
   .detection-art,
   .hardware-art {
     min-height: auto;
     padding: 19px 14px;
   }
+
   .architecture-overview {
     width: 80%;
   }
-  .assembly-fallback .architecture-overview > strong {
+
+  .assembly-fallback .architecture-overview>strong {
     font-size: 20px;
     margin-bottom: 7px;
   }
+
   .assembly-fallback .architecture-overview ol {
     gap: 0;
     grid-template-columns: 1fr 1fr;
   }
+
   .assembly-fallback .architecture-overview li {
     font-size: 10px;
     padding: 7px;
   }
+
   .assembly-fallback .architecture-overview svg {
     height: 130px;
     max-height: 130px;
   }
+
   .assembly-fallback .architecture-overview text {
     font-size: 18px;
   }
+
   .architecture-overview figcaption {
     margin-top: 10px;
   }
 }
+
 @media (max-width: 365px) {
   .laboratory-name h1 {
     font-size: 15.8vw;
   }
+
   .assembly-stage {
     height: 220px;
   }
+
   .laboratory-about {
     display: inline-flex;
     margin-left: 8px;

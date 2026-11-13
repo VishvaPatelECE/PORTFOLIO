@@ -1,4 +1,4 @@
-/* Runway provides 320vh of natural scroll distance */
+﻿/* Runway provides 320vh of natural scroll distance */
 .runway {
   position: relative;
   width: 100%;
@@ -138,16 +138,14 @@
 }
 
 .panel {
-  --bounce: linear(
-    0 0%, 0.4214 6.61%, 0.5762 9.59%,
-    0.7047 12.55%, 0.8115 15.61%,
-    0.8964 18.78%, 0.9614 22.13%,
-    1.0078 25.74%, 1.0282 28.18%,
-    1.0422 30.82%, 1.0503 33.7%,
-    1.0527 36.95%, 1.0468 42.53%,
-    1.015 58.45%, 1.0045 67.2%,
-    0.9987 80.44%, 1 100%
-  );
+  --bounce: linear(0 0%, 0.4214 6.61%, 0.5762 9.59%,
+      0.7047 12.55%, 0.8115 15.61%,
+      0.8964 18.78%, 0.9614 22.13%,
+      1.0078 25.74%, 1.0282 28.18%,
+      1.0422 30.82%, 1.0503 33.7%,
+      1.0527 36.95%, 1.0468 42.53%,
+      1.015 58.45%, 1.0045 67.2%,
+      0.9987 80.44%, 1 100%);
   --distance: 15%;
   position: relative;
   border-radius: 20px;
@@ -200,12 +198,10 @@
 .scrimOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(8, 7, 11, 0.35) 0%,
-    rgba(8, 7, 11, 0.05) 35%,
-    rgba(8, 7, 11, 0.9) 85%
-  );
+  background: linear-gradient(180deg,
+      rgba(8, 7, 11, 0.35) 0%,
+      rgba(8, 7, 11, 0.05) 35%,
+      rgba(8, 7, 11, 0.9) 85%);
 }
 
 /* Collapsed Bar */
@@ -438,32 +434,39 @@
   .runway {
     height: auto;
   }
+
   .stickyStage {
     position: relative;
     top: 0;
     height: auto;
     padding: 20px 16px;
   }
+
   .accordionContainer {
     flex-direction: column;
     max-height: none;
     height: auto;
   }
+
   .panelActive {
     height: 480px;
   }
+
   .panelCollapsed {
     height: 64px;
   }
+
   .collapsedBar {
     flex-direction: row;
     padding: 14px 20px;
   }
+
   .collapsedTitle {
     writing-mode: horizontal-tb;
     transform: none;
     font-size: 17px;
   }
+
   .tabNav {
     display: none;
   }

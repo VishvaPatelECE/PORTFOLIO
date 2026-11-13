@@ -1,7 +1,42 @@
 .reference-home .signal-composition { min-height:min(880px,100svh); padding-bottom:28px; }
 .project-cards-section { position:relative; isolation:isolate; overflow-x:clip; background:var(--bg); padding-top:20px; padding-bottom:64px; }
-.project-tubes-field { position:sticky; top:0; height:100svh; width:100vw; margin-left:calc(50% - 50vw); margin-bottom:-100svh; z-index:0; pointer-events:none; overflow:hidden; background:#08070b; }
-.project-tubes-field iframe { display:block; width:100%; height:100%; border:0; }
+
+/* Discovery tubes continuous sticky viewport */
+.discovery-tubes-wrapper {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+.discovery-tubes-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(8, 7, 11, 0.4) 40%, rgba(8, 7, 11, 0.85) 80%, var(--bg, #08070b) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.discovery-tubes-track {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: clip;
+}
+.discovery-tubes-track > .project-tubes-field {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100svh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.project-tubes-field { position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+.project-tubes-field iframe { display:block; width:100%; height:100%; border:0; pointer-events:none; }
 .project-cards-heading { position:relative; display:flex; justify-content:space-between; align-items:end; gap:28px; margin-bottom:20px; }
 .project-cards-heading h2 { font-size:clamp(40px,5.5vw,72px); font-weight:440; letter-spacing:-.035em; }
 .project-cards-heading h2 > span { color:var(--gold); }

@@ -1,0 +1,317 @@
+/* ==========================================================================
+   PROJECT HERO: Full-Bleed Editorial Split Horizon Hero
+   Unenclosed, starts at absolute top of the page (top: 0), zero card borders.
+   Left column editorial typography, right column feather-masked artwork.
+   Zero numbering watermark, zero paradigm switcher pills.
+   ========================================================================== */
+
+.heroWrapper {
+  position: relative;
+  width: 100%;
+  min-height: clamp(520px, 68vh, 720px);
+  background: var(--bg, #08070b);
+  overflow: hidden;
+  isolation: isolate;
+  margin: 0 0 clamp(48px, 6vh, 80px) 0;
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   HERO STAGE (Full-bleed canvas, zero card constraints)
+   -------------------------------------------------------------------------- */
+.stage {
+  position: relative;
+  width: 100%;
+  min-height: clamp(520px, 68vh, 720px);
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------
+   RIGHT COLUMN FULL-HEIGHT ARTWORK WITH SOFT FEATHER GRADIENT
+   -------------------------------------------------------------------------- */
+.imageViewport {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: clamp(28%, 36vw, 44%);
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.5) 22%, black 50%),
+              linear-gradient(to bottom, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.5) 22%, black 50%),
+                      linear-gradient(to bottom, black 80%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center 38%;
+  transform: scale(1.02);
+  opacity: 0.82;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.6s ease;
+  will-change: transform;
+  view-transition-name: project-cover-morph;
+}
+
+.stage:hover .heroImage {
+  transform: scale(1.04);
+}
+
+/* --------------------------------------------------------------------------
+   AMBIENT OBSIDIAN GRADIENT SCRIM (Guarantees perfect text contrast)
+   -------------------------------------------------------------------------- */
+.scrimLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 15% 50%,
+    rgba(8, 7, 11, 0.95) 0%,
+    rgba(8, 7, 11, 0.72) 45%,
+    transparent 82%
+  ),
+  linear-gradient(
+    180deg,
+    rgba(8, 7, 11, 0.45) 0%,
+    transparent 24%,
+    transparent 68%,
+    #08070b 100%
+  );
+}
+
+/* --------------------------------------------------------------------------
+   INNER CONTAINER (Aligned to luxurious max-width with generous top clearance)
+   -------------------------------------------------------------------------- */
+.innerContainer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: clamp(96px, 12vh, 132px) clamp(24px, 5vw, 64px) clamp(44px, 6vh, 68px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: clamp(520px, 68vh, 720px);
+}
+
+.splitLeftCol {
+  max-width: 820px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* --------------------------------------------------------------------------
+   TOP BREADCRUMBS ROW (Return to index / External / All projects)
+   -------------------------------------------------------------------------- */
+.navRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(232, 224, 210, 0.75);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navLink:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(185, 157, 115, 0.35);
+  transform: translateX(-2px);
+}
+
+.navLink[data-theme="cyan"]:hover {
+  border-color: rgba(0, 174, 189, 0.5);
+}
+
+.navLink[data-theme="gold"]:hover {
+  border-color: rgba(185, 157, 115, 0.6);
+}
+
+/* --------------------------------------------------------------------------
+   EDITORIAL TITLE & THESIS CLUSTER
+   -------------------------------------------------------------------------- */
+.titleCluster {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--gold, #b99d73);
+  text-transform: uppercase;
+}
+
+.kickerBeacon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00aebd;
+  box-shadow: 0 0 10px #00aebd;
+  animation: beaconPulse 2.2s infinite ease-in-out;
+}
+
+@keyframes beaconPulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.4); opacity: 1; }
+}
+
+.projectTitle {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(56px, 7.5vw, 98px);
+  font-weight: 480;
+  letter-spacing: -0.04em;
+  line-height: 1.0;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.85);
+}
+
+.projectSubtitle {
+  font-size: clamp(15px, 1.35vw, 18.5px);
+  line-height: 1.58;
+  color: rgba(232, 224, 210, 0.9);
+  margin: 0;
+  max-width: 680px;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+}
+
+/* --------------------------------------------------------------------------
+   ARCHITECTURE / TECH CHIPS CLUSTER
+   -------------------------------------------------------------------------- */
+.tagCluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.tagChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.22s ease;
+}
+
+/* Cyan accent (RANGraph, DARVS) — Matches project card border: rgba(0, 174, 189, 0.45) */
+.tagChip[data-theme="cyan"],
+.tagChip:not([data-theme="gold"]) {
+  background: rgba(0, 174, 189, 0.08);
+  border: 1px solid rgba(0, 174, 189, 0.45);
+  color: #e6f7f9;
+}
+
+.tagChip[data-theme="cyan"]:hover,
+.tagChip:not([data-theme="gold"]):hover {
+  background: rgba(0, 174, 189, 0.16);
+  border-color: rgba(0, 174, 189, 0.7);
+  color: #ffffff;
+}
+
+.tagChip[data-theme="cyan"] .tagDot,
+.tagChip:not([data-theme="gold"]) .tagDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #00aebd;
+  box-shadow: 0 0 6px #00aebd;
+}
+
+/* Gold accent (USMHACS, GraphMARL) — Matches project card border: rgba(185, 157, 115, 0.5) */
+.tagChip[data-theme="gold"] {
+  background: rgba(185, 157, 115, 0.12);
+  border: 1px solid rgba(185, 157, 115, 0.5);
+  color: #f3ece1;
+}
+
+.tagChip[data-theme="gold"]:hover {
+  background: rgba(185, 157, 115, 0.2);
+  border-color: rgba(185, 157, 115, 0.8);
+  color: #ffffff;
+}
+
+.tagChip[data-theme="gold"] .tagDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #b99d73;
+  box-shadow: 0 0 6px #b99d73;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE LAYOUT (Mobile & Tablet)
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .heroWrapper,
+  .stage,
+  .innerContainer {
+    min-height: auto;
+  }
+
+  .innerContainer {
+    padding: 96px 20px 40px;
+  }
+
+  .imageViewport {
+    left: 0;
+    opacity: 0.35;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  }
+
+  .splitLeftCol {
+    max-width: 100%;
+  }
+
+  .projectTitle {
+    font-size: clamp(40px, 11vw, 56px);
+  }
+
+  .projectSubtitle {
+    font-size: 15px;
+  }
+}

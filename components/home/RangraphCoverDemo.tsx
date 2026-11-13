@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import { motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, Pause, Play } from "lucide-react";
 import type { GraphSequence, RanGraph } from "@/lib/rangraph";
@@ -50,9 +50,13 @@ function GraphArtwork({ graph, compact, animated, handoverUe }: { graph: RanGrap
   </svg>;
 }
 
+const emptySubscribe = () => () => {};
+
 export default function RangraphCoverDemo({ sequence }: { sequence: GraphSequence }) {
   const cover = useRef<HTMLElement>(null);
+  const isHydrated = useSyncExternalStore(emptySubscribe, () => true, () => false);
   const reduced = useReducedMotion(), visible = useInView(cover, { amount: .05 });
+  const effectiveReduced = isHydrated ? !!reduced : false;
   const { paused, setPaused } = useHomeMotion();
   const [time, setTime] = useState(0), [instant, setInstant] = useState(true), [hidden, setHidden] = useState(false), [focused, setFocused] = useState(false);
   const { scrollYProgress } = useScroll({ target: cover, offset: ["start end", "start .2"] });
@@ -72,7 +76,7 @@ export default function RangraphCoverDemo({ sequence }: { sequence: GraphSequenc
     <div className={styles.container}>
       <header className={styles.pageHeading}>
         <h1>Selected work<span>.</span></h1>
-        <button className={styles.pause} onClick={() => setPaused(!paused)} aria-pressed={paused} aria-label={paused ? "Resume demo motion" : "Pause demo motion"} disabled={!!reduced}>{paused ? <Play size={16} /> : <Pause size={16} />}<span>{paused ? "Resume motion" : "Pause motion"}</span></button>
+        <button className={styles.pause} onClick={() => setPaused(!paused)} aria-pressed={paused} aria-label={paused ? "Resume demo motion" : "Pause demo motion"} disabled={effectiveReduced}>{paused ? <Play size={16} /> : <Pause size={16} />}<span>{paused ? "Resume motion" : "Pause motion"}</span></button>
       </header>
       <article ref={cover} className={styles.cover} data-motion-enabled={enabled}>
         <Link className={styles.coverLink} href="/rangraph" prefetch={false} aria-label="Open RANGraph project" onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}>

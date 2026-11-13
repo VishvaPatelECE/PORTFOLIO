@@ -1,0 +1,565 @@
+/* ==========================================================================
+   Experience Section — Premium Card with Stable Golden Neon Border
+   Exact X-Axis Alignment with Skills & Projects (max-width: 1380px, padding: 0 24px)
+   Originkit Glass Buttons, Dynamic Variable Typography, Clean Seamless Interior
+   ========================================================================== */
+
+.section {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  min-height: auto;
+  padding: clamp(60px, 8vh, 100px) 0 clamp(70px, 9vh, 110px);
+  background: transparent;
+  outline: none;
+  scroll-margin-top: 0;
+}
+
+/* Atmosphere Aura synced with Projects */
+.ambientAura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1200px;
+  height: 600px;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 55% 45%,
+    rgba(0, 174, 189, 0.16) 0%,
+    rgba(185, 157, 115, 0.06) 45%,
+    rgba(8, 7, 11, 0) 70%
+  );
+  opacity: 0.55;
+  z-index: 1;
+}
+
+/* Container: Exact same max-width and padding as Skills & Projects */
+.stageInner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 0 24px;
+}
+
+/* Section Header: Title only with protective ambient depth */
+.heading {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.headingLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionTitle {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(38px, 4.5vw, 64px);
+  font-weight: 480;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text, #e8e0d2);
+  margin: 0;
+  cursor: default;
+}
+
+.titleDot {
+  color: var(--gold, #b99d73);
+}
+
+/* Experience Card Container with Golden Neon Border matching Skills & Projects */
+.experienceCard {
+  position: relative;
+  border-radius: 24px;
+  background: rgba(12, 12, 16, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: clamp(28px, 3.5vw, 42px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  isolation: isolate;
+  overflow: visible;
+  transition:
+    background-color 0.4s var(--ease),
+    border-color 0.4s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+
+.experienceCard.cardActive {
+  background-color: rgba(16, 16, 22, 0.96);
+  border-color: rgba(185, 157, 115, 0.35);
+  box-shadow: 0 0 35px rgba(185, 157, 115, 0.12), 0 24px 60px rgba(0, 0, 0, 0.65);
+}
+
+/* Card Content: layered above the border host */
+.cardContent {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Header Row: Left role/affiliation stack, Right date/location stack */
+.entryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.roleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 68ch;
+}
+
+/* Role Title using Cakra font matching Skills Cards (Static, no roll animation) */
+.roleTitle {
+  font-family: "Cakra", sans-serif;
+  font-size: clamp(28px, 2.5vw, 36px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0;
+}
+
+.affiliationBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+/* Department in Cyan */
+.deptName {
+  font-family: "Recursive Variable", sans-serif;
+  font-variation-settings: "MONO" 0, "CASL" 0;
+  font-size: clamp(14.5px, 1.1vw, 16px);
+  font-weight: 500;
+  color: var(--signal, #00aebd);
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* Institution */
+.instituteName {
+  font-family: "Recursive Variable", sans-serif;
+  font-variation-settings: "MONO" 0, "CASL" 0;
+  font-size: clamp(17.5px, 1.35vw, 21px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--gold, #b99d73);
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Meta Block on Right:
+   Line 1: May 2026 - July 2026 (white, bold)
+   Line 2: Surat, Gujarat (same size as May-July, golden, center aligned)
+*/
+.metaBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .metaBlock {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+.dateRangeWhite {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(16px, 1.25vw, 18.5px);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Surat, Gujarat: Same size as may july, golden, mixed case, center aligned */
+.locationGold {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(16px, 1.25vw, 18.5px); /* Same size as may july */
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--gold, #b99d73);
+  text-transform: none; /* Not all uppercase */
+  margin: 0;
+  line-height: 1.25;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Subsections: Research Focus & Key Contributions (White display styling) */
+.sectionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subheadLabel {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(17px, 1.25vw, 20px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.25;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+}
+
+.subheadDot {
+  color: var(--gold, #b99d73);
+}
+
+/* Research Focus Body: Prevents 'networks.' from wrapping to next line */
+.overviewText {
+  font-family: "Recursive Variable", sans-serif;
+  font-variation-settings: "MONO" 0, "CASL" 0;
+  font-size: clamp(15px, 1.12vw, 16.5px);
+  line-height: 1.55;
+  color: rgba(232, 224, 210, 0.9);
+  margin: 0;
+  max-width: 100%;
+}
+
+@media (min-width: 960px) {
+  .overviewText {
+    white-space: nowrap;
+  }
+}
+
+/* Three Key Contribution Points: Golden bullet dots */
+.bulletList {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bulletItem {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 2px 0;
+  margin: 0;
+}
+
+.bulletDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold, #b99d73);
+  flex-shrink: 0;
+  transform: translateY(-2px);
+  box-shadow: 0 0 8px rgba(185, 157, 115, 0.7);
+}
+
+.bulletText {
+  font-family: "Recursive Variable", sans-serif;
+  font-variation-settings: "MONO" 0, "CASL" 0;
+  font-size: clamp(14.5px, 1.08vw, 16px);
+  font-weight: 480;
+  color: rgba(232, 224, 210, 0.88);
+  margin: 0;
+  line-height: 1.5;
+  transition: color 0.2s ease;
+}
+
+.bulletItem:hover .bulletText {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Originkit-Inspired High-Tech Glass Buttons
+   Capsule silhouette, multi-layer refractive borders, dynamic hover flaring
+   ========================================================================== */
+
+.actionsRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+  padding-top: 10px;
+  border-top: none;
+  width: 100%;
+}
+
+/* Primary Button: Obsidian Cyan Glass Capsule with Travelling Flare */
+.exploreBtn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 26px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(0, 174, 189, 0.16) 0%, rgba(6, 20, 26, 0.88) 100%);
+  border: 1px solid rgba(0, 174, 189, 0.42);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.45),
+    inset 0 1px 1px rgba(255, 255, 255, 0.22),
+    inset 0 0 16px rgba(0, 174, 189, 0.12);
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.28s ease,
+    background 0.28s ease,
+    box-shadow 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Top Specular Edge Flare */
+.exploreBtn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 0.25s ease, left 0.3s ease, right 0.3s ease;
+}
+
+.exploreBtn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(0, 210, 229, 0.26) 0%, rgba(4, 28, 36, 0.94) 100%);
+  border-color: rgba(0, 210, 229, 0.85);
+  box-shadow:
+    0 10px 32px rgba(0, 174, 189, 0.4),
+    0 0 24px rgba(0, 210, 229, 0.25),
+    inset 0 1px 2px rgba(255, 255, 255, 0.45),
+    inset 0 0 20px rgba(0, 210, 229, 0.2);
+}
+
+.exploreBtn:hover::before {
+  opacity: 1;
+  left: 8%;
+  right: 8%;
+}
+
+.exploreBtn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btnText {
+  font-family: var(--font-mono, monospace);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e6fcff;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.exploreBtn:hover .btnText {
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(0, 210, 229, 0.6);
+}
+
+.btnIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0, 174, 189, 0.25);
+  border: 1px solid rgba(0, 174, 189, 0.5);
+  color: #00e5ff;
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.exploreBtn:hover .btnIconWrap {
+  transform: translateX(3px);
+  background: rgba(0, 210, 229, 0.4);
+  border-color: #00e5ff;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 210, 229, 0.5);
+}
+
+/* Secondary Button: Warm Gold Frosted Glass Capsule */
+.certBtn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(185, 157, 115, 0.08) 0%, rgba(18, 16, 20, 0.78) 100%);
+  border: 1px solid rgba(185, 157, 115, 0.28);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.28s ease,
+    background 0.28s ease,
+    box-shadow 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.certBtn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(185, 157, 115, 0.45), transparent);
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity 0.25s ease, left 0.3s ease, right 0.3s ease;
+}
+
+.certBtn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(185, 157, 115, 0.18) 0%, rgba(28, 24, 28, 0.92) 100%);
+  border-color: rgba(185, 157, 115, 0.65);
+  box-shadow:
+    0 10px 28px rgba(185, 157, 115, 0.25),
+    0 0 16px rgba(185, 157, 115, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.25);
+}
+
+.certBtn:hover::before {
+  opacity: 1;
+  left: 10%;
+  right: 10%;
+}
+
+.certBtn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.certBtn .btnText {
+  font-family: var(--font-mono, monospace);
+  font-size: 12.5px;
+  font-weight: 550;
+  letter-spacing: 0.05em;
+  color: #ded6c8;
+  transition: color 0.2s ease;
+}
+
+.certBtn:hover .btnText {
+  color: #ffffff;
+}
+
+.btnIconWrapGold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold, #b99d73);
+  transition: color 0.25s ease;
+}
+
+.certBtn:hover .btnIconWrapGold {
+  color: #f7e7cf;
+}
+
+.certArrow {
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  color: var(--gold, #b99d73);
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.25s ease;
+}
+
+.certBtn:hover .certArrow {
+  transform: translate(2px, -2px);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Option 3: Minimalist Editorial Certificate Link (Selected)
+   ========================================================================== */
+
+.editorialCertLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0 6px 0;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(13.5px, 1.05vw, 15px);
+  font-weight: 550;
+  letter-spacing: 0.04em;
+  color: #ded6c8;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.editorialCertLink::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: auto;
+  width: 42%;
+  height: 1.5px;
+  background: var(--gold, #b99d73);
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.editorialCertLink:hover {
+  color: #ffffff;
+}
+
+.editorialCertLink:hover::after {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(185, 157, 115, 0.7);
+}
+
+.editorialArrow {
+  font-size: 14px;
+  color: var(--gold, #b99d73);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.2s ease;
+}
+
+.editorialCertLink:hover .editorialArrow {
+  transform: translate(3px, -2px);
+  color: #ffffff;
+}
+

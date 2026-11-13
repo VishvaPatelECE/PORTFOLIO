@@ -53,6 +53,12 @@ const cloudShader = {
  * Live Clouds with Three.js
  * Merged plane geometries with custom fog / depth shader.
  * Shaded in warm gold, amber, and ivory to seamlessly harmonize with the hero flow-field and dark void palette.
+ *
+ * Performance optimisations:
+ * - IntersectionObserver pauses the render loop when the canvas is off-screen.
+ * - visibilitychange pauses when the tab is hidden.
+ * - WebGL context-loss is handled gracefully.
+ * - Only one animation frame is ever queued at a time.
  */
 export default function ThreeCloudCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -63,6 +69,10 @@ export default function ThreeCloudCanvas() {
 
     let animId = 0;
     let disposed = false;
+    /** True when the canvas is visible on-screen AND the tab is in the foreground. */
+    let isVisible = false;
+    /** True once the scene geometry is built and ready to render. */
+    let sceneReady = false;
 
     let width = container.clientWidth || window.innerWidth;
     let height = container.clientHeight || 500;
@@ -80,7 +90,7 @@ export default function ThreeCloudCanvas() {
     });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(width, height);
-    renderer.setClearColor(0x08070b, 1);
+    renderer.setClearColor(0x000000, 1);
     container.appendChild(renderer.domElement);
 
     const fog = new THREE.Fog(0x08070b, -100, 3000);
@@ -100,6 +110,78 @@ export default function ThreeCloudCanvas() {
     let mergedGeo: THREE.BufferGeometry | null = null;
     let shaderMat: THREE.ShaderMaterial | null = null;
     let loadedTexture: THREE.Texture | null = null;
+
+    /* ------------------------------------------------------------------ */
+    /*  Render-loop control: start / stop                                 */
+    /* ------------------------------------------------------------------ */
+
+    /** Start the render loop only if visible, scene is ready, and not already running. */
+    function startLoop() {
+      if (disposed || !isVisible || !sceneReady || animId !== 0) return;
+      animate();
+    }
+
+    /** Stop the render loop by cancelling the queued frame. */
+    function stopLoop() {
+      if (animId !== 0) {
+        cancelAnimationFrame(animId);
+        animId = 0;
+      }
+    }
+
+    /* ------------------------------------------------------------------ */
+    /*  IntersectionObserver: off-screen → pause                          */
+    /* ------------------------------------------------------------------ */
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const wasVisible = isVisible;
+        // Consider visible if any part intersects AND the document is visible
+        isVisible = entry.isIntersecting && document.visibilityState === "visible";
+        if (isVisible && !wasVisible) startLoop();
+        else if (!isVisible && wasVisible) stopLoop();
+      },
+      { threshold: 0 }
+    );
+    observer.observe(container);
+
+    /* ------------------------------------------------------------------ */
+    /*  visibilitychange: tab hidden → pause                             */
+    /* ------------------------------------------------------------------ */
+
+    function onVisibilityChange() {
+      if (document.visibilityState === "hidden") {
+        isVisible = false;
+        stopLoop();
+      } else {
+        // Re-check intersection — the observer callback won't fire on its own
+        // when the tab becomes visible again, so we optimistically resume
+        // and let the observer correct if the element scrolled off-screen.
+        isVisible = true;
+        startLoop();
+      }
+    }
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
+    /* ------------------------------------------------------------------ */
+    /*  WebGL context loss / restore                                      */
+    /* ------------------------------------------------------------------ */
+
+    function onContextLost(event: Event) {
+      event.preventDefault();
+      stopLoop();
+    }
+
+    function onContextRestored() {
+      if (isVisible && sceneReady) startLoop();
+    }
+
+    renderer.domElement.addEventListener("webglcontextlost", onContextLost);
+    renderer.domElement.addEventListener("webglcontextrestored", onContextRestored);
+
+    /* ------------------------------------------------------------------ */
+    /*  Texture load + scene build                                        */
+    /* ------------------------------------------------------------------ */
 
     const tLoader = new THREE.TextureLoader();
     tLoader.load(
@@ -168,13 +250,18 @@ export default function ThreeCloudCanvas() {
         scene.add(mergedMesh1);
         scene.add(mergedMesh2);
 
-        animate();
+        sceneReady = true;
+        startLoop();
       },
       undefined,
       (err) => {
         console.error("Failed to load /cloud10.png texture", err);
       }
     );
+
+    /* ------------------------------------------------------------------ */
+    /*  Input listeners                                                   */
+    /* ------------------------------------------------------------------ */
 
     function onDocumentMouseMove(event: MouseEvent) {
       mouseX = (event.clientX - windowHalfX) * 0.25;
@@ -193,8 +280,15 @@ export default function ThreeCloudCanvas() {
       renderer.setSize(width, height);
     }
 
+    /* ------------------------------------------------------------------ */
+    /*  Animation loop                                                    */
+    /* ------------------------------------------------------------------ */
+
     function animate() {
-      if (disposed) return;
+      if (disposed || !isVisible) {
+        animId = 0;
+        return;
+      }
       animId = requestAnimationFrame(animate);
 
       const elapsed = (Date.now() - start_time) * 0.001;
@@ -215,9 +309,19 @@ export default function ThreeCloudCanvas() {
     window.addEventListener("mousemove", onDocumentMouseMove, false);
     window.addEventListener("resize", onWindowResize, false);
 
+    /* ------------------------------------------------------------------ */
+    /*  Cleanup                                                           */
+    /* ------------------------------------------------------------------ */
+
     return () => {
       disposed = true;
-      cancelAnimationFrame(animId);
+      stopLoop();
+
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      renderer.domElement.removeEventListener("webglcontextlost", onContextLost);
+      renderer.domElement.removeEventListener("webglcontextrestored", onContextRestored);
+
       window.removeEventListener("mousemove", onDocumentMouseMove);
       window.removeEventListener("resize", onWindowResize);
 

@@ -1,0 +1,224 @@
+.section {
+  padding: 64px 0 80px;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.container {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header {
+  margin-bottom: 44px;
+  max-width: 760px;
+}
+
+.kicker {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--gold, #b99d73);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(34px, 3.6vw, 48px);
+  font-weight: 440;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+  color: var(--text, #e8e0d2);
+  margin: 0 0 16px;
+}
+
+.title span {
+  color: var(--gold, #b99d73);
+}
+
+.subtitle {
+  font-family: "Recursive Variable", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted, #afaea2);
+  margin: 0;
+}
+
+/* 3-Phase Continuum */
+.flowStages {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.stageCard {
+  position: relative;
+  background: rgba(12, 20, 27, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stageTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.phaseTag {
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--gold, #b99d73);
+}
+
+.systemTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11.5px;
+  color: var(--signal, #00aebd);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.systemTag:hover {
+  text-decoration: underline;
+}
+
+.stageTitle {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(19px, 1.7vw, 23px);
+  font-weight: 480;
+  letter-spacing: -0.02em;
+  color: var(--text, #e8e0d2);
+  margin: 0 0 20px;
+  line-height: 1.2;
+}
+
+.stageSpec {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(8, 7, 11, 0.5);
+  padding: 14px 16px;
+  border-left: 2px solid rgba(255, 255, 255, 0.12);
+  margin-top: auto;
+}
+
+.specRow {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 10px;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.specKey {
+  font-family: var(--font-mono, monospace);
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  color: var(--muted, #afaea2);
+  padding-top: 1px;
+}
+
+.specVal {
+  color: var(--text, #e8e0d2);
+}
+
+.flowConnector {
+  display: none;
+}
+
+/* Invariant Matrix Table */
+.matrixWrapper {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 36px;
+}
+
+.matrixHeading {
+  margin-bottom: 20px;
+}
+
+.matrixKicker {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--signal, #00aebd);
+  margin-bottom: 6px;
+}
+
+.matrixHeading h4 {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: 20px;
+  font-weight: 480;
+  color: var(--text, #e8e0d2);
+  margin: 0;
+}
+
+.tableResponsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.matrixTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  text-align: left;
+}
+
+.matrixTable th {
+  font-family: var(--font-mono, monospace);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  color: var(--muted, #afaea2);
+  text-transform: uppercase;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.matrixTable td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text, #e8e0d2);
+  line-height: 1.45;
+}
+
+.tdDomain {
+  font-weight: 500;
+  color: var(--text, #e8e0d2);
+}
+
+.tdCode {
+  font-family: var(--font-mono, monospace);
+  font-size: 11.5px;
+  color: var(--gold, #b99d73);
+}
+
+.tdRule {
+  color: var(--muted, #afaea2);
+}
+
+.tdTarget {
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  color: var(--signal, #00aebd);
+}
+
+@media (max-width: 960px) {
+  .flowStages {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}

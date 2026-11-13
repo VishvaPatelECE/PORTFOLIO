@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import * as THREE from "three";
 import { featuredProjects } from "@/lib/content/projects";
@@ -118,7 +118,7 @@ export default function DepthGalleryDemo() {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [scrollVelocity, setScrollVelocity] = useState(0);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [, setScrollProgress] = useState(0);
 
   const targetProgress = useRef(0);
   const currentProgress = useRef(0);

@@ -3,6 +3,7 @@
 // Non Commercial — You may not use the material for commercial purposes.
 import TubesCursor from "https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js"
 
+// Tubes locked to constant portfolio color scheme: Laboratory Gold, Signal Cyan, Ivory
 const app = TubesCursor(document.getElementById('canvas'), {
   tubes: {
     colors: ["#b99d73", "#00aebd", "#e8e0d2"],
@@ -13,16 +14,6 @@ const app = TubesCursor(document.getElementById('canvas'), {
   }
 })
 
-document.body.addEventListener('click', () => {
-  const colors = randomColors(3)
-  const lightsColors = randomColors(4)
-  console.log(colors, lightsColors)
-  app.tubes.setColors(colors)
-  app.tubes.setLightsColors(lightsColors)
-})
-
-function randomColors (count) {
-  return new Array(count)
-    .fill(0)
-    .map(() => "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'))
+if (app?.three?.renderer) {
+  app.three.renderer.setClearColor(0x08070b, 1);
 }

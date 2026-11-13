@@ -1,6 +1,6 @@
 export const featuredProjects = [
   { name: "RANGraph", field: "Wireless & representation", line: "Making data mean something.", href: "/rangraph", kind: "wireless", action: "Open project" },
-  { name: "GraphMARL", field: "Research in progress", line: "Project details coming soon.", href: "/graphmarl", kind: "research", action: "View research status" },
+  { name: "GraphMARL", field: "Multi-Agent RL · Wireless", line: "Graph representations and decentralized decision-making for connected mobility.", href: "/graphmarl", kind: "research", action: "Open project" },
   { name: "DARVS", field: "Vision & identity", line: "Presence before permission.", href: "/darvs", kind: "vision", action: "Open project" },
   { name: "USMHACS", field: "Hardware & control", line: "Trust the logic. Test the failure.", href: "/usmhacs", kind: "hardware", action: "Open project" },
 ] as const;

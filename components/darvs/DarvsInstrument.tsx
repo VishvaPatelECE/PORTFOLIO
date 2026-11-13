@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useReducer, useState } from "react";
+import { darvsPreviewReducer, initialDarvsPreview, previewChallenges } from "@/lib/models/darvsPreview";
 import { darvsStages } from "@/lib/content/darvs";
 import {
   ArrowRight,
@@ -13,13 +14,14 @@ const stages = darvsStages;
 const stageIcons = { MTCNN: ScanFace, LIVENESS: ScanLine, FACENET: Fingerprint, DECISION: ShieldCheck } as const;
 export default function DarvsInstrument() {
   const [stage, setStage] = useState(0);
-  const [present, setPresent] = useState(true);
-  const [challenge, setChallenge] = useState(0);
-  const [live, setLive] = useState(true);
-  const [match, setMatch] = useState(false);
+  const [state, dispatch] = useReducer(darvsPreviewReducer, initialDarvsPreview);
+  const present = state.region;
+  const challenge = state.responses;
+  const live = present && challenge === previewChallenges.length;
+  const match = state.match;
   const current = stages[stage];
   const Icon = stageIcons[current.name];
-  const challenges = ["TURN LEFT", "LOOK UP", "BLINK"];
+  const challenges = previewChallenges;
   return (
     <section className="instrument darvs-instrument">
       <div className="instrument-bar mono">
@@ -60,7 +62,7 @@ export default function DarvsInstrument() {
                   {present ? "FACE REGION LOCATED" : "NO FACE REGION"}
                 </span>
               </div>
-              <button className="button" onClick={() => setPresent(!present)}>
+              <button className="button" onClick={() => dispatch({ type: "toggle-region" })}>
                 {present ? "SHOW EMPTY FRAME" : "SHOW DETECTION EXAMPLE"}
               </button>
             </div>
@@ -87,7 +89,8 @@ export default function DarvsInstrument() {
               </div>
               <button
                 className="button"
-                onClick={() => setChallenge(challenge < 3 ? challenge + 1 : 0)}
+                disabled={!present}
+                onClick={() => dispatch({ type: challenge < challenges.length ? "respond" : "reset-challenges" })}
               >
                 {challenge < 3 ? "MARK EXAMPLE RESPONSE" : "RESET EXAMPLE"}{" "}
                 <ArrowRight size={15} />
@@ -129,10 +132,10 @@ export default function DarvsInstrument() {
                 <span className="mono">IN THIS EXAMPLE</span>
               </div>
               <div className="decision-inputs">
-                <button aria-pressed={live} onClick={() => setLive(!live)}>
+                <button aria-pressed={live} disabled={!live} onClick={() => dispatch({ type: "reset-challenges" })}>
                   LIVENESS <b>{live ? "COMPLETE" : "INCOMPLETE"}</b>
                 </button>
-                <button aria-pressed={match} onClick={() => setMatch(!match)}>
+                <button aria-pressed={match} disabled={!live} onClick={() => dispatch({ type: "toggle-match" })}>
                   IDENTITY <b>{match ? "MATCH" : "NO MATCH"}</b>
                 </button>
               </div>
