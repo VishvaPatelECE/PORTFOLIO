@@ -260,7 +260,7 @@ export default function ProjectCards({ showTubes = true }: { showTubes?: boolean
                       fill
                       sizes="(max-width: 900px) 100vw, 1200px"
                       priority={idx === 0}
-                      className={styles.coverImg}
+                      className={`${styles.coverImg}${isActive ? " project-cover-morph" : ""}`}
                     />
                   </div>
                   <div className={styles.scrimOverlay} />

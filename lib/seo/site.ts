@@ -31,6 +31,7 @@ export function buildPageMetadata({
   path,
   keywords,
   index = true,
+  absoluteTitle = false,
 }: {
   title: string;
   description: string;
@@ -41,7 +42,7 @@ export function buildPageMetadata({
 }): Metadata {
   const canonicalUrl = absoluteUrl(path);
   return {
-    title: { absolute: BRAND_TAB_TITLE },
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     keywords,
     alternates: {

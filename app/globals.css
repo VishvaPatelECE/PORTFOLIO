@@ -4153,6 +4153,10 @@ nav,
 /* ==========================================================================
    VIEW TRANSITIONS API: Smooth Morph Physics for Project Cards -> Hero Masthead
    ========================================================================== */
+.project-cover-morph {
+  view-transition-name: project-cover-morph;
+}
+
 ::view-transition-old(project-cover-morph),
 ::view-transition-new(project-cover-morph) {
   animation-duration: 0.55s;

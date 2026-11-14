@@ -31,10 +31,29 @@ export default function SignalTubes() {
         location.origin,
       );
 
+    // Narrowly scoped geometry cache to avoid forced reflows on pointer movement
+    let cachedFrameRect: DOMRect | null = null;
+    let cachedBoundsRect: DOMRect | null = null;
+
+    const updateGeometry = () => {
+      if (!frame.current || !root.current) return;
+      const f = frame.current.getBoundingClientRect();
+      if (!f.width || !f.height) return;
+      const wrapper = root.current.closest(".discovery-tubes-wrapper");
+      const b = wrapper ? wrapper.getBoundingClientRect() : f;
+      cachedFrameRect = f;
+      cachedBoundsRect = b;
+    };
+
+    updateGeometry();
+
     const forwardCoords = (clientX: number, clientY: number, pointerType: string) => {
-      const rect = frame.current?.getBoundingClientRect();
-      if (!rect || !rect.width || !rect.height) return;
-      const boundsRect = root.current?.closest(".discovery-tubes-wrapper")?.getBoundingClientRect() ?? rect;
+      if (!cachedFrameRect || !cachedBoundsRect) {
+        updateGeometry();
+      }
+      const rect = cachedFrameRect;
+      const boundsRect = cachedBoundsRect;
+      if (!rect || !boundsRect || !rect.width || !rect.height) return;
       const inside =
         clientX >= rect.left &&
         clientX <= rect.right &&
@@ -73,13 +92,50 @@ export default function SignalTubes() {
       if (event.data?.type === "vishva-tubes-error") setUnavailable(true);
     };
 
+    // Observers and listeners to keep geometry strictly fresh without polling
+    const wrapper = root.current?.closest(".discovery-tubes-wrapper");
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== "undefined") {
+      resizeObserver = new ResizeObserver(() => {
+        updateGeometry();
+      });
+      if (wrapper) resizeObserver.observe(wrapper);
+      if (typeof document !== "undefined" && document.body) {
+        resizeObserver.observe(document.body);
+      }
+    }
+
+    let transitionRafId = 0;
+    const onTransition = () => {
+      updateGeometry();
+      cancelAnimationFrame(transitionRafId);
+      const pollTransition = (start: number) => {
+        updateGeometry();
+        if (performance.now() - start < 500) {
+          transitionRafId = requestAnimationFrame(() => pollTransition(start));
+        }
+      };
+      transitionRafId = requestAnimationFrame(() => pollTransition(performance.now()));
+    };
+
+    wrapper?.addEventListener("transitionrun", onTransition);
+    wrapper?.addEventListener("transitionstart", onTransition);
+    window.addEventListener("scroll", updateGeometry, { passive: true });
+    window.addEventListener("resize", updateGeometry, { passive: true });
     window.addEventListener("pointerdown", pointer, { passive: true });
     window.addEventListener("pointermove", pointer, { passive: true });
     window.addEventListener("touchstart", touch, { passive: true });
     window.addEventListener("touchmove", touch, { passive: true });
     window.addEventListener("pointerleave", leave);
     window.addEventListener("message", ready);
+
     return () => {
+      cancelAnimationFrame(transitionRafId);
+      resizeObserver?.disconnect();
+      wrapper?.removeEventListener("transitionrun", onTransition);
+      wrapper?.removeEventListener("transitionstart", onTransition);
+      window.removeEventListener("scroll", updateGeometry);
+      window.removeEventListener("resize", updateGeometry);
       window.removeEventListener("pointerdown", pointer);
       window.removeEventListener("pointermove", pointer);
       window.removeEventListener("touchstart", touch);

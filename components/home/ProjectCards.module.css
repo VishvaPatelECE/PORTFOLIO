@@ -241,7 +241,6 @@
 
 .panelActive .coverImg {
   transform: scale(1.05);
-  view-transition-name: project-cover-morph;
 }
 
 .scrimOverlay {

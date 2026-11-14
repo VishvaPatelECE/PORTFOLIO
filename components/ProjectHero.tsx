@@ -50,7 +50,7 @@ export default function ProjectHero({
             fill
             priority
             sizes="(max-width: 900px) 100vw, 65vw"
-            className={styles.heroImage}
+            className={`${styles.heroImage} project-cover-morph`}
           />
         </div>
 
