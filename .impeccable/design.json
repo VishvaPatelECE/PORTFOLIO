@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-08T02:17:40.116Z",
+  "title": "Design System: VishvaProjects V3",
+  "extensions": {
+    "colorMeta": {
+      "bg": {
+        "role": "neutral",
+        "displayName": "Optical Black",
+        "tonalRamp": [
+          "oklch(15.00% 0.00965 297.64)",
+          "oklch(26.43% 0.00965 297.64)",
+          "oklch(37.86% 0.00965 297.64)",
+          "oklch(49.29% 0.00965 297.64)",
+          "oklch(60.71% 0.00965 297.64)",
+          "oklch(72.14% 0.00965 297.64)",
+          "oklch(83.57% 0.00965 297.64)",
+          "oklch(95.00% 0.00965 297.64)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Dark Glass",
+        "tonalRamp": [
+          "oklch(15.00% 0.01878 245.45)",
+          "oklch(26.43% 0.01878 245.45)",
+          "oklch(37.86% 0.01878 245.45)",
+          "oklch(49.29% 0.01878 245.45)",
+          "oklch(60.71% 0.01878 245.45)",
+          "oklch(72.14% 0.01878 245.45)",
+          "oklch(83.57% 0.01878 245.45)",
+          "oklch(95.00% 0.01878 245.45)"
+        ]
+      },
+      "surface-high": {
+        "role": "neutral",
+        "displayName": "Raised Glass",
+        "tonalRamp": [
+          "oklch(15.00% 0.02560 244.27)",
+          "oklch(26.43% 0.02560 244.27)",
+          "oklch(37.86% 0.02560 244.27)",
+          "oklch(49.29% 0.02560 244.27)",
+          "oklch(60.71% 0.02560 244.27)",
+          "oklch(72.14% 0.02560 244.27)",
+          "oklch(83.57% 0.02560 244.27)",
+          "oklch(95.00% 0.02560 244.27)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Warm Identity",
+        "tonalRamp": [
+          "oklch(15.00% 0.02071 81.78)",
+          "oklch(26.43% 0.02071 81.78)",
+          "oklch(37.86% 0.02071 81.78)",
+          "oklch(49.29% 0.02071 81.78)",
+          "oklch(60.71% 0.02071 81.78)",
+          "oklch(72.14% 0.02071 81.78)",
+          "oklch(83.57% 0.02071 81.78)",
+          "oklch(95.00% 0.02071 81.78)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Technical Mist",
+        "tonalRamp": [
+          "oklch(15.00% 0.01939 232.60)",
+          "oklch(26.43% 0.01939 232.60)",
+          "oklch(37.86% 0.01939 232.60)",
+          "oklch(49.29% 0.01939 232.60)",
+          "oklch(60.71% 0.01939 232.60)",
+          "oklch(72.14% 0.01939 232.60)",
+          "oklch(83.57% 0.01939 232.60)",
+          "oklch(95.00% 0.01939 232.60)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Machined Divider",
+        "tonalRamp": [
+          "oklch(15.00% 0.02566 246.40)",
+          "oklch(26.43% 0.02566 246.40)",
+          "oklch(37.86% 0.02566 246.40)",
+          "oklch(49.29% 0.02566 246.40)",
+          "oklch(60.71% 0.02566 246.40)",
+          "oklch(72.14% 0.02566 246.40)",
+          "oklch(83.57% 0.02566 246.40)",
+          "oklch(95.00% 0.02566 246.40)"
+        ]
+      },
+      "signal": {
+        "role": "primary",
+        "displayName": "Routed Cyan",
+        "tonalRamp": [
+          "oklch(15.00% 0.11720 205.68)",
+          "oklch(26.43% 0.11720 205.68)",
+          "oklch(37.86% 0.11720 205.68)",
+          "oklch(49.29% 0.11720 205.68)",
+          "oklch(60.71% 0.11720 205.68)",
+          "oklch(72.14% 0.11720 205.68)",
+          "oklch(83.57% 0.11720 205.68)",
+          "oklch(95.00% 0.11720 205.68)"
+        ]
+      },
+      "gold": {
+        "role": "secondary",
+        "displayName": "Contact Gold",
+        "tonalRamp": [
+          "oklch(15.00% 0.06593 77.47)",
+          "oklch(26.43% 0.06593 77.47)",
+          "oklch(37.86% 0.06593 77.47)",
+          "oklch(49.29% 0.06593 77.47)",
+          "oklch(60.71% 0.06593 77.47)",
+          "oklch(72.14% 0.06593 77.47)",
+          "oklch(83.57% 0.06593 77.47)",
+          "oklch(95.00% 0.06593 77.47)"
+        ]
+      },
+      "fault": {
+        "role": "tertiary",
+        "displayName": "Fault Red",
+        "tonalRamp": [
+          "oklch(15.00% 0.20039 22.38)",
+          "oklch(26.43% 0.20039 22.38)",
+          "oklch(37.86% 0.20039 22.38)",
+          "oklch(49.29% 0.20039 22.38)",
+          "oklch(60.71% 0.20039 22.38)",
+          "oklch(72.14% 0.20039 22.38)",
+          "oklch(83.57% 0.20039 22.38)",
+          "oklch(95.00% 0.20039 22.38)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "HTML Identity",
+        "purpose": "The current two-line home name; signal.css sets the desktop clamp and responsive overrides."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "purpose": "Home section introductions, with local related treatments for research and contact."
+      },
+      "page-title": {
+        "displayName": "Route Title",
+        "purpose": "The shared page heading."
+      },
+      "title": {
+        "displayName": "Supporting Title",
+        "purpose": "Supporting work and reading headings."
+      },
+      "project-title": {
+        "displayName": "Project Name",
+        "purpose": "The large DARVS and USMHACS names."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Readable prose with MONO and CASL off."
+      },
+      "label": {
+        "displayName": "Technical Label",
+        "purpose": "Native controls, provenance and data with MONO on. Reverse texture stage printing uses a local 88px/500 Recursive treatment separate from the HTML label scale."
+      },
+      "system-title": {
+        "displayName": "System Choice",
+        "purpose": "The current three-system dock title, with mobile overrides."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ignition-shell",
+        "value": "0 16px 36px #0008, inset 0 1px 0 #dfd4bd4a",
+        "purpose": "Metal shell and ambient depth around the native original-shader action."
+      },
+      {
+        "name": "navigation",
+        "value": "inset 0 1px 0 #ffffff16, 0 8px 24px #00000035",
+        "purpose": "Shared route navigation; home overrides its outer shadow to none."
+      },
+      {
+        "name": "project-button",
+        "value": "inset 0 1px 0 #ffffff20, 0 6px 20px #0003",
+        "purpose": "Smaller cool project action."
+      },
+      {
+        "name": "instrument-frame",
+        "value": "inset 0 1px 0 #d9ffff17, 0 25px 70px #0006",
+        "purpose": "Large dark instrument frame."
+      },
+      {
+        "name": "research-record",
+        "value": "inset 0 1px 0 #a0d5df22, 0 18px 55px #0005",
+        "purpose": "Inset glass edge and ambient depth for the source representation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Shared CSS state easing."
+      },
+      {
+        "name": "state-transition",
+        "value": "0.16s",
+        "purpose": "Shared color, background and border response."
+      },
+      {
+        "name": "ignition-shell-transition",
+        "value": "0.2s ease-out",
+        "purpose": "Native action hover lift; removed under reduced motion."
+      },
+      {
+        "name": "identity-ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Current HTML identity movement after entry."
+      },
+      {
+        "name": "identity-first-line",
+        "value": "0.9s",
+        "purpose": "First HTML name line movement."
+      },
+      {
+        "name": "identity-second-line",
+        "value": "1.1s",
+        "purpose": "Second HTML name line movement."
+      },
+      {
+        "name": "intro-sequence",
+        "value": "6.2s",
+        "purpose": "Bidirectional scan and dissolve; automatic entry is skipped under reduced motion."
+      },
+      {
+        "name": "card-follow",
+        "value": "1 - exp(-7 × dt)",
+        "purpose": "Time-based pointer/flip interpolation; single-frame immediate updates while paused or reduced."
+      },
+      {
+        "name": "decorative-field-pause",
+        "value": "unmount",
+        "purpose": "Shared home Pause/Resume unmounts every home field, including later mounts; hidden/offscreen/static/reduced states also remove affected frames. Zero speed is not universal pause."
+      },
+      {
+        "name": "home-motion-state",
+        "value": "shared paused state",
+        "purpose": "HomeMotionProvider wraps the home main. Card, action and all home fields read it; the pause control is independent of card initialization."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "large",
+        "value": "1600px"
+      },
+      {
+        "name": "tablet",
+        "value": "1100px"
+      },
+      {
+        "name": "mobile",
+        "value": "760px"
+      },
+      {
+        "name": "narrow",
+        "value": "365px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Ignition Project Action",
+      "kind": "button",
+      "refersTo": "button-ignition",
+      "description": "Accessible native action shell. The application uses the exact original Ignition GLSL; this framework-free preview retains the static dark well.",
+      "html": "<a href=\"#project\" class=\"ds-ignition\"><span class=\"ds-ignition-well\"><span class=\"ds-ignition-label\">Explore DARVS <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10M7 17 17 7\"/></svg></span></span></a>",
+      "css": ".ds-ignition{display:block;width:246px;height:70px;padding:6px;border-radius:21px;text-decoration:none;background:linear-gradient(180deg,#484843,#1b1b1a 55%,#343b3c);box-shadow:0 16px 36px #0008,inset 0 1px 0 #dfd4bd4a;transition:transform .2s ease-out}.ds-ignition-well{display:grid;place-items:center;height:100%;border-radius:15px;overflow:hidden;background:#160e06}.ds-ignition-label{display:flex;align-items:center;justify-content:center;gap:15px;color:#fff1d8;font-family:\"Recursive Variable\",sans-serif;font-variation-settings:\"MONO\" 0,\"CASL\" 0;font-size:12px;line-height:1.65;font-weight:500;text-shadow:0 1px 7px #000}.ds-ignition:hover{transform:translateY(-2px)}.ds-ignition:active{transform:translateY(1px)}.ds-ignition:focus-visible{outline:2px solid var(--signal,#00aebd);outline-offset:5px;}@media(max-width:760px){.ds-ignition{width:196px;height:58px;padding:5px;border-radius:18px}.ds-ignition-well{border-radius:13px}.ds-ignition-label{font-size:10px;gap:8px}}@media(prefers-reduced-motion:reduce){.ds-ignition{transition:none}.ds-ignition:hover{transform:none}}"
+    },
+    {
+      "name": "Project Action",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A cool pill for opening a functioning project instrument.",
+      "html": "<a class=\"ds-project-action\" href=\"#project\">INSPECT THE PIPELINE <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10M7 17 17 7\"/></svg></a>",
+      "css": ".ds-project-action{display:inline-flex;align-items:center;justify-content:center;gap:28px;min-height:48px;padding:13px 22px;border:1px solid #59737d;border-radius:100px;background:linear-gradient(145deg,#24363f,#131f28);color:#c9d9dc;box-shadow:inset 0 1px 0 #ffffff20,0 6px 20px #0003;font-family:\"Recursive Variable\",monospace;font-variation-settings:\"MONO\" 1,\"CASL\" 0;font-size:11px;letter-spacing:.04em;line-height:1.5;text-decoration:none;transition:color .16s var(--ease,cubic-bezier(0.22,1,0.36,1)),background .16s var(--ease,cubic-bezier(0.22,1,0.36,1)),border-color .16s var(--ease,cubic-bezier(0.22,1,0.36,1))}.ds-project-action:hover{background:linear-gradient(145deg,#3f535b,#19333e);border-color:#8ab8ba;color:#fff;transform:translateY(-1px)}.ds-project-action:focus-visible{outline:2px solid var(--signal,#00aebd);outline-offset:5px;}.ds-project-action:active{transform:translateY(1px)}"
+    },
+    {
+      "name": "Text Action",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "A low-emphasis link with a full native target for secondary navigation.",
+      "html": "<a class=\"ds-text-action\" href=\"#about\">MEET THE ENGINEER <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10v10M7 17 17 7\"/></svg></a>",
+      "css": ".ds-text-action{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:var(--text,#e8e0d2);font-family:\"Recursive Variable\",monospace;font-variation-settings:\"MONO\" 1,\"CASL\" 0;font-size:11px;letter-spacing:.04em;line-height:1.65;text-decoration:none;transition:color .16s var(--ease,cubic-bezier(0.22,1,0.36,1))}.ds-text-action:hover{color:var(--signal,#00aebd)}.ds-text-action:focus-visible{outline:2px solid var(--signal,#00aebd);outline-offset:5px;}"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-current",
+      "description": "Current home navigation: a transparent dark pill rail, selected fill and explicit focus. Other routes retain the shared ambient shadow.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a class=\"ds-nav-link\" href=\"#home\" aria-current=\"page\">HOME</a><a class=\"ds-nav-link\" href=\"#systems\">SYSTEMS</a><a class=\"ds-nav-link\" href=\"#research\">RESEARCH</a></nav>",
+      "css": ".ds-nav{display:inline-flex;align-items:center;gap:2px;padding:6px;background:#08070b66;border:1px solid #b99d7333;border-radius:100px;box-shadow:none;backdrop-filter:blur(18px)}.ds-nav-link{display:block;padding:9px 18px;color:var(--muted,#a6b4bc);font-family:\"Recursive Variable\",monospace;font-variation-settings:\"MONO\" 1,\"CASL\" 0;font-size:11px;line-height:1.65;letter-spacing:.02em;text-decoration:none;border-radius:100px;transition:color .16s var(--ease,cubic-bezier(0.22,1,0.36,1)),background .16s var(--ease,cubic-bezier(0.22,1,0.36,1))}.ds-nav-link[aria-current=\"page\"]{color:var(--text,#e8e0d2);background:#c6ded512;box-shadow:inset 0 1px 0 #ffffff16}.ds-nav-link:hover{color:var(--text,#e8e0d2)}.ds-nav-link:focus-visible{outline:2px solid var(--signal,#00aebd);outline-offset:5px;}@media(prefers-reduced-transparency:reduce){.ds-nav{backdrop-filter:none;background:#14212b}}"
+    },
+    {
+      "name": "Entity Select",
+      "kind": "input",
+      "refersTo": "entity-select",
+      "description": "RANGraph's native entity choice; mobile preserves native input readability.",
+      "html": "<label class=\"ds-entity-label\">INSPECT ENTITY <select class=\"ds-entity-select\"><option>ue-1</option><option>gnb-1</option><option>ue-2</option></select></label>",
+      "css": ".ds-entity-label{display:inline-flex;align-items:center;gap:10px;color:var(--gold,#b99d73);font-family:\"Recursive Variable\",monospace;font-variation-settings:\"MONO\" 1,\"CASL\" 0;font-size:9px;line-height:1.65;letter-spacing:.04em}.ds-entity-select{background:var(--surface,#0c141b);color:var(--text,#e8e0d2);border:1px solid #635868;padding:8px;font-family:\"Recursive Variable\",sans-serif;font-variation-settings:\"MONO\" 0,\"CASL\" 0;font-size:11px;line-height:1.65;min-height:40px}.ds-entity-select:focus-visible{outline:2px solid var(--signal,#00aebd);outline-offset:5px;}@media(max-width:760px){.ds-entity-select{font-size:16px}}"
+    },
+    {
+      "name": "Instrument Frame",
+      "kind": "card",
+      "refersTo": "instrument",
+      "description": "The shared glass frame for source-backed interactive project tools.",
+      "html": "<section class=\"ds-instrument\"><div class=\"ds-instrument-bar\">BROWSER LOGIC SIMULATOR</div><div class=\"ds-instrument-body\"><h2 class=\"ds-instrument-title\">USMHACS</h2><p class=\"ds-instrument-copy\">Inputs change the simulated state.</p></div></section>",
+      "css": ".ds-instrument{background:linear-gradient(135deg,#15222c,#0a1018 60%);border:1px solid #607b8738;border-radius:18px;box-shadow:inset 0 1px 0 #d9ffff17,0 25px 70px #0006;overflow:hidden;color:var(--text,#e8e0d2)}.ds-instrument-bar{padding:15px 24px;background:#06101975;color:#9fbbc9;border-bottom:1px solid #36545e;font-family:\"Recursive Variable\",monospace;font-variation-settings:\"MONO\" 1,\"CASL\" 0;font-size:10px;line-height:1.65;letter-spacing:.04em}.ds-instrument-body{padding:30px}.ds-instrument-title{margin:0;font-family:\"Anybody Variable\",sans-serif;font-weight:440;font-size:48px;line-height:1.1;letter-spacing:-.035em}.ds-instrument-copy{margin:16px 0 0;font-family:\"Recursive Variable\",sans-serif;font-variation-settings:\"MONO\" 0,\"CASL\" 0;font-size:16px;line-height:1.65;color:var(--muted,#a6b4bc)}@media(max-width:760px){.ds-instrument{border-radius:12px}}"
+    },
+    {
+      "name": "Home Visual Control",
+      "kind": "button",
+      "refersTo": "visual-control",
+      "description": "Native visual control shell. Pause/Resume controls the home fields, card and action and stays available in static/failure mode; only reverse/reset require a ready card. Reduced motion disables Pause.",
+      "html": "<button class=\"ds-visual-control\" aria-label=\"View card reverse\" aria-pressed=\"false\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M16.466 7.5C15.643 4.237 13.952 2 12 2 9.239 2 7 6.477 7 12s2.239 10 5 10c.342 0 .677-.069 1-.2\"/><path d=\"m15.194 13.707 3.814 1.86-1.86 3.814\"/><path d=\"M19 15.57c-1.804.885-4.274 1.43-7 1.43-5.523 0-10-2.239-10-5s4.477-5 10-5c4.838 0 8.873 1.718 9.8 4\"/></svg><span>Reverse</span></button>",
+      "css": ".ds-visual-control{display:flex;align-items:center;justify-content:center;gap:7px;min-width:44px;height:44px;padding:0 12px;border:1px solid #8a80583d;border-radius:22px;background:#121414a8;color:#c7c9c2;backdrop-filter:blur(10px);cursor:pointer;font-family:\"Recursive Variable\",sans-serif;font-variation-settings:\"MONO\" 0,\"CASL\" 0;line-height:1.65;transition:color .16s var(--ease,cubic-bezier(.22,1,.36,1)),background .16s var(--ease,cubic-bezier(.22,1,.36,1)),border-color .16s var(--ease,cubic-bezier(.22,1,.36,1))}.ds-visual-control span{font-size:10px}.ds-visual-control[aria-pressed=\"true\"]{border-color:var(--gold,#b99d73);color:#ead9b8}.ds-visual-control:hover{background:#314344c2}.ds-visual-control:focus-visible{outline:2px solid var(--signal,#00aebd);outline-offset:5px;}.ds-visual-control:disabled{opacity:.42;cursor:not-allowed}@media(prefers-reduced-transparency:reduce){.ds-visual-control{backdrop-filter:none;background:#101317}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Holographic Signal Field",
+    "overview": "Actual particle trails and laser fields surround physical engineering artifacts. Warm, wide HTML identity holds the composition while gold and cyan diffraction move across a dark foil card. The owner's pinned ThreeUI references and rejection of the optical-workbench translation establish this replacement world.\n\nThe interface keeps project truth readable around the rendered material. HTML owns names, navigation, actions, provenance and explanation; the original Community fields provide atmosphere and a custom Three.js card provides inspection. The owner removed the lower DARVS, USMHACS and RANGraph illustration panels; those sections now lead with project text and native links. Technical instruments continue the dark glass, metal edge and semantic signal vocabulary.\n\nOwner refinement: the hero is personal identity only; its named project dock is retired. Entry waits for Scan on a full home refresh, with compact/preference/failure alternatives. USMHACS is the copied V1 component with local palette substitutions. See docs/V1-DETAILS.md for source fidelity and current verification limits.\n\nLatest owner entry refinement: remove status/bar/stage clutter; closely frame the supplied interactive face; use a condensed Scan to enter heading, Authenticate your identity subtitle and corner DARVS System Overview link. Morph its points into gold/cyan ribbons and open an aperture onto the prepared hero over a 6.9-second sequence. Face disposal ends the bounded renderer overlap. See docs/ENTRY-MOTION.md for controls and current visual-verification limits.",
+    "keyCharacteristics": [
+      "Full-scale official particle and laser fields behind readable HTML.",
+      "Custom gold/cyan foil, physical card edges and a shader-lit native action.",
+      "Source-backed architecture, meaningful static views and native controls.",
+      "Bounded inspection, explicit motion preferences and precise reference attribution."
+    ],
+    "rules": [
+      {
+        "name": "The Signal Meaning Rule",
+        "body": "Cyan marks interaction or signal; fault red belongs to a demonstrated failure state, and gold carries material warmth and selected home-system emphasis.",
+        "section": "colors"
+      },
+      {
+        "name": "The HTML Identity Rule",
+        "body": "Names, headings, control labels and project truth stay in HTML; rendered card printing supplements them.",
+        "section": "typography"
+      },
+      {
+        "name": "The Material Provenance Rule",
+        "body": "Name direct upstream effects precisely and distinguish them from custom studies; an inspired material treatment does not make it the referenced component.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** retain the actual reference fields, warm HTML identity and gold/cyan foil relationship.",
+      "**Do** distinguish decorative atmosphere from source-backed project data.",
+      "**Do** retain native actions, visible focus, bounded keyboard inspection and mobile vertical scrolling.",
+      "**Do** use system-specific static overviews, keep Pause/Resume available independently of the card, and gate reverse/reset on card availability.",
+      "**Do** unmount decorative frames when paused, hidden, offscreen or reduced motion is requested.",
+      "**Do** keep exact upstream attribution and custom-study boundaries adjacent to the design record."
+    ],
+    "donts": [
+      "**Don't** replace the pinned reference materials with the rejected optical-workbench translation.",
+      "**Don't** call the custom card Ashen One source or the face a Cortexa Pro component.",
+      "**Don't** claim a zero-speed control reliably pauses every upstream renderer.",
+      "**Don't** invent telemetry, benchmarks, publications or wireless relationships.",
+      "**Don't** present schematic geometry as a measured hardware prototype or running model inference.",
+      "**Don't** leave the temporary face in the persistent home composition."
+    ]
+  }
+}

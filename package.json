@@ -1,29 +1,53 @@
 {
-  "name": "darvs-portfolio",
-  "version": "0.1.0",
+  "name": "vishvaprojects-v3",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --hostname 127.0.0.1 --port 3003",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "next start --hostname 127.0.0.1 --port 3003",
+    "lint": "eslint . --cache --cache-strategy content --cache-location .eslintcache",
+    "lint:ci": "eslint . --cache --cache-strategy content --cache-location .eslintcache --max-warnings 2",
+    "test": "tsx --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "postinstall": "node scripts/patch_threeui_gmail.mjs",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,mjs}": "eslint --cache --cache-strategy content --cache-location .eslintcache --no-warn-ignored --max-warnings 2"
   },
   "dependencies": {
-    "@vercel/analytics": "^2.0.1",
-    "framer-motion": "^12.38.0",
-    "lucide-react": "^1.8.0",
-    "next": "16.2.3",
+    "@designcodeio/threeui": "1.2.0",
+    "@fontsource-variable/anybody": "^5.2.8",
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource-variable/recursive": "^5.2.8",
+    "@fontsource-variable/syne": "^5.3.0",
+    "@fontsource-variable/texturina": "^5.3.0",
+    "@fontsource/aclonica": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@next/third-parties": "16.4.6",
+    "@paper-design/shaders": "^0.0.61",
+    "@paper-design/shaders-react": "^0.0.61",
+    "framer-motion": "12.38.0",
+    "lucide-react": "1.8.0",
+    "next": "^16.4.3",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "three": "0.180.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^24",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.180.0",
     "eslint": "^9",
-    "eslint-config-next": "16.2.3",
+    "eslint-config-next": "^16.4.3",
+    "gsap": "3.12.2",
+    "husky": "9.1.7",
+    "lint-staged": "17.6.0",
     "tailwindcss": "^4",
+    "tsx": "^4.20.0",
     "typescript": "^5"
   }
 }

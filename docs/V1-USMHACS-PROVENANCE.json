@@ -1,0 +1,53 @@
+{
+  "source": "C:/Users/HP/darvs-portfolio/components/USMHACSPanel.tsx",
+  "sourceCommit": "1011122d185156c7542894747e9ce32a60156e4c",
+  "sourceSHA256": "e1b833b870f3b1b640d86e869c786330710dd36f70aedc834f077f862d72aa16",
+  "portSHA256": "06b0e883618e22e77237a1031a0f7b3c931503026b6144801435d698e8df5b30",
+  "liveRoute": "https://www.vishvaprojects.in/usmhacs",
+  "liveChunk": "https://www.vishvaprojects.in/_next/static/chunks/0v4_hbqewtiwz.js",
+  "changes": [
+    "V3 color substitutions",
+    "Scoped CSS wrapper",
+    "Named reducer/state exports for tests"
+  ],
+  "unchanged": [
+    "Diagram coordinates",
+    "Controls and scenarios",
+    "Reducer and gates",
+    "Timers",
+    "Alarm and success audio",
+    "Console and original copy"
+  ],
+  "colors": {
+    "#0d1b2a": "#08070b",
+    "#1b263b": "#101014",
+    "#415a77": "#17171c",
+    "#e0e1dd": "#e8e0d2",
+    "#778da9": "#afaea2",
+    "#8ea0b4": "#afaea2",
+    "#b8c5d6": "#b5c1c8",
+    "#d0d8e4": "#e8e0d2",
+    "#ffc300": "#b99d73",
+    "#ffd60a": "#b99d73",
+    "#f59e0b": "#b99d73",
+    "#ff6b35": "#b99d73",
+    "#4cc9f0": "#00aebd",
+    "#00d4ff": "#00aebd",
+    "#22c55e": "#00aebd",
+    "#ef4444": "#ff5a5f"
+  },
+  "utilities": {
+    "green-300": "[#89d1d8]",
+    "green-400": "[#00aebd]",
+    "green-500": "[#00aebd]",
+    "green-900": "[#103238]",
+    "green-950": "[#0d2529]",
+    "red-300": "[#ffc0c2]",
+    "red-400": "[#ff5a5f]",
+    "red-500": "[#ff5a5f]",
+    "red-950": "[#351719]",
+    "orange-300": "[#d5c6a9]",
+    "orange-500": "[#b99d73]",
+    "orange-950": "[#2b2218]"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "root": "C:/Users/HP/darvs-portfolio",
+  "head": "1011122d185156c7542894747e9ce32a60156e4c",
+  "captured": "2026-10-07",
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "CFDBD5A321F3BA279E434C025FC9A44BF2D3BD3A1AF5AFFB8429D79BD18AF054"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "761C0FA5BB4494117CD89376445BC058C6638B53A01D29E9E41E90DCECB1A16C"
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "D631D88045F74623D568ADFB4783B72E3D1B732330D749BC6C72E6648D4581D3"
+    },
+    {
+      "path": "README.md",
+      "sha256": "3B3ED71EBF50E973209BC634F6849E8ECF235A6C0686C285E1F36AF5CAA1C2CC"
+    },
+    {
+      "path": "app/about/page.tsx",
+      "sha256": "3DB35C0C85CBA8D29C2366E8617B43D774F9333FAD1F856467A6DC8E56E90218"
+    },
+    {
+      "path": "app/darvs/page.tsx",
+      "sha256": "9639C38F70706911A67203BE805147E737C4651A9AFFEC710DF148521F63B7BD"
+    },
+    {
+      "path": "app/favicon.ico",
+      "sha256": "2B8AD2D33455A8F736FC3A8EBF8F0BDEA8848AD4C0DB48A2833BD0F9CD775932"
+    },
+    {
+      "path": "app/globals.css",
+      "sha256": "2C5D2125782522B56876C54A391D75A796C351F07CD699FD98D9860D03859AEF"
+    },
+    {
+      "path": "app/layout.tsx",
+      "sha256": "94C8FEDF8FB64C2DDAA982F7C2A48A407E0A8D737D290F00E1FCBF5DAC3A5781"
+    },
+    {
+      "path": "app/page.tsx",
+      "sha256": "936CA1203CCD6BED582BCAA1151D35977582FBBC11793F0EA18EA44462994719"
+    },
+    {
+      "path": "app/research/page.tsx",
+      "sha256": "E93FEE640A18F376330532C63385276412CC245A54F134A9FB5DE8F5614FDBF0"
+    },
+    {
+      "path": "app/usmhacs/full/page.tsx",
+      "sha256": "C4AA8910479B56ECC55506C12D6B25EAE2E6270446CEA826C35FD4A1DCDE4E3E"
+    },
+    {
+      "path": "app/usmhacs/page.tsx",
+      "sha256": "719525CE91F75848F478ED613C4DF9962B41B7BD4D9A40FA3D7FB62E616BE984"
+    },
+    {
+      "path": "components/AboutDossier.tsx",
+      "sha256": "876E4A93F71DCE88458C8AF5E4C3DDD943FC152586FFFEE4758059F99ED64CD3"
+    },
+    {
+      "path": "components/Hero.tsx",
+      "sha256": "CBB3DCBE64C66685991F3743011766970760149DDE5A28B1D62C68B0B0A71BF7"
+    },
+    {
+      "path": "components/Projects.tsx",
+      "sha256": "C4F37D308C6762E528945F29C6E06C353613A391493CCCFA8D186596B4406A23"
+    },
+    {
+      "path": "components/ScanGate.tsx",
+      "sha256": "C715DF375738F1EE2713C405F2AADD9507EDD6D861EE3EB1C59189C013C8F258"
+    },
+    {
+      "path": "components/ScrollDepthLayer.tsx",
+      "sha256": "C2980C61316537AE65B0447D26AB636BC6A6F1CFE23D1363F70F53E2600D2B7C"
+    },
+    {
+      "path": "components/SecureCommunication.tsx",
+      "sha256": "235BD2A0FBC1672EF67633A32E6F620444FB759C81A13454C013B60E975D5453"
+    },
+    {
+      "path": "components/USMHACSPanel.tsx",
+      "sha256": "E1B833B870F3B1B640D86E869C786330710DD36F70AEDC834F077F862D72AA16"
+    },
+    {
+      "path": "components/index.ts",
+      "sha256": "ADC9C8431EBCC700E0776F6AAE08C49BCBA4E38CDCE79BC2E34B6B5B436C57BA"
+    },
+    {
+      "path": "context/AuthContext.tsx",
+      "sha256": "C3E489C7570C54CCB483D3F92DFF76A981B9EF2ADB71EF3B30831EE2AE031A59"
+    },
+    {
+      "path": "eslint.config.mjs",
+      "sha256": "275A07C13FC7C83A652EFCFA9FB6A207C451A2F5088E6793415CE44281285720"
+    },
+    {
+      "path": "next.config.ts",
+      "sha256": "A972C4F0FFA6DD714E7909B02D1AC19D2F2FE3D01F191EFD2C5054BD6F142EC1"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "3F1F4F9852EAFFF086AC99C64FBB709A366B511B1640E71D505C6C86E45A2B84"
+    },
+    {
+      "path": "package.json",
+      "sha256": "2108AFD323055BF991D6816F4459D7BA421FB39429C3FB5E20500D5B47EB238F"
+    },
+    {
+      "path": "postcss.config.mjs",
+      "sha256": "7B299D3D3B16699DDDA397C0B2373B3AF4F25F8FC9CCC9B3D9E64EF083BC1C21"
+    },
+    {
+      "path": "public/Vishva_Patel_CV.pdf",
+      "sha256": "24119AF15B8EB51BB013EF8DB9F6D2544DF493114DB7AB0723D3AAE4701031F4"
+    },
+    {
+      "path": "public/file.svg",
+      "sha256": "2B67812C325C199A02536CDBEEA0C593A72F707D323B72EE3E08DBAB06753BD4"
+    },
+    {
+      "path": "public/globe.svg",
+      "sha256": "B614B9BF183925957661AC851498FE1D8029FD43A62FBFED86F9E2624A57E7CF"
+    },
+    {
+      "path": "public/next.svg",
+      "sha256": "55995DFAD6ECB4945A1E856DDCA03C5E16AA5BF13FD21B4DF6A74AE79357BCFC"
+    },
+    {
+      "path": "public/usmhacs-preview.svg",
+      "sha256": "B2404B081D6D95E3622364858F32DF5AF4062F5931E7011E3AAFD60A606BC7FD"
+    },
+    {
+      "path": "public/vercel.svg",
+      "sha256": "F081337B2FEE635B455B63275406A3E7F39D6A014E25AD90DAB5A67E62A12AC4"
+    },
+    {
+      "path": "public/window.svg",
+      "sha256": "644768C4AAEB4767BCE293344EEB0C125FB804A94D801440424072202D85E3A1"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "FBFF01604D6CB54694BE707F26E7A0EB21A6EF796B888C6A1DAB1839FA7C6CCC"
+    }
+  ]
+}

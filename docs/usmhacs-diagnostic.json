@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-07",
+  "source": "C:/Users/HP/darvs-portfolio/components/USMHACSPanel.tsx",
+  "sourceCommit": "1011122d185156c7542894747e9ce32a60156e4c",
+  "method": "Read TypeScript AST; transpile INITIAL_STATE, addLog, applyHardwareRules, reducer and runScenario declarations in memory; execute with a deterministic diagnostic clock. No project files written.",
+  "baselineChecksPassed": [
+    "Initial door closed",
+    "Key alone remains closed",
+    "Correct code waits for delay",
+    "Key plus completed delay opens",
+    "Tamper closes and latches",
+    "Cleared tamper retains latch",
+    "Safe latch clearing restores an otherwise eligible open state",
+    "Removed key closes door"
+  ],
+  "reproducedDefect": {
+    "scenario": "Brute Force at 0 ms, Perfect Entry at 500 ms",
+    "events": [
+      { "timeMs": 1200, "action": "SET_CODE", "codeState": "wrong", "isLatched": true, "origin": "Old Brute Force nested timer" },
+      { "timeMs": 1700, "action": "SET_CODE", "codeState": "correct", "isLatched": true, "origin": "Current Perfect Entry nested timer" }
+    ],
+    "conclusion": "The previous scenario can latch the current one because nested timers are not cancelled."
+  },
+  "limitations": "Reducer and scenario scheduling only. No React mounting, browser timer integration, audio, hardware or execution of the five-second React effect. The separate handleReset UI guard was inspected in source, not executed by this diagnostic."
+}

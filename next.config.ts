@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const config: NextConfig = {
+  poweredByHeader: false,
+  reactStrictMode: true,
+  allowedDevOrigins: ["127.0.0.1", "192.168.29.20", "*.trycloudflare.com"],
+  experimental: {
+    agentUpgrade: "security",
+  },
 };
 
-export default nextConfig;
+export default config;

@@ -1,1 +1,5 @@
-export { default } from '../about/page';
+import { redirect } from "next/navigation";
+
+export default function Research() {
+  redirect("/#projects");
+}

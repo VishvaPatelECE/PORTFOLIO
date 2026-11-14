@@ -1,0 +1,513 @@
+/* Kinetic Project Deck in Natural Document Flow */
+.section {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  padding: clamp(32px, 4vh, 52px) 0 clamp(36px, 4.5vh, 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: transparent;
+  overflow: clip;
+  outline: none;
+  scroll-margin-top: 0;
+}
+
+.anchor {
+  position: absolute;
+  top: 0;
+  scroll-margin-top: 0;
+}
+
+.ambientAura {
+  display: none;
+}
+
+.stageInner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0 24px;
+}
+
+/* Header */
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.headingLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sectionKicker {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--gold, #b99d73);
+  text-transform: uppercase;
+}
+
+.heading h2 {
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(34px, 4.2vw, 56px);
+  font-weight: 440;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  color: var(--text, #e8e0d2);
+  margin: 0;
+}
+
+.heading h2 .titleDot {
+  color: var(--gold, #b99d73);
+}
+
+.scrollHint {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--gold, #b99d73);
+  text-transform: uppercase;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.stepperGroup {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 4px;
+}
+
+.stepBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #dcd7ce;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.stepBtn:hover:not(:disabled) {
+  background: rgba(185, 157, 115, 0.2);
+  color: #fff1d8;
+}
+
+.stepBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.indicatorPill {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  padding: 0 8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.currentSlide {
+  color: #00aebd;
+}
+
+.slash {
+  color: #55535c;
+  font-size: 11px;
+}
+
+.totalSlides {
+  color: #8c8a82;
+  font-size: 11px;
+}
+
+.pauseBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(185, 157, 115, 0.1);
+  border: 1px solid rgba(185, 157, 115, 0.3);
+  color: var(--gold, #b99d73);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pauseBtn:hover {
+  background: rgba(185, 157, 115, 0.25);
+  color: #fff1d8;
+}
+
+.pauseBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Horizontal Accordion Deck in Natural Document Flow */
+.accordionContainer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: clamp(480px, 55vh, 540px);
+  gap: 14px;
+}
+
+.panel {
+  --timing: cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  border-radius: 20px;
+  overflow: visible;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0f0e14;
+  cursor: pointer;
+  transition: flex 0.44s var(--timing), border-color 0.28s ease, opacity 0.28s ease, box-shadow 0.44s var(--timing);
+  isolation: isolate;
+  outline: none;
+  will-change: flex;
+}
+
+.panel:focus-visible {
+  border-color: #00aebd;
+  box-shadow: 0 0 0 2px rgba(0, 174, 189, 0.4);
+}
+
+.panelActive {
+  flex: 5.6;
+  border-color: rgba(185, 157, 115, 0.55);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+.panelCollapsed {
+  flex: 1.1;
+  opacity: 0.78;
+}
+
+.panelCollapsed:hover {
+  opacity: 0.96;
+  border-color: rgba(0, 174, 189, 0.55);
+  background: #14131b;
+}
+
+/* Parallax Image Viewport */
+.imageViewport {
+  position: absolute;
+  inset: 0;
+  border-radius: 19px;
+  overflow: hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.imageInner {
+  position: absolute;
+  inset: -20px;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.coverImg {
+  object-fit: cover;
+  pointer-events: none;
+  transform: scale(1.18);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.panelActive .coverImg {
+  transform: scale(1.05);
+}
+
+.scrimOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(180deg,
+      rgba(8, 7, 11, 0.28) 0%,
+      rgba(8, 7, 11, 0.08) 32%,
+      rgba(8, 7, 11, 0.68) 68%,
+      rgba(8, 7, 11, 0.92) 100%);
+  pointer-events: none;
+}
+
+/* Top Badges */
+.badgeCluster {
+  position: absolute;
+  top: 28px;
+  left: 34px;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+
+.badgeActive {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.badgeCollapsed {
+  opacity: 0;
+  transform: translate3d(0, -8px, 0);
+  pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.metaBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--signal, #00aebd);
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(0, 174, 189, 0.14);
+  border: 1px solid rgba(0, 174, 189, 0.4);
+  text-transform: uppercase;
+}
+
+.categoryBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--gold, #b99d73);
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: rgba(185, 157, 115, 0.14);
+  border: 1px solid rgba(185, 157, 115, 0.35);
+}
+
+/* Typography Stage */
+.typographyStage {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Unified Project Title Morph */
+.morphTitle {
+  --timing: cubic-bezier(0.16, 1, 0.3, 1);
+  position: absolute;
+  display: flex;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: transform 0.38s var(--timing), left 0.38s var(--timing), top 0.38s var(--timing), opacity 0.25s ease;
+  will-change: transform, opacity;
+}
+
+/* Vertical collapsed state: centered in the closed card strip */
+.titleCollapsed {
+  transform-origin: center center;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  left: 50%;
+  top: 50%;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.88;
+}
+
+.titleCollapsed .projectIndex {
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 600;
+  color: #b99d73;
+  margin-right: 0;
+  letter-spacing: 0.08em;
+}
+
+.titleCollapsed .projectName {
+  display: inline;
+  font-family: "Anybody Variable", sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: #e8e0d2;
+  letter-spacing: -0.015em;
+  margin: 0;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8);
+}
+
+/* Horizontal active state */
+.titleActive {
+  transform-origin: left bottom;
+  transform: translate(0, 0) rotate(0deg);
+  left: 36px;
+  top: calc(100% - 192px);
+  align-items: baseline;
+  gap: 12px;
+  opacity: 1;
+}
+
+.titleActive .projectIndex {
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 600;
+  color: #b99d73;
+  margin-right: 0;
+  letter-spacing: 0.12em;
+}
+
+.titleActive .projectName {
+  display: inline;
+  font-family: "Anybody Variable", sans-serif;
+  font-size: clamp(34px, 4.2vw, 54px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #e8e0d2;
+  margin: 0;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
+}
+
+/* Sliding Tagline & Action below the project name */
+.slidingContainer {
+  position: absolute;
+  left: 36px;
+  bottom: 32px;
+  max-width: 620px;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  will-change: opacity, transform;
+}
+
+.slidingActive {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  pointer-events: auto;
+  transition: opacity 0.28s 0.08s ease, transform 0.28s 0.08s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slidingCollapsed {
+  visibility: hidden;
+  opacity: 0;
+  transform: translate3d(-24px, 0, 0);
+  pointer-events: none;
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.projectLine {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(14px, 1.4vw, 17px);
+  color: #e8c49a;
+  margin: 0;
+  line-height: 1.45;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 22px;
+  border-radius: 999px;
+  background: rgba(185, 157, 115, 0.18);
+  border: 1px solid #b99d73;
+  color: #fff1d8;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.actionBtn:hover {
+  background: #b99d73;
+  color: #08070b;
+  box-shadow: 0 0 20px rgba(185, 157, 115, 0.4);
+}
+
+@media (max-width: 860px) {
+  .section {
+    padding: 24px 0 60px;
+    scroll-margin-top: 76px;
+  }
+
+  .accordionContainer {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .panelActive {
+    min-height: 400px;
+  }
+
+  .panelCollapsed {
+    min-height: 70px;
+  }
+
+  .badgeCluster {
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    max-width: calc(100% - 40px);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 480px) {
+    .badgeCluster {
+      top: 16px;
+      left: 16px;
+      right: 16px;
+      max-width: calc(100% - 32px);
+      gap: 6px;
+    }
+
+    .metaBadge,
+    .categoryBadge {
+      font-size: 10px;
+      padding: 4px 10px;
+    }
+  }
+
+  .titleCollapsed {
+    transform: rotate(0deg) scale(0.9);
+    position: relative;
+    left: 20px;
+    bottom: auto;
+    top: 24px;
+  }
+
+  .titleActive {
+    left: 20px;
+    top: auto;
+    bottom: 120px;
+  }
+
+  .slidingContainer {
+    left: 20px;
+    bottom: 24px;
+  }
+}

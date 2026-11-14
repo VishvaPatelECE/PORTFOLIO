@@ -1,0 +1,133 @@
+{
+  "date": "2026-10-07",
+  "status": "Provisional color study from user transcription; original handwritten image not inspected",
+  "method": "WCAG sRGB relative luminance contrast, opaque colors. Rounded ratios are display values only. OKLCH conversion from linear sRGB, approximate display precision. Mixes use encoded sRGB channel interpolation; not OKLCH mixing.",
+  "result": [
+    {
+      "hex": "#131E4A",
+      "oklch": "oklch(25.46% 0.0830 269.15)",
+      "onDark": 1.26,
+      "onNavy": 1
+    },
+    {
+      "hex": "#08070B",
+      "oklch": "oklch(13.23% 0.0096 297.64)",
+      "onDark": 1,
+      "onNavy": 1.26
+    },
+    {
+      "hex": "#E8E0D2",
+      "oklch": "oklch(90.92% 0.0207 81.78)",
+      "onDark": 15.33,
+      "onNavy": 12.21
+    },
+    {
+      "hex": "#7E69E8",
+      "oklch": "oklch(60.45% 0.1846 287.12)",
+      "onDark": 4.85,
+      "onNavy": 3.87
+    },
+    {
+      "hex": "#AFAEA2",
+      "oklch": "oklch(74.82% 0.0169 102.92)",
+      "onDark": 8.99,
+      "onNavy": 7.16
+    },
+    {
+      "hex": "#F32E35",
+      "oklch": "oklch(62.47% 0.2293 25.65)",
+      "onDark": 5.02,
+      "onNavy": 4
+    },
+    {
+      "hex": "#B89A5A",
+      "oklch": "oklch(69.94% 0.0902 85.00)",
+      "onDark": 7.47,
+      "onNavy": 5.95
+    },
+    {
+      "hex": "#000000",
+      "oklch": "oklch(0.00% 0.0000 0.00)",
+      "onDark": 1.05,
+      "onNavy": 1.31
+    },
+    {
+      "hex": "#D21329",
+      "oklch": "oklch(54.98% 0.2151 24.42)",
+      "onDark": 3.7,
+      "onNavy": 2.95
+    },
+    {
+      "hex": "#4E50ED",
+      "oklch": "oklch(53.22% 0.2293 274.78)",
+      "onDark": 3.53,
+      "onNavy": 2.82
+    },
+    {
+      "hex": "#0E1D61",
+      "oklch": "oklch(27.24% 0.1212 267.40)",
+      "onDark": 1.31,
+      "onNavy": 1.04
+    },
+    {
+      "hex": "#FF5A5F",
+      "oklch": "oklch(68.92% 0.2004 22.38)",
+      "onDark": 6.58,
+      "onNavy": 5.24
+    },
+    {
+      "hex": "#021861",
+      "oklch": "oklch(25.79% 0.1308 263.94)",
+      "onDark": 1.25,
+      "onNavy": 1
+    },
+    {
+      "hex": "#090907",
+      "oklch": "oklch(13.88% 0.0049 107.02)",
+      "onDark": 1.01,
+      "onNavy": 1.25
+    },
+    {
+      "hex": "#255DCE",
+      "oklch": "oklch(51.07% 0.1850 262.22)",
+      "onDark": 3.38,
+      "onNavy": 2.69
+    },
+    {
+      "hex": "#6C5636",
+      "oklch": "oklch(46.76% 0.0551 76.09)",
+      "onDark": 2.89,
+      "onNavy": 2.3
+    },
+    {
+      "hex": "#E3E4D3",
+      "oklch": "oklch(91.35% 0.0227 109.57)",
+      "onDark": 15.59,
+      "onNavy": 12.42
+    },
+    {
+      "hex": "#DE1110",
+      "oklch": "oklch(57.00% 0.2276 28.73)",
+      "onDark": 4.01,
+      "onNavy": 3.2
+    },
+    {
+      "hex": "#B99D73",
+      "oklch": "oklch(71.08% 0.0659 77.47)",
+      "onDark": 7.78,
+      "onNavy": 6.2
+    },
+    {
+      "hex": "#00AEBD",
+      "oklch": "oklch(68.55% 0.1172 205.68)",
+      "onDark": 7.45,
+      "onNavy": 5.94
+    }
+  ],
+  "mixes": {
+    "signalTint20": "#33BECA",
+    "signalTone40": "#339CA5",
+    "signalShade65": "#003D42"
+  },
+  "lightOnSignal": 2.06
+}
