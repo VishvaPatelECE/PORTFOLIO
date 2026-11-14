@@ -61,8 +61,8 @@ if (!htmlJs.includes('if (cfg.key === "gmail")')) {
 const gmailPreset = 'email:  { draw: mk({ key: "gmail", n: 30, nMini: 13, motion: "scan", speed: .4, vb: 144, v: .64 }), accent: [234, 67, 53], speed: 1, staticT: 1.1 },\n    gmail:  { draw: mk({ key: "gmail", n: 30, nMini: 13, motion: "scan", speed: .4, vb: 144, v: .64 }), accent: [234, 67, 53], speed: 1, staticT: 1.1 },';
 
 htmlJs = htmlJs.replace(
-  /email:\s*\{\s*draw:\s*mk\(\{\s*key:\s*"(?:email|gmail)"[^}]+\}\)[^}]+\},(\s*gmail:\s*\{\s*draw:\s*mk\(\{\s*key:\s*"gmail"[^}]+\}\)[^}]+\},)?/,
-  gmailPreset
+  /(\n\s*)email:\s*\{[^}]+},(\s*gmail:\s*\{[^}]+},)?/,
+  `$1${gmailPreset}`
 );
 
 // Remove inverted circle background from github so only the octocat mark is drawn
@@ -98,6 +98,14 @@ htmlJs = htmlJs.replace(
   'if (rc && pts.length) {',
   'if (pts.length) {'
 );
+
+// Report missing mode clearly rather than silently ignoring
+if (!htmlJs.includes("BrandOrbs: requested mode")) {
+  htmlJs = htmlJs.replace(
+    'if (!mode) return;',
+    'if (!mode) { console.warn("BrandOrbs: requested mode " + canvas.dataset.mode + " not defined"); return; }'
+  );
+}
 
 fs.writeFileSync(htmlJsPath, htmlJs);
 console.log("Patched brand-orbs-v2.html.js with modern multi-color Gmail logo, permanent light tone, and auto-centering");
@@ -144,3 +152,37 @@ if (!brandOrbsDts.includes('"gmail"')) {
   fs.writeFileSync(brandOrbsDtsPath, brandOrbsDts);
   console.log("Patched BrandOrbs.d.ts");
 }
+
+// 4. Strict verification assertions: ensure no silent patch failures
+const errors = [];
+if (!htmlJs.includes(modernGmailPath)) {
+  errors.push("Failed to inject modernGmailPath into MARK_PATHS");
+}
+if (!htmlJs.includes('covPath("gmail", MARK_PATHS.gmail')) {
+  errors.push("Failed to inject gmail into COVER_MARKS");
+}
+if (!htmlJs.includes('if (cfg.key === "gmail")')) {
+  errors.push("Failed to inject multi-color Gmail dot coloring logic");
+}
+if (!htmlJs.includes('gmail:  { draw: mk({ key: "gmail"')) {
+  errors.push("Failed to inject gmail preset into MODES");
+}
+if (!htmlJs.includes('covPath("github", MARK_PATHS.github, 18, .8, 24, 0, null, 1)')) {
+  errors.push("Failed to patch GitHub mark circle removal");
+}
+if (!brandOrbsJs.includes('"gmail"')) {
+  errors.push("Failed to patch BrandOrbs.js variant list with 'gmail'");
+}
+if (!brandOrbsJs.includes('background: "transparent",')) {
+  errors.push("Failed to patch BrandOrbs.js background transparency");
+}
+if (!brandOrbsDts.includes('"gmail"')) {
+  errors.push("Failed to patch BrandOrbs.d.ts with 'gmail'");
+}
+
+if (errors.length > 0) {
+  console.error("FATAL: ThreeUI BrandOrbs patch failed:\n" + errors.map((e) => "  - " + e).join("\n"));
+  process.exit(1);
+}
+console.log("All ThreeUI BrandOrbs patches verified successfully!");
+
