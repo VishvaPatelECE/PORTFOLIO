@@ -1051,20 +1051,20 @@
   }
 }
 
-/* Batch 3: Prevent CSS Grid min-content intrinsic blowout on non-USMHACS editorial routes */
-main:not(:has(#simulator)) .editorial-thesis > *,
-main:not(:has(#simulator)) .editorial-grid > *,
-main:not(:has(#simulator)) .editorial-sidebar,
-main:not(:has(#simulator)) .editorial-content,
-main:not(:has(#simulator)) .editorial-block,
-main:not(:has(#simulator)) .track-record-header > *,
-main:not(:has(#simulator)) .track-discourse > *,
-main:not(:has(#simulator)) .track-evidence-box > *,
-main:not(:has(#simulator)) .capabilities-editorial > * {
+/* Prevent CSS Grid min-content intrinsic blowout on editorial routes */
+.editorial-thesis > *,
+.editorial-grid > *,
+.editorial-sidebar,
+.editorial-content,
+.editorial-block,
+.track-record-header > *,
+.track-discourse > *,
+.track-evidence-box > *,
+.capabilities-editorial > * {
   min-width: 0;
 }
 
-main:not(:has(#simulator)) .spec-table-wrap {
+.spec-table-wrap {
   max-width: 100%;
 }
 

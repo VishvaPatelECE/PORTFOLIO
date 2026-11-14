@@ -61,7 +61,7 @@ if (!htmlJs.includes('if (cfg.key === "gmail")')) {
 const gmailPreset = 'email:  { draw: mk({ key: "gmail", n: 30, nMini: 13, motion: "scan", speed: .4, vb: 144, v: .64 }), accent: [234, 67, 53], speed: 1, staticT: 1.1 },\n    gmail:  { draw: mk({ key: "gmail", n: 30, nMini: 13, motion: "scan", speed: .4, vb: 144, v: .64 }), accent: [234, 67, 53], speed: 1, staticT: 1.1 },';
 
 htmlJs = htmlJs.replace(
-  /email:\s*\{\s*draw:\s*mk\(\{\s*key:\s*"gmail"[^}]+\}\)[^}]+\},(\s*gmail:\s*\{\s*draw:\s*mk\(\{\s*key:\s*"gmail"[^}]+\}\)[^}]+\},)?/,
+  /email:\s*\{\s*draw:\s*mk\(\{\s*key:\s*"(?:email|gmail)"[^}]+\}\)[^}]+\},(\s*gmail:\s*\{\s*draw:\s*mk\(\{\s*key:\s*"gmail"[^}]+\}\)[^}]+\},)?/,
   gmailPreset
 );
 

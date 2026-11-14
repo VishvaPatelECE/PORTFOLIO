@@ -99,7 +99,7 @@ export default function AboutExperience() {
 
           <aside className={styles.portraitFrame} aria-label="Portrait and location summary">
             <Image
-              src="/vishva-avatar-3d.png"
+              src="/avatar/vishva-avatar-3d.png"
               alt="Portrait illustration of Vishva Patel"
               width={935}
               height={1024}

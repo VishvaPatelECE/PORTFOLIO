@@ -148,15 +148,32 @@ export function Footer() {
                   rel={href.startsWith("mailto") ? undefined : "noreferrer"}
                   onClick={onTrack}
                 >
-                  <BrandOrbs
-                    variant={variant}
-                    size="medium"
-                    mode="dark"
-                    speed={1}
-                    paused={effectiveReduced}
-                    aria-label={ariaLabel}
-                    style={{ pointerEvents: "none", width: "100%", height: "100%", display: "block" }}
-                  />
+                  {variant === "gmail" ? (
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      aria-hidden="true"
+                      className="brand-orb-icon"
+                      style={{ display: "block" }}
+                    >
+                      <path d="M2.5 19h4v-7.5l-4-3V17c0 1.1.9 2 2 2Z" fill="#4285F4" />
+                      <path d="M17.5 19h4c1.1 0 2-.9 2-2V8.5l-4 3V19Z" fill="#34A853" />
+                      <path d="M17.5 5.5v3l4-3v-1c0-1.47-1.68-2.31-2.85-1.42L17.5 5.5Z" fill="#FBBC04" />
+                      <path d="M6.5 8.5v-3L12 9.5l5.5-4v-3L12 6.5 6.5 8.5Z" fill="#EA4335" />
+                      <path d="M2.5 4.5v1l4 3v-3L5.35 3.08C4.18 2.19 2.5 3.03 2.5 4.5Z" fill="#EA4335" />
+                    </svg>
+                  ) : (
+                    <BrandOrbs
+                      variant={variant}
+                      size="medium"
+                      mode="dark"
+                      speed={1}
+                      paused={effectiveReduced}
+                      aria-label={ariaLabel}
+                      style={{ pointerEvents: "none", width: "100%", height: "100%", display: "block" }}
+                    />
+                  )}
                   <span className="sr-only">{name}</span>
                 </a>
               ))}

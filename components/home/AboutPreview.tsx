@@ -198,7 +198,7 @@ export default function AboutPreview() {
           >
             <div className={styles.portraitAura} aria-hidden="true" />
             <Image
-              src="/vishva-avatar-3d.png"
+              src="/avatar/vishva-avatar-3d.png"
               alt="Stylized portrait of Vishva Patel"
               width={935}
               height={1024}
